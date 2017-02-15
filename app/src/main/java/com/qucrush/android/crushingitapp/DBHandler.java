@@ -69,9 +69,9 @@ public class DBHandler extends SQLiteOpenHelper{
         Cursor cur = db.rawQuery(selectQuery,null);
         if(cur.moveToFirst()){
             do{
-                Task task = new Task(cur.getString(0),
+                Task task = new Task(cur.getInt(0),
                         cur.getString(1),cur.getString(2),cur.getString(3),
-                        cur.getString(4));
+                        cur.getString(4),cur.getString(5));
                 taskList.add(task);
             } while (cur.moveToNext());
         }

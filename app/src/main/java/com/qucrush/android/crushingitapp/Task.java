@@ -5,13 +5,15 @@ package com.qucrush.android.crushingitapp;
  */
 
 public class Task {
+    private int id;
     private String name;
     private String desc;
     private String date;
     private String time;
     private String category;
 
-    public Task(String name, String desc, String date, String time, String category){
+    public Task(int id, String name, String desc, String date, String time, String category){
+        this.id = id;
         this.name = name;
         this.desc = desc;
         this.date = date;
@@ -34,6 +36,9 @@ public class Task {
     public String getCategory(){
         return category;
     }
+    public int getId(){
+        return id;
+    }
     public void setName(String name){
         this.name = name;
     }
@@ -48,5 +53,8 @@ public class Task {
     }
     public void setCategory(String category){
         this.category = category;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }
