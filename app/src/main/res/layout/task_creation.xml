@@ -21,7 +21,6 @@
         android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"/>
 
-
     <TextView
         android:text="Task Time:"
         android:layout_width="wrap_content"
@@ -79,16 +78,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 
-
-    <RadioGroup
-        android:id="@+id/radioAMPM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="200dp">
-
-    </RadioGroup>
-
     <RadioGroup
         android:id="@+id/radioWorkLife"
         android:layout_width="150dp"
@@ -117,15 +106,6 @@
             android:id="@+id/radioButton4" />
     </RadioGroup>
 
-    <RadioButton
-        android:text="PM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioButton2"
-        android:layout_below="@+id/radioButton"
-        android:layout_alignLeft="@+id/radioButton"
-        android:layout_alignStart="@+id/radioButton" />
-
     <TextView
         android:text=":"
         android:layout_width="wrap_content"
@@ -135,18 +115,6 @@
         android:layout_alignBaseline="@+id/inputHours"
         android:layout_alignBottom="@+id/inputHours"
         android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/inputMins"
-        android:text="00"
-        android:layout_alignBaseline="@+id/textTimeSplit"
-        android:layout_alignBottom="@+id/textTimeSplit"
-        android:layout_toRightOf="@+id/radioAMPM"
-        android:layout_toEndOf="@+id/radioAMPM" />
 
     <EditText
         android:layout_width="40dp"
@@ -197,16 +165,6 @@
         android:layout_marginRight="23dp"
         android:layout_marginEnd="23dp" />
 
-    <RadioButton
-        android:text="AM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioButton"
-        android:checked="true"
-        android:layout_below="@+id/InputName"
-        android:layout_alignLeft="@+id/textDateSplit2"
-        android:layout_alignStart="@+id/textDateSplit2" />
-
     <TextView
         android:text="/"
         android:layout_width="wrap_content"
@@ -236,17 +194,6 @@
         android:hint="Description" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/InputName"
-        android:layout_alignBottom="@+id/radioAMPM"
-        android:layout_alignLeft="@+id/inputHours"
-        android:layout_alignStart="@+id/inputHours" />
-
-    <EditText
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="time"
@@ -258,5 +205,57 @@
         android:layout_alignLeft="@+id/inputDay"
         android:layout_alignStart="@+id/inputDay" />
 
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/inputMins"
+        android:text="00"
+        android:layout_alignBaseline="@+id/textTimeSplit"
+        android:layout_alignBottom="@+id/textTimeSplit"
+        android:layout_toRightOf="@+id/textDateSplit1"
+        android:layout_toEndOf="@+id/textDateSplit1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/InputName"
+        android:layout_alignBaseline="@+id/textName"
+        android:layout_alignBottom="@+id/textName"
+        android:layout_alignLeft="@+id/inputHours"
+        android:layout_alignStart="@+id/inputHours" />
+
+    <RadioGroup
+        android:id="@+id/radioAMPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textName"
+        android:layout_toRightOf="@+id/textDesc"
+        android:layout_toEndOf="@+id/textDesc">
+
+        <RadioButton
+            android:text="AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton"
+            android:checked="true"
+            android:layout_below="@+id/InputName"
+            android:layout_alignLeft="@+id/textDateSplit2"
+            android:layout_alignStart="@+id/textDateSplit2" />
+
+        <RadioButton
+            android:text="PM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton2"
+            android:layout_below="@+id/radioButton"
+            android:layout_alignLeft="@+id/radioButton"
+            android:layout_alignStart="@+id/radioButton" />
+
+    </RadioGroup>
 
 </RelativeLayout>
