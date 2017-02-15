@@ -7,4 +7,5 @@ package com.qucrush.android.crushingitapp;
 public interface communicate {
     public void storeTask();
     public void startCreationForm();
+    public void startTaskMenu();
 }

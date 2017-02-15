@@ -24,15 +24,20 @@ public class TaskManager {
     public void createTask(String name, String desc, String date, String time, String category){
         tempTask = new Task(0,name,desc,date,time,category);
         MainActivity.db.addTask(tempTask);
+        retrieveTasks();
     }
-    public void retrieveTasks(){
+    public List<Task> retrieveTasks(){
         //List<Task> taskList = new ArrayList<Task>();
         if(MainActivity.db.getTaskCount() != 0){
             taskList = MainActivity.db.getAllTasks();
+            for(int i = 0; i < taskList.size(); i++){
+                System.out.println("Retrieved Task: ID:" + taskList.get(i).getId() + " Name: " + taskList.get(i).getName());
+            }
         }
         else{
             taskList = null;
         }
+        return taskList;
     }
 
     public void changeCard(){

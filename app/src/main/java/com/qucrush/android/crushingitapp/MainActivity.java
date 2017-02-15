@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,communicate {
 
     public static DBHandler db;
-    private TaskManager tm = new TaskManager();
+    public static TaskManager tm = new TaskManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity
 
     public void storeTask(){
         FragmentManager fm = getFragmentManager();
-        TaskFormTest frag = (TaskFormTest) fm.findFragmentById(R.id.nav_task_menu);
-        frag.saveTask(tm);
+        //TaskFormTest frag = (TaskFormTest) fm.findFragmentById(R.id.);
+        //frag.saveTask(tm);
+        fm.beginTransaction().replace(R.id.content_frame,
+                new TaskFragment()).commit();
     }
 
     public void startCreationForm(){
@@ -59,7 +61,11 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskFormTest()).commit();
     }
-
+    public void startTaskMenu(){
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame,
+                new TaskFragment()).commit();
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
