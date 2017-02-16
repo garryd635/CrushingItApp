@@ -24,6 +24,7 @@ public class TaskFormTest extends Fragment{
     RadioGroup amPMGrp, cateGrp;
     RadioButton amPMBtn, cateBtn;
     String fullDate, fullTime;
+    int count;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class TaskFormTest extends Fragment{
         cm = (communicate) getActivity();
         add = (Button) myView.findViewById(R.id.addButton);
         cancel = (Button) myView.findViewById(R.id.cancelButton);
+        count = 0;
 
         cancel.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -44,6 +46,7 @@ public class TaskFormTest extends Fragment{
                 cm.startTaskMenu();
             }
         });
+
         return myView;
     }
 

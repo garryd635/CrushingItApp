@@ -1,6 +1,8 @@
 package com.qucrush.android.crushingitapp;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -24,7 +26,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     View myView;
     List<Task> taskList = new ArrayList<Task>();
     TextView dateTextView, timeTextView, nameTextView, cateTextView;
-    Button add;
+    Button add,delete;
     ImageButton nextBtn,prevBtn;
     communicate cm;
     int count;
@@ -41,9 +43,47 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         taskList = MainActivity.tm.retrieveTasks();
 
         add = (Button) myView.findViewById(R.id.addButton);
+        delete = (Button) myView.findViewById(R.id.deleteButton);
         nextBtn = (ImageButton) myView.findViewById(R.id.nextButton);
         prevBtn = (ImageButton) myView.findViewById(R.id.prevButton);
         add.setOnClickListener(this);
+        delete.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if (taskList != null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setCancelable(true);
+                    builder.setTitle("Delete Current Task");
+                    builder.setMessage("Do you wish to delete this task?");
+                    builder.setPositiveButton("Delete",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    MainActivity.tm.deleteTask(taskList.get(count).getId());
+                                    taskList = MainActivity.tm.retrieveTasks();
+                                    updateTextView(0, taskList);
+                                }
+                            });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                }
+//                if(MainActivity.tm.retrieveTasks() != null) {
+
+//                            count++;
+//                    if (count >= TaskManager.getCount().taskList.size()) {
+//                        System.out.println("Adjusting Next Counter");
+//                        count = 0;
+//                    }
+//                    updateTextView(count,taskList);
+//                }
+            }
+        });
         nextBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 if(MainActivity.tm.retrieveTasks() != null) {
@@ -94,15 +134,32 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     }
 
     public void updateTextView(int count, List<Task> taskList){
-        dateTextView = (TextView) myView.findViewById(R.id.dateText);
-        timeTextView = (TextView) myView.findViewById(R.id.timeText);
-        nameTextView = (TextView) myView.findViewById(R.id.taskNameText);
-        cateTextView = (TextView) myView.findViewById(R.id.taskCateText);
+        if (taskList != null) {
+            dateTextView = (TextView) myView.findViewById(R.id.dateText);
+            timeTextView = (TextView) myView.findViewById(R.id.timeText);
+            nameTextView = (TextView) myView.findViewById(R.id.taskNameText);
+            cateTextView = (TextView) myView.findViewById(R.id.taskCateText);
 
-        //taskList = MainActivity.tm.retrieveTasks();
-        dateTextView.setText(taskList.get(count).getDate());
-        timeTextView.setText(taskList.get(count).getTime());
-        cateTextView.setText(taskList.get(count).getCategory());
-        nameTextView.setText(taskList.get(count).getName());
+            //taskList = MainActivity.tm.retrieveTasks();
+            dateTextView.setText(taskList.get(count).getDate());
+            timeTextView.setText(taskList.get(count).getTime());
+            cateTextView.setText(taskList.get(count).getCategory());
+            nameTextView.setText(taskList.get(count).getName());
+        } else {
+            dateTextView = (TextView) myView.findViewById(R.id.dateText);
+            timeTextView = (TextView) myView.findViewById(R.id.timeText);
+            nameTextView = (TextView) myView.findViewById(R.id.taskNameText);
+            cateTextView = (TextView) myView.findViewById(R.id.taskCateText);
+
+            //taskList = MainActivity.tm.retrieveTasks();
+            dateTextView.setText("NA");
+            timeTextView.setText("NA");
+            cateTextView.setText("NA");
+            nameTextView.setText("NA");
+        }
+    }
+
+    public int getID(int count) {
+        return taskList.get(count).getId();
     }
 }

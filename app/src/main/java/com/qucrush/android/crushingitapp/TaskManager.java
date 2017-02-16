@@ -26,6 +26,12 @@ public class TaskManager {
         MainActivity.db.addTask(tempTask);
         retrieveTasks();
     }
+
+    public void deleteTask(int count){
+        taskList = retrieveTasks();
+        MainActivity.db.deleteTask(count);
+    }
+
     public List<Task> retrieveTasks(){
         //List<Task> taskList = new ArrayList<Task>();
         if(MainActivity.db.getTaskCount() != 0){
@@ -38,6 +44,10 @@ public class TaskManager {
             taskList = null;
         }
         return taskList;
+    }
+
+    public int getCount() {
+        return counter;
     }
 
     public void changeCard(){

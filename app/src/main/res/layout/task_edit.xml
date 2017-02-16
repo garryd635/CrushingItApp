@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="Task Creation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textTitle"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Task Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textName"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Time:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textTime"
+        android:textSize="20sp"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Date:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDate"
+        android:textSize="20sp"
+        android:layout_marginTop="150dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Category:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textCategory"
+        android:textSize="20sp"
+        android:layout_marginTop="200dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Description:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDesc"
+        android:textSize="20sp"
+        android:layout_marginTop="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:text="Confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirmButton"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
+
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelButton"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    <RadioGroup
+        android:id="@+id/radioWorkLife"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="195dp"
+        android:layout_alignRight="@+id/InputName"
+        android:layout_alignEnd="@+id/InputName"
+        android:layout_alignLeft="@+id/inputDay"
+        android:layout_alignStart="@+id/inputDay">
+        <RadioButton
+            android:text="Work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textName"
+            android:layout_alignRight="@+id/textName"
+            android:id="@+id/radioButton3"
+            android:checked="true"/>
+
+        <RadioButton
+            android:text="Life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioButton"
+            android:layout_alignRight="@+id/radioButton"
+            android:id="@+id/radioButton4" />
+    </RadioGroup>
+
+    <TextView
+        android:text=":"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textTimeSplit"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/inputHours"
+        android:layout_alignBottom="@+id/inputHours"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/inputMonth"
+        android:text="mm"
+        android:layout_alignBaseline="@+id/textDateSplit1"
+        android:layout_alignBottom="@+id/textDateSplit1"
+        android:layout_alignRight="@+id/textTitle"
+        android:layout_alignEnd="@+id/textTitle" />
+
+    <EditText
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/inputDay"
+        android:text="dd"
+        android:layout_alignBaseline="@+id/textDate"
+        android:layout_alignBottom="@+id/textDate"
+        android:layout_alignRight="@+id/textTimeSplit"
+        android:layout_alignEnd="@+id/textTimeSplit" />
+
+    <TextView
+        android:text="/"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDateSplit1"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/inputDay"
+        android:layout_alignBottom="@+id/inputDay"
+        android:layout_toRightOf="@+id/inputDay"
+        android:layout_toEndOf="@+id/inputDay" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/inputYear"
+        android:text="yyyy"
+        android:layout_alignBaseline="@+id/textDateSplit2"
+        android:layout_alignBottom="@+id/textDateSplit2"
+        android:layout_alignRight="@+id/InputName"
+        android:layout_alignEnd="@+id/InputName"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp" />
+
+    <TextView
+        android:text="/"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDateSplit2"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/inputMonth"
+        android:layout_alignBottom="@+id/inputMonth"
+        android:layout_toLeftOf="@+id/inputYear"
+        android:layout_toStartOf="@+id/inputYear"
+        android:layout_marginRight="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_below="@+id/textDesc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/inputDesc"
+        android:layout_above="@+id/addButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:selectAllOnFocus="true"
+        android:gravity="top"
+        android:hint="Description" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/inputHours"
+        android:text="12"
+        android:layout_alignBaseline="@+id/textTime"
+        android:layout_alignBottom="@+id/textTime"
+        android:layout_alignLeft="@+id/inputDay"
+        android:layout_alignStart="@+id/inputDay" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/inputMins"
+        android:text="00"
+        android:layout_alignBaseline="@+id/textTimeSplit"
+        android:layout_alignBottom="@+id/textTimeSplit"
+        android:layout_toRightOf="@+id/textDateSplit1"
+        android:layout_toEndOf="@+id/textDateSplit1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/InputName"
+        android:layout_alignBaseline="@+id/textName"
+        android:layout_alignBottom="@+id/textName"
+        android:layout_alignLeft="@+id/inputHours"
+        android:layout_alignStart="@+id/inputHours" />
+
+    <RadioGroup
+        android:id="@+id/radioAMPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textName"
+        android:layout_toRightOf="@+id/textDesc"
+        android:layout_toEndOf="@+id/textDesc">
+
+        <RadioButton
+            android:text="AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton"
+            android:checked="true"
+            android:layout_below="@+id/InputName"
+            android:layout_alignLeft="@+id/textDateSplit2"
+            android:layout_alignStart="@+id/textDateSplit2" />
+
+        <RadioButton
+            android:text="PM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton2"
+            android:layout_below="@+id/radioButton"
+            android:layout_alignLeft="@+id/radioButton"
+            android:layout_alignStart="@+id/radioButton" />
+
+    </RadioGroup>
+
+</RelativeLayout>

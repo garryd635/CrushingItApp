@@ -61,6 +61,12 @@ public class DBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void deleteTask(int count) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE from TASKS WHERE ID == " + count);
+        db.close();
+    }
+
     public List<Task> getAllTasks(){
         List<Task> taskList = new ArrayList<Task>();
 
