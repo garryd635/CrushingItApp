@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="Task Creation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextTitle"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Task Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextName"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Time:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextTime"
+        android:textSize="20sp"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Date:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextDate"
+        android:textSize="20sp"
+        android:layout_marginTop="150dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Category:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextCategory"
+        android:textSize="20sp"
+        android:layout_marginTop="200dp"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:text="Task Description:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextDesc"
+        android:textSize="20sp"
+        android:layout_marginTop="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:text="Update Task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/uUpdateButton"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ucancelButton"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    <RadioGroup
+        android:id="@+id/uradioWorkLife"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="195dp"
+        android:layout_alignRight="@+id/uInputName"
+        android:layout_alignEnd="@+id/uInputName"
+        android:layout_alignLeft="@+id/uinputDay"
+        android:layout_alignStart="@+id/uinputDay">
+
+        <RadioButton
+            android:text="Work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/utextName"
+            android:layout_alignRight="@+id/utextName"
+            android:id="@+id/uradioButton3"
+            android:checked="true"/>
+
+        <RadioButton
+            android:text="Life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/uradioButton"
+            android:layout_alignRight="@+id/uradioButton"
+            android:id="@+id/uradioButton4" />
+    </RadioGroup>
+
+    <TextView
+        android:text=":"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextTimeSplit"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/uinputHours"
+        android:layout_alignBottom="@+id/uinputHours"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/uinputMonth"
+        android:text="mm"
+        android:layout_alignBaseline="@+id/utextDateSplit1"
+        android:layout_alignBottom="@+id/utextDateSplit1"
+        android:layout_alignRight="@+id/utextTitle"
+        android:layout_alignEnd="@+id/utextTitle" />
+
+    <EditText
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/uinputDay"
+        android:text="dd"
+        android:layout_alignBaseline="@+id/utextDate"
+        android:layout_alignBottom="@+id/utextDate"
+        android:layout_alignRight="@+id/utextTimeSplit"
+        android:layout_alignEnd="@+id/utextTimeSplit" />
+
+    <TextView
+        android:text="/"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextDateSplit1"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/uinputDay"
+        android:layout_alignBottom="@+id/uinputDay"
+        android:layout_toRightOf="@+id/uinputDay"
+        android:layout_toEndOf="@+id/uinputDay" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/uinputYear"
+        android:text="yyyy"
+        android:layout_alignBaseline="@+id/utextDateSplit2"
+        android:layout_alignBottom="@+id/utextDateSplit2"
+        android:layout_alignRight="@+id/uInputName"
+        android:layout_alignEnd="@+id/uInputName"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp" />
+
+    <TextView
+        android:text="/"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/utextDateSplit2"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/uinputMonth"
+        android:layout_alignBottom="@+id/uinputMonth"
+        android:layout_toLeftOf="@+id/uinputYear"
+        android:layout_toStartOf="@+id/uinputYear"
+        android:layout_marginRight="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_below="@+id/utextDesc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/uinputDesc"
+        android:layout_above="@+id/uUpdateButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:selectAllOnFocus="true"
+        android:gravity="top"
+        android:hint="Description" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/uinputHours"
+        android:text="12"
+        android:layout_alignBaseline="@+id/utextTime"
+        android:layout_alignBottom="@+id/utextTime"
+        android:layout_alignLeft="@+id/uinputDay"
+        android:layout_alignStart="@+id/uinputDay" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/uinputMins"
+        android:text="00"
+        android:layout_alignBaseline="@+id/utextTimeSplit"
+        android:layout_alignBottom="@+id/utextTimeSplit"
+        android:layout_toRightOf="@+id/utextDateSplit1"
+        android:layout_toEndOf="@+id/utextDateSplit1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/uInputName"
+        android:layout_alignBaseline="@+id/utextName"
+        android:layout_alignBottom="@+id/utextName"
+        android:layout_alignLeft="@+id/uinputHours"
+        android:layout_alignStart="@+id/uinputHours" />
+
+    <RadioGroup
+        android:id="@+id/uradioAMPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/utextName"
+        android:layout_toRightOf="@+id/utextDesc"
+        android:layout_toEndOf="@+id/utextDesc">
+
+        <RadioButton
+            android:text="AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/uradioButton"
+            android:checked="true"
+            android:layout_below="@+id/uInputName"
+            android:layout_alignLeft="@+id/utextDateSplit2"
+            android:layout_alignStart="@+id/utextDateSplit2" />
+
+        <RadioButton
+            android:text="PM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/uradioButton2"
+            android:layout_below="@+id/uradioButton"
+            android:layout_alignLeft="@+id/uradioButton"
+            android:layout_alignStart="@+id/uradioButton" />
+
+    </RadioGroup>
+
+</RelativeLayout>

@@ -27,6 +27,12 @@ public class TaskManager {
         retrieveTasks();
     }
 
+    public void updateTask(String name, String desc, String date, String time, String category, int id){
+        tempTask = new Task(id,name,desc,date,time,category);
+        MainActivity.db.updateTask(tempTask);
+        retrieveTasks();
+    }
+
     public void deleteTask(int count){
         taskList = retrieveTasks();
         MainActivity.db.deleteTask(count);

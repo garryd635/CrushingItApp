@@ -8,4 +8,6 @@ public interface communicate {
     public void storeTask();
     public void startCreationForm();
     public void startTaskMenu();
+    public void startEditForm(Task task);
+    public Task getTaskToEdit();
 }

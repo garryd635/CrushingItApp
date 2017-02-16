@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity
 
     public static DBHandler db;
     public static TaskManager tm = new TaskManager();
+    private Task editTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,15 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskFragment()).commit();
+    }
+    public void startEditForm(Task task){
+        editTask = task;
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame,
+                new TaskEditFragment()).commit();
+    }
+    public Task getTaskToEdit(){
+        return editTask;
     }
     @Override
     public void onBackPressed() {
