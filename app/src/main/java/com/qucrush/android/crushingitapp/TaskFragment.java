@@ -27,7 +27,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     List<Task> taskList = new ArrayList<Task>();
     TextView dateTextView, timeTextView, nameTextView, cateTextView;
     Button add,delete;
-    ImageButton nextBtn,prevBtn;
+    //ImageButton nextBtn,prevBtn;
     communicate cm;
     int count;
 
@@ -44,8 +44,8 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 
         add = (Button) myView.findViewById(R.id.addButton);
         delete = (Button) myView.findViewById(R.id.deleteButton);
-        nextBtn = (ImageButton) myView.findViewById(R.id.nextButton);
-        prevBtn = (ImageButton) myView.findViewById(R.id.prevButton);
+        //nextBtn = (ImageButton) myView.findViewById(R.id.nextButton);
+        //prevBtn = (ImageButton) myView.findViewById(R.id.prevButton);
         add.setOnClickListener(this);
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -60,7 +60,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                                 public void onClick(DialogInterface dialog, int which) {
                                     MainActivity.tm.deleteTask(taskList.get(count).getId());
                                     taskList = MainActivity.tm.retrieveTasks();
-                                    updateTextView(0, taskList);
+                                    //updateTextView(0, taskList);
                                 }
                             });
                     builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -84,30 +84,6 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 //                }
             }
         });
-        nextBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if(MainActivity.tm.retrieveTasks() != null) {
-                    count++;
-                    if (count >= taskList.size()) {
-                        System.out.println("Adjusting Next Counter");
-                        count = 0;
-                    }
-                    updateTextView(count,taskList);
-                }
-            }
-        });
-        prevBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if(MainActivity.tm.retrieveTasks() != null) {
-                    count--;
-                    if (count < 0) {
-                        System.out.println("Adujusting Prev Counter");
-                        count = taskList.size()-1;
-                    }
-                    updateTextView(count,taskList);
-                }
-            }
-        });
 
         if(MainActivity.tm.retrieveTasks() != null){
 //            dateTextView = (TextView) myView.findViewById(R.id.dateText);
@@ -123,7 +99,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 //            nameTextView.setText(taskList.get(count).getName());
             count = 0;
             taskList = MainActivity.tm.retrieveTasks();
-            updateTextView(count,taskList);
+            //updateTextView(count,taskList);
         }
 
         return myView;
@@ -131,32 +107,6 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 
     public void onClick(View arg0){
         cm.startCreationForm();
-    }
-
-    public void updateTextView(int count, List<Task> taskList){
-        if (taskList != null) {
-            dateTextView = (TextView) myView.findViewById(R.id.dateText);
-            timeTextView = (TextView) myView.findViewById(R.id.timeText);
-            nameTextView = (TextView) myView.findViewById(R.id.taskNameText);
-            cateTextView = (TextView) myView.findViewById(R.id.taskCateText);
-
-            //taskList = MainActivity.tm.retrieveTasks();
-            dateTextView.setText(taskList.get(count).getDate());
-            timeTextView.setText(taskList.get(count).getTime());
-            cateTextView.setText(taskList.get(count).getCategory());
-            nameTextView.setText(taskList.get(count).getName());
-        } else {
-            dateTextView = (TextView) myView.findViewById(R.id.dateText);
-            timeTextView = (TextView) myView.findViewById(R.id.timeText);
-            nameTextView = (TextView) myView.findViewById(R.id.taskNameText);
-            cateTextView = (TextView) myView.findViewById(R.id.taskCateText);
-
-            //taskList = MainActivity.tm.retrieveTasks();
-            dateTextView.setText("NA");
-            timeTextView.setText("NA");
-            cateTextView.setText("NA");
-            nameTextView.setText("NA");
-        }
     }
 
     public int getID(int count) {
