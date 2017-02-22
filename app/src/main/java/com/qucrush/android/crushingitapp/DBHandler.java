@@ -97,5 +97,13 @@ public class DBHandler extends SQLiteOpenHelper{
         System.out.println(num);
         return num;
     }
+    public void updateTask(Task task){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE TASKS SET " + KEY_NAME + " = '" + task.getName() +
+                "', " + KEY_DESC + " = '" + task.getDesc() + "', " + KEY_DATE + " = '" +task.getDate() +
+                "', " + KEY_TIME + " = '" + task.getTime() + "', " + KEY_CATE + " = '" + task.getCategory()
+                + "' WHERE " + KEY_ID + " = " + task.getId());
+        db.close();
+    }
 }
 

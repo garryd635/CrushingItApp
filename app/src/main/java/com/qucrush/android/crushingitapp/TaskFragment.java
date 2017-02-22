@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -109,6 +110,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         }
 
         lView = (ListView) myView.findViewById(R.id.listView);
+        String[] lstLabel = new String[taskList.size()];
         List<Map<String, String>> data = new ArrayList<Map<String, String>>();
         if(taskList != null) {
             for (Task item : taskList) {
@@ -133,6 +135,14 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                         android.R.id.text2});
 
         lView.setAdapter(adapter);
+
+        lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println(position);
+                cm.startEditForm(taskList.get(position));
+            }
+        });
         return myView;
     }
 

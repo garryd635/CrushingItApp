@@ -50,6 +50,12 @@ public class TaskManager {
         return counter;
     }
 
+    public void updateTask(String name, String desc, String date, String time, String category, int id){
+        tempTask = new Task(id,name,desc,date,time,category);
+        MainActivity.db.updateTask(tempTask);
+        retrieveTasks();
+    }
+
     public void changeCard(){
         if(taskList != null){
             if(counter <= MainActivity.db.getTaskCount()){
