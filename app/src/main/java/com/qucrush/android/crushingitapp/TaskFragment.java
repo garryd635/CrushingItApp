@@ -8,14 +8,19 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Garry on 2/8/2017.
@@ -27,6 +32,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     List<Task> taskList = new ArrayList<Task>();
     TextView dateTextView, timeTextView, nameTextView, cateTextView;
     Button add,delete;
+    ListView lView;
     //ImageButton nextBtn,prevBtn;
     communicate cm;
     int count;
@@ -102,6 +108,31 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             //updateTextView(count,taskList);
         }
 
+        lView = (ListView) myView.findViewById(R.id.listView);
+        List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        if(taskList != null) {
+            for (Task item : taskList) {
+                Map<String, String> datum = new HashMap<String, String>(2);
+                datum.put("Name:", item.getName());
+                datum.put("Due:", item.getDate());
+                data.add(datum);
+            }
+        }
+        else {
+            Map<String, String> datum = new HashMap<String, String>(2);
+            datum.put("Name:", "Sample Name");
+            datum.put("Due:", "Sample Date");
+            data.add(datum);
+        }
+
+        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, taskList);
+        SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
+                android.R.layout.simple_list_item_2,
+                new String[] {"Name:", "Due:"},
+                new int[] {android.R.id.text1,
+                        android.R.id.text2});
+
+        lView.setAdapter(adapter);
         return myView;
     }
 
