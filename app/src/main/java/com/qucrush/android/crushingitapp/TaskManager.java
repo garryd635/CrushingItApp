@@ -22,8 +22,14 @@ public class TaskManager {
     }
 
     public void createTask(String name, String desc, String date, String time, String category){
-        tempTask = new Task(0,name,desc,date,time,category);
+        tempTask = new Task(0,name,desc,date,time,category,"no","no");
         MainActivity.db.addTask(tempTask);
+        retrieveTasks();
+    }
+
+    public void updateTask(String name, String desc, String date, String time, String category, int id){
+        tempTask = new Task(id,name,desc,date,time,category,"no","no");
+        MainActivity.db.updateTask(tempTask);
         retrieveTasks();
     }
 
@@ -37,7 +43,8 @@ public class TaskManager {
         if(MainActivity.db.getTaskCount() != 0){
             taskList = MainActivity.db.getAllTasks();
             for(int i = 0; i < taskList.size(); i++){
-                System.out.println("Retrieved Task: ID:" + taskList.get(i).getId() + " Name: " + taskList.get(i).getName());
+                System.out.println("Retrieved Task: ID:" + taskList.get(i).getId() + " Name: " + taskList.get(i).getName() + " "
+                        + taskList.get(i).getCompletion());
             }
         }
         else{
@@ -48,12 +55,6 @@ public class TaskManager {
 
     public int getCount() {
         return counter;
-    }
-
-    public void updateTask(String name, String desc, String date, String time, String category, int id){
-        tempTask = new Task(id,name,desc,date,time,category);
-        MainActivity.db.updateTask(tempTask);
-        retrieveTasks();
     }
 
     public void changeCard(){

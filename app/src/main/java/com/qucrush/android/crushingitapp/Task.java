@@ -1,9 +1,5 @@
 package com.qucrush.android.crushingitapp;
 
-/**
- * Created by Garry on 2/12/2017.
- */
-
 public class Task {
     private int id;
     private String name;
@@ -11,14 +7,18 @@ public class Task {
     private String date;
     private String time;
     private String category;
+    private String completion;
+    private String recurring;
 
-    public Task(int id, String name, String desc, String date, String time, String category){
+    public Task(int id, String name, String desc, String date, String time, String category, String completion, String recurring){
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.date = date;
         this.time = time;
         this.category = category;
+        this.completion = completion;
+        this.recurring = recurring;
     }
 
     public String getName(){
@@ -39,6 +39,12 @@ public class Task {
     public int getId(){
         return id;
     }
+    public String getCompletion(){
+        return completion;
+    }
+    public String getRecurring(){
+        return recurring;
+    }
     public void setName(String name){
         this.name = name;
     }
@@ -56,5 +62,11 @@ public class Task {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public void setCompletion(String completion){
+        this.completion = completion;
+    }
+    public void setRecurring(String recurring){
+        this.recurring = recurring;
     }
 }
