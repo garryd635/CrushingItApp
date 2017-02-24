@@ -37,10 +37,13 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     //ImageButton nextBtn,prevBtn;
     communicate cm;
     int count;
+    CustomAdapter dataAdapter = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         myView = inflater.inflate(R.layout.task_menu, container, false);
 //        dateTextView = (TextView) myView.findViewById(R.id.dateText);
 //        timeTextView = (TextView) myView.findViewById(R.id.timeText);
@@ -110,31 +113,39 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         }
 
         lView = (ListView) myView.findViewById(R.id.listView);
-        String[] lstLabel = new String[taskList.size()];
-        List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-        if(taskList != null) {
-            for (Task item : taskList) {
-                Map<String, String> datum = new HashMap<String, String>(2);
-                datum.put("Name:", item.getName());
-                datum.put("Due:", item.getDate());
-                data.add(datum);
-            }
-        }
-        else {
-            Map<String, String> datum = new HashMap<String, String>(2);
-            datum.put("Name:", "Sample Name");
-            datum.put("Due:", "Sample Date");
-            data.add(datum);
-        }
+//        String[] lstLabel = new String[taskList.size()];
+//        List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+//        if(taskList != null) {
+//            for (Task item : taskList) {
+//                Map<String, String> datum = new HashMap<String, String>(2);
+//                datum.put("Name:", item.getName());
+//                datum.put("Due:", item.getDate());
+//                data.add(datum);
+//            }
+//        }
+//        else {
+//            Map<String, String> datum = new HashMap<String, String>(2);
+//            datum.put("Name:", "Sample Name");
+//            datum.put("Due:", "Sample Date");
+//            data.add(datum);
+//        }
 
         //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, taskList);
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
-                android.R.layout.simple_list_item_2,
-                new String[] {"Name:", "Due:"},
-                new int[] {android.R.id.text1,
-                        android.R.id.text2});
+//        SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
+//                android.R.layout.simple_list_item_2,
+//                new String[] {"Name:", "Due:"},
+//                new int[] {android.R.id.text1,
+//                        android.R.id.text2});
 
-        lView.setAdapter(adapter);
+        dataAdapter = new CustomAdapter(getActivity(),
+                R.layout.task_menu, taskList);
+
+        // Assign adapter to ListView
+        if (taskList != null) {
+            lView.setAdapter(dataAdapter);
+        }
+
+        //lView.setAdapter(adapter);
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

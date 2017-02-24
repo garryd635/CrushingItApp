@@ -6,15 +6,17 @@
 
     <TextView
         android:text="Task Creation"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textTitle"
         android:textSize="20sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:text="Task Name:"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textName"
@@ -26,17 +28,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/InputName"
-        android:background="@color/colorGrey"
-        android:layout_alignBaseline="@+id/textName"
-        android:layout_alignBottom="@+id/textName"
-        android:layout_alignLeft="@+id/inputHours"
-        android:layout_alignStart="@+id/inputHours" />
+        android:background="@color/colorBlue"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginStart="160dp"
+        android:hint="Name"
+        android:selectAllOnFocus="true"/>
 
     <TextView
         android:text="Task Time:"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textTime"
@@ -50,12 +53,14 @@
         android:inputType="time"
         android:ems="10"
         android:id="@+id/inputHours"
-        android:text="12"
-        android:background="@color/colorGrey"
+        android:background="@color/colorBlue"
+        android:layout_centerHorizontal="true"
         android:layout_alignBaseline="@+id/textTime"
         android:layout_alignBottom="@+id/textTime"
-        android:layout_alignLeft="@+id/inputDay"
-        android:layout_alignStart="@+id/inputDay" />
+        android:layout_marginLeft="160dp"
+        android:layout_marginStart="160dp"
+        android:hint="12"
+        android:selectAllOnFocus="true"/>
 
     <TextView
         android:text=":"
@@ -65,6 +70,7 @@
         android:textSize="20sp"
         android:layout_alignBaseline="@+id/inputHours"
         android:layout_alignBottom="@+id/inputHours"
+
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -73,15 +79,18 @@
         android:inputType="time"
         android:ems="10"
         android:id="@+id/inputMins"
-        android:text="00"
-        android:background="@color/colorGrey"
+        android:background="@color/colorBlue"
+        android:layout_centerHorizontal="true"
         android:layout_alignBaseline="@+id/textTimeSplit"
         android:layout_alignBottom="@+id/textTimeSplit"
-        android:layout_toRightOf="@+id/textDateSplit1"
-        android:layout_toEndOf="@+id/textDateSplit1" />
+        android:layout_toRightOf="@+id/textTimeSplit"
+        android:layout_toEndOf="@+id/textTimeSplit"
+        android:hint="00"
+        android:selectAllOnFocus="true" />
 
     <TextView
         android:text="Task Date:"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textDate"
@@ -91,6 +100,7 @@
 
     <TextView
         android:text="Task Category:"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textCategory"
@@ -129,12 +139,14 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/inputMonth"
-        android:text="mm"
-        android:background="@color/colorGrey"
+        android:background="@color/colorBlue"
+        android:layout_centerHorizontal="true"
         android:layout_alignBaseline="@+id/textDateSplit1"
         android:layout_alignBottom="@+id/textDateSplit1"
         android:layout_alignRight="@+id/textTitle"
-        android:layout_alignEnd="@+id/textTitle" />
+        android:layout_alignEnd="@+id/textTitle"
+        android:hint="mm"
+        android:selectAllOnFocus="true" />
 
     <TextView
         android:text="/"
@@ -153,14 +165,16 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/inputYear"
-        android:text="yyyy"
-        android:background="@color/colorGrey"
+        android:background="@color/colorBlue"
+        android:layout_centerHorizontal="true"
         android:layout_alignBaseline="@+id/textDateSplit2"
         android:layout_alignBottom="@+id/textDateSplit2"
         android:layout_alignRight="@+id/InputName"
         android:layout_alignEnd="@+id/InputName"
         android:layout_marginRight="23dp"
-        android:layout_marginEnd="23dp" />
+        android:layout_marginEnd="23dp"
+        android:hint="yyyy"
+        android:selectAllOnFocus="true" />
 
     <TextView
         android:text="/"
@@ -200,6 +214,7 @@
 
     <TextView
         android:text="Recurrence:"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textRecurrence"
@@ -213,31 +228,33 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/inputDay"
-        android:text="dd"
-        android:background="@color/colorGrey"
+        android:background="@color/colorBlue"
+        android:layout_centerHorizontal="true"
         android:layout_alignBaseline="@+id/textDate"
         android:layout_alignBottom="@+id/textDate"
-        android:layout_alignRight="@+id/textTimeSplit"
-        android:layout_alignEnd="@+id/textTimeSplit" />
+        android:layout_marginLeft="160dp"
+        android:layout_marginStart="160dp"
+        android:hint="dd"
+        android:selectAllOnFocus="true"/>
 
     <TextView
         android:text="Task Description:"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textDesc"
         android:textSize="20sp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/textRecurrence"
-        android:layout_toStartOf="@+id/textDateSplit2"
-        android:layout_marginTop="26dp"
-        android:layout_toLeftOf="@+id/textDateSplit2" />
+        android:layout_marginTop="26dp"/>
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/inputDesc"
-        android:background="@color/colorGrey"
+        android:background="@color/colorBlue"
         android:selectAllOnFocus="true"
         android:gravity="top"
         android:hint="Description"
@@ -245,7 +262,6 @@
         android:layout_below="@+id/textDesc"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/confirmButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -253,7 +269,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
-        android:background="@color/colorGrey"
+        android:background="@color/colorBlue"
         android:layout_alignBottom="@+id/textRecurrence"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -266,6 +282,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/confirmButton"
+        android:background="@color/colorBlue"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/inputMonth"
         android:layout_toEndOf="@+id/inputMonth" />
@@ -275,6 +292,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cancelButton"
+        android:background="@color/colorBlue"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textCategory"
         android:layout_alignEnd="@+id/textCategory" />
