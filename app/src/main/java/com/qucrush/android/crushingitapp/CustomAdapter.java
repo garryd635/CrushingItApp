@@ -65,7 +65,7 @@ public class CustomAdapter extends ArrayAdapter<Task>{
         }
 
         Task task = taskList.get(position);
-        holder.code.setText(" (" +  task.getName() + ")");
+        holder.code.setText("      Due: " +  task.getDate());
         holder.name.setText(task.getName());
         //holder.name.setChecked(task.isSelected());
         holder.name.setTag(task);

@@ -9,6 +9,7 @@ public interface communicate {
     public void startCreationForm();
     public void startTaskMenu();
     public void startEditForm(Task task);
+    public void startDailyReport();
     public Task getTaskToEdit();
 
 }

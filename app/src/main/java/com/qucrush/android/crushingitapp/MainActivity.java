@@ -57,10 +57,16 @@ public class MainActivity extends AppCompatActivity
                 new TaskFragment()).commit();
     }
 
-    public void startCreationForm(){
+    public void startCreationForm() {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskFormTest()).commit();
+    }
+
+    public void startDailyReport(){
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame,
+                new DailyReport()).commit();
     }
     public void startTaskMenu(){
         FragmentManager fragmentManager = getFragmentManager();
@@ -125,6 +131,11 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame
                             , new SampleFragment())
+                    .commit();
+        } else if (id == R.id.nav_daily_report) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame
+                            , new DailyFeedbackTest())
                     .commit();
         } else if (id == R.id.nav_share) {
 

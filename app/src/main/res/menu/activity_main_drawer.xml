@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Task Menu" />
         <item
+            android:id="@+id/nav_daily_report"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Feedback Report" />
+        <item
             android:id="@+id/nav_sample_menuy"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Sample" />

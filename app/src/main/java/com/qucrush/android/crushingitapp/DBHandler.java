@@ -77,7 +77,7 @@ public class DBHandler extends SQLiteOpenHelper{
         db.execSQL("UPDATE TASKS SET " + KEY_NAME + " = '" + task.getName() +
                 "', " + KEY_DESC + " = '" + task.getDesc() + "', " + KEY_DATE + " = '" +task.getDate() +
                 "', " + KEY_TIME + " = '" + task.getTime() + "', " + KEY_CATE + " = '" + task.getCategory()
-                + "', " + KEY_COMPLETE + " = '" + task.getCompletion() + "' " + KEY_RECUR + " = '" + task.getRecurring()
+                + "', " + KEY_COMPLETE + " = '" + task.getCompletion() + "' ," + KEY_RECUR + " = '" + task.getRecurring()
                 +"' WHERE " + KEY_ID + " = " + task.getId());
         db.close();
     }
