@@ -36,6 +36,7 @@
         android:layout_alignParentTop="true"/>
 
     <EditText
+        android:textColor="@color/colorBlack"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="time"
@@ -51,6 +52,7 @@
         android:selectAllOnFocus="true"/>
 
     <TextView
+        android:textColor="@color/colorBlack"
         android:text=":"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,6 +109,7 @@
     </RadioGroup>
 
     <EditText
+        android:textColor="@color/colorBlack"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:inputType="date"
@@ -118,11 +121,13 @@
         android:layout_alignBottom="@+id/textDateSplit1"
         android:layout_alignLeft="@+id/textDateSplit1"
         android:layout_alignStart="@+id/textDateSplit1"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:hint="mm"
         android:selectAllOnFocus="true" />
 
     <EditText
+        android:textColor="@color/colorBlack"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="date"
@@ -231,8 +236,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirmButton"
         android:background="@color/colorBlue"
-        android:layout_marginTop="450dp"
-        android:layout_marginLeft="280dp"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"/>
 
     <Button
         android:text="Cancel"
@@ -240,8 +248,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/cancelButton"
         android:background="@color/colorBlue"
-        android:layout_marginTop="450dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"/>
 
     <TextView
         android:text="/"
