@@ -121,6 +121,7 @@
         android:layout_alignLeft="@+id/textDateSplit1"
         android:layout_alignStart="@+id/textDateSplit1"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:hint="mm"
         android:selectAllOnFocus="true" />
 
