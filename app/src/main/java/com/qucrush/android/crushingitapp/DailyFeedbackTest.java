@@ -26,25 +26,26 @@ public class DailyFeedbackTest extends Fragment{
         button = (Button) myView.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setCancelable(true);
-                builder.setTitle("Daily Report is Ready!");
-                builder.setMessage("Do you wish to view the daily feedback now?");
-                builder.setPositiveButton("View Now",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                cm.startDailyReport();
-                            }
-                        });
-                builder.setNegativeButton("View Later", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setCancelable(true);
+//                builder.setTitle("Daily Report is Ready!");
+//                builder.setMessage("Do you wish to view the daily feedback now?");
+//                builder.setPositiveButton("View Now",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                cm.startDailyReport();
+//                            }
+//                        });
+//                builder.setNegativeButton("View Later", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
+//
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+                cm.scheduleReport();
             }
         });
         return myView;

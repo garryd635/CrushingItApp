@@ -29,15 +29,31 @@ public class TaskManager {
 
     public void updateTask(String name, String desc, String date, String time, String category, int id){
         tempTask = new Task(id,name,desc,date,time,category,"no","no");
+        System.out.println("FROM TASKMANAGER:" + tempTask.getCompletion());
         MainActivity.db.updateTask(tempTask);
         retrieveTasks();
     }
 
+    public void updateTaskInAdapter(String name, String desc, String date, String time, String category,String complete, int id){
+        tempTask = new Task(id,name,desc,date,time,category,complete,"no");
+        System.out.println("FROM TASKMANAGER:" + tempTask.getCompletion());
+        MainActivity.db.updateTask(tempTask);
+        retrieveTasks();
+    }
     public void deleteTask(int count){
         taskList = retrieveTasks();
         MainActivity.db.deleteTask(count);
     }
 
+    public void deleteCompletedTask(List<Task> taskList){
+        for(int i=0; i < taskList.size(); i++){
+            System.out.println(taskList.get(i).getRecurring());
+            if(taskList.get(i).getRecurring().equals("no")){
+                deleteTask(taskList.get(i).getId());
+            }
+
+        }
+    }
     public List<Task> retrieveTasks(){
         //List<Task> taskList = new ArrayList<Task>();
         if(MainActivity.db.getTaskCount() != 0){

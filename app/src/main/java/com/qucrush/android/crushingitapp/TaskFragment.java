@@ -154,6 +154,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 cm.startEditForm(taskList.get(position));
             }
         });
+
         return myView;
     }
 

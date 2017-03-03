@@ -37,7 +37,7 @@ public class CustomAdapter extends ArrayAdapter<Task>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
         Log.v("ConvertView", String.valueOf(position));
@@ -50,6 +50,7 @@ public class CustomAdapter extends ArrayAdapter<Task>{
             holder = new ViewHolder();
             holder.code = (TextView) convertView.findViewById(R.id.textTask1);
             holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
             convertView.setTag(holder);
 
             holder.name.setOnClickListener( new View.OnClickListener() {
@@ -57,6 +58,19 @@ public class CustomAdapter extends ArrayAdapter<Task>{
                     CheckBox cb = (CheckBox) v ;
                     Task task = (Task) cb.getTag();
 //                    task.setSelected(cb.isChecked());
+                    System.out.println(cb.isChecked());
+                    if(cb.isChecked() == true){
+                        MainActivity.tm.updateTaskInAdapter(taskList.get(position).getName(),taskList.get(position).getDesc(),taskList.get(position).getDate()
+                        , taskList.get(position).getTime(), taskList.get(position).getCategory(), "yes",taskList.get(position).getId());
+                        taskList = MainActivity.tm.retrieveTasks();
+                        System.out.println("New Task Update: " + taskList.get(position).getName() + " complete? " + taskList.get(position).getCompletion());
+                    }
+                    if(cb.isChecked() == false){
+                        MainActivity.tm.updateTaskInAdapter(taskList.get(position).getName(),taskList.get(position).getDesc(),taskList.get(position).getDate()
+                                , taskList.get(position).getTime(), taskList.get(position).getCategory(), "no",taskList.get(position).getId());
+                        taskList = MainActivity.tm.retrieveTasks();
+                        System.out.println("New Task Update: " + taskList.get(position).getName() + " complete? " + taskList.get(position).getCompletion());
+                    }
                 }
             });
         }
@@ -69,6 +83,9 @@ public class CustomAdapter extends ArrayAdapter<Task>{
         holder.name.setText(task.getName());
         //holder.name.setChecked(task.isSelected());
         holder.name.setTag(task);
+        if(task.getCompletion().equals("yes")){
+            holder.name.setChecked(true);
+        }
 
         return convertView;
     }

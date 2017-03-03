@@ -1,6 +1,13 @@
 package com.qucrush.android.crushingitapp;
 
+import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +21,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,communicate {
@@ -21,6 +32,9 @@ public class MainActivity extends AppCompatActivity
     public static DBHandler db;
     public static TaskManager tm = new TaskManager();
     private Task editTask;
+    private long time;
+    private boolean reportReady = false;
+    AlarmReceiver alarmReceiver = new AlarmReceiver();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +61,27 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        String intentFragment = "";
+        //intentFragment = getIntent().getExtras().getString("FrgToLoad");
+        try {
+            intentFragment = getIntent().getExtras().getString("FrgToLoad");
+        }catch (NullPointerException e){
+            System.out.println("Not yet");
+        }
+        System.out.println("IntendedFrag is :" + intentFragment );
+        if(intentFragment.equals("dailyReport")){
+            startDailyReport();
+        }
+        if(intentFragment.equals("taskMenu")){
+            startTaskMenu();
+        }
+
+        try {
+            reportReady = getIntent().getExtras().getBoolean("prepReport");
+        }catch (NullPointerException e){
+
+        }
+
     }
 
     public void storeTask(){
@@ -133,10 +168,18 @@ public class MainActivity extends AppCompatActivity
                             , new SampleFragment())
                     .commit();
         } else if (id == R.id.nav_daily_report) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new DailyFeedbackTest())
-                    .commit();
+            if(reportReady == false) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame
+                                , new DailyFeedbackTest())
+                        .commit();
+            }else{
+                reportReady = true;
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame
+                                , new DailyReport())
+                        .commit();
+            }
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -146,5 +189,29 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void scheduleReport(){
+        //this.time = time;
+        //long calc = (long) 1.0/60.0;
+        this.time = new GregorianCalendar().getTimeInMillis()+5*1000;
+        System.out.println(time);
+
+        Date d = new Date(time);
+        System.out.println(d);
+        Intent intentAlarm = new Intent(this,AlarmReceiver.class);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        //set the alarm for particular time
+        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        Toast.makeText(this, "Feedback report will initiate in 5 seconds", Toast.LENGTH_LONG).show();
+    }
+
+    public static class AlarmReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent){
+            Toast.makeText(context, "Alarm Triggered", Toast.LENGTH_LONG).show();
+            Intent intent1 = new Intent(context,DailyFeedbackActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent1);
+        }
     }
 }
