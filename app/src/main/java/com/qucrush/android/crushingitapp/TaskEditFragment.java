@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -27,12 +29,14 @@ public class TaskEditFragment extends Fragment{
     Task editTask;
     String fullDate;
     String fullTime;
+    Spinner recurOption;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.task_edit, container, false);
         cancel = (Button) myView.findViewById(R.id.cancelButton);
         update = (Button) myView.findViewById(R.id.confirmButton);
+        recurOption = (Spinner) myView.findViewById(R.id.spinnerEdit);
 
         name = (TextView) myView.findViewById(R.id.InputName);
         desc = (TextView) myView.findViewById(R.id.inputDesc);
@@ -80,6 +84,10 @@ public class TaskEditFragment extends Fragment{
         });
 
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.recurr_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        recurOption.setAdapter(adapter);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

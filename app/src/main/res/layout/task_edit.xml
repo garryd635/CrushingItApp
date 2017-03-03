@@ -221,7 +221,7 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerEdit"
         android:background="@color/colorBlue"
         android:layout_alignBottom="@+id/textRecurrence"
         android:layout_alignParentRight="true"
