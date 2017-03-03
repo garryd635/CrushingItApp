@@ -87,10 +87,10 @@ public class TaskEditFragment extends Fragment{
         });
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.recurr_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        recurOption.setAdapter(adapter);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+        //        R.array.recurr_array, android.R.layout.simple_spinner_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //recurOption.setAdapter(adapter);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
