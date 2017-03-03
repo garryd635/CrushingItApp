@@ -1,6 +1,8 @@
 package com.qucrush.android.crushingitapp;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,7 +23,7 @@ import org.w3c.dom.Text;
 
 public class TaskEditFragment extends Fragment{
     View myView;
-    Button update,cancel;
+    Button update,cancel,delete;
     communicate cm;
     TextView name,desc,dateM,dateD,dateY,timeH,timeM,timeAMPM,category;
     RadioGroup AMPMgrp, categrp;
@@ -36,6 +38,7 @@ public class TaskEditFragment extends Fragment{
         myView = inflater.inflate(R.layout.task_edit, container, false);
         cancel = (Button) myView.findViewById(R.id.cancelButton);
         update = (Button) myView.findViewById(R.id.confirmButton);
+        delete = (Button) myView.findViewById(R.id.deleteTaskB);
         recurOption = (Spinner) myView.findViewById(R.id.spinnerEdit);
 
         name = (TextView) myView.findViewById(R.id.InputName);
@@ -93,6 +96,28 @@ public class TaskEditFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 cm.startTaskMenu();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                System.out.println("Button pressed");
+                MainActivity.tm.deleteTask(editTask.getId());
+                cm.startTaskMenu();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setCancelable(true);
+//                builder.setTitle("Delete Current Task");
+//                builder.setMessage("Do you wish to delete this task?");
+//                builder.setPositiveButton("Delete",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                MainActivity.tm.deleteTask(editTask.getId());
+//                                cm.startTaskMenu();
+//                                //updateTextView(0, taskList);
+//                            }
+//                        });
+//                builder.create().show();
             }
         });
         return myView;

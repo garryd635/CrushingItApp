@@ -302,4 +302,12 @@
         android:layout_alignLeft="@+id/InputName"
         android:layout_alignStart="@+id/InputName" />
 
+    <Button
+        android:text="Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cancelButton"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/deleteTaskB" />
+
 </RelativeLayout>
