@@ -144,6 +144,12 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame
+                            , new SettingsFragment())
+                    .commit();
+            System.out.println("SETTINGS BUTTON PRESSED");
             return true;
         }
 
