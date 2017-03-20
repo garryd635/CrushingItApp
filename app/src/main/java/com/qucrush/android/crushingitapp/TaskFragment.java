@@ -198,6 +198,30 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                                     "please select 'Today' from the filter options.");
                         }else{
                             //Perform Date filtering for Tasks HERE
+                            sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            Calendar testDate = Calendar.getInstance();
+                            ArrayList<Task> sortedTasks = new ArrayList<Task>();
+                            for(int i = 0; i < taskList.size(); i++){
+                                try{
+                                    testDate.setTime(sdf.parse(taskList.get(i).getDate()));
+                                    if((testDate.after(firstDate) && testDate.before(secondDate)||
+                                            testDate.equals(firstDate) || testDate.equals(secondDate))){
+                                        sortedTasks.add(taskList.get(i));
+                                        System.out.println("Date found");
+                                    }
+                                }catch (ParseException e) {
+                                }
+                            }
+                            if(sortedTasks != null){
+                                dataAdapter = new CustomAdapter(getActivity(),
+                                        R.layout.task_menu, sortedTasks);
+                                lView.setAdapter(dataAdapter);
+                                lView.setVisibility(View.VISIBLE);
+                            }else{
+                                lView.setVisibility(View.GONE);
+                            }
+
+
                         }
                     }
                 }else{
@@ -213,17 +237,26 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     beforeDate.setVisibility(View.GONE);
                     afterDate.setVisibility(View.GONE);
                     go.setVisibility(View.GONE);
+                    dataAdapter = new CustomAdapter(getActivity(),
+                            R.layout.task_menu, taskList);
+                    if (taskList != null) {
+                        lView.setAdapter(dataAdapter);
+                        lView.setVisibility(View.VISIBLE);
+                    }
+
                 }
                 if(selected.equals("Today")){
                     textViewClickable = false;
                     final Calendar c = Calendar.getInstance();
                     int year = c.get(Calendar.YEAR);
                     int month = c.get(Calendar.MONTH);
+                    month += 1;
                     int day = c.get(Calendar.DAY_OF_MONTH);
                     afterDate.setVisibility(View.VISIBLE);
                     beforeDate.setVisibility(View.GONE);
-                    go.setVisibility(View.VISIBLE);
+                    go.setVisibility(View.GONE);
                     afterDate.setText(month + "-" + day + "-" + year);
+                    filterListView();
                 }
                 if((selected.equals("Between Dates"))){
                     textViewClickable = true;
@@ -280,6 +313,33 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 });
         builder.show();
     }
+    public void filterListView(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar currDate = Calendar.getInstance();
+        Calendar testDate = Calendar.getInstance();
+        ArrayList<Task> sortedTasks = new ArrayList<Task>();
+        for(int i = 0; i < taskList.size(); i++){
+            try{
+                testDate.setTime(sdf.parse(taskList.get(i).getDate()));
+                if((testDate.get(Calendar.YEAR) == currDate.get(Calendar.YEAR)) &&
+                        (testDate.get(Calendar.MONTH) == currDate.get(Calendar.MONTH)) &&
+                        (testDate.get(Calendar.DAY_OF_MONTH) == currDate.get(Calendar.DAY_OF_MONTH))){
+                    sortedTasks.add(taskList.get(i));
+                    System.out.println("FOUND ONE");
+                }
+            }catch (ParseException e) {
+            }
+        }
+        if(sortedTasks != null){
+            dataAdapter = new CustomAdapter(getActivity(),
+                    R.layout.task_menu, sortedTasks);
+            lView.setAdapter(dataAdapter);
+            lView.setVisibility(View.VISIBLE);
+        }else{
+            lView.setVisibility(View.GONE);
+        }
+    }
+
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         public Dialog onCreateDialog(Bundle savedInstanceState) {
