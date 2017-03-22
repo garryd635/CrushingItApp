@@ -11,6 +11,6 @@ public interface communicate {
     public void startEditForm(Task task);
     public void startDailyReport();
     public Task getTaskToEdit();
-    public void scheduleReport();
+    public void scheduleReport(int hour, int min);
 
 }

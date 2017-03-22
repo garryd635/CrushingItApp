@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -196,20 +197,25 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void scheduleReport(){
+    public void scheduleReport(int hour, int min){
         //this.time = time;
         //long calc = (long) 1.0/60.0;
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(System.currentTimeMillis());
+        c.set(Calendar.HOUR_OF_DAY, hour);
+        c.set(Calendar.MINUTE, min);
+
+
         this.time = new GregorianCalendar().getTimeInMillis()+5*1000;
         System.out.println(time);
-
         Date d = new Date(time);
         System.out.println(d);
         Intent intentAlarm = new Intent(this,AlarmReceiver.class);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         //set the alarm for particular time
-        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-        Toast.makeText(this, "Feedback report will initiate in 5 seconds", Toast.LENGTH_LONG).show();
+        alarmManager.set(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(), PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        Toast.makeText(this, "Feedback report Scheduled", Toast.LENGTH_LONG).show();
     }
 
     public static class AlarmReceiver extends BroadcastReceiver{
