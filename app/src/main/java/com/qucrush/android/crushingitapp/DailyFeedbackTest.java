@@ -45,7 +45,7 @@ public class DailyFeedbackTest extends Fragment{
 //
 //                AlertDialog dialog = builder.create();
 //                dialog.show();
-                cm.scheduleReport();
+                //cm.scheduleReport();
             }
         });
         return myView;
