@@ -4,6 +4,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Manifest;
 
 /**
  * Created by Garry on 2/13/2017.
@@ -15,6 +16,7 @@ public class TaskManager {
     private int counter;
     private TextView dateText,timeText, nameText, cateText;
     private Task tempTask;
+    private String reportTime;
 
     public TaskManager(){
         taskList = new ArrayList<Task>();
@@ -69,6 +71,24 @@ public class TaskManager {
         return taskList;
     }
 
+    public String retrieveTime(){
+        if(MainActivity.db.getTableDrtime() != ""){
+            reportTime = MainActivity.db.getTableDrtime();
+        }
+        else
+            reportTime = null;
+        return reportTime;
+    }
+
+    public void addTime(String time){
+        if(MainActivity.db.getTableDrtime() == ""){
+            MainActivity.db.addTime(time);
+        }
+    }
+
+    public void updateTime(String time){
+        MainActivity.db.updateTime(time);
+    }
     public int getCount() {
         return counter;
     }

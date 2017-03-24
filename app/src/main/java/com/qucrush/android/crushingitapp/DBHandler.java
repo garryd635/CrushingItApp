@@ -20,6 +20,7 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "CrushDB";
     // Contacts table name
     private static final String TABLE_TASKS = "Tasks";
+    private static final String TABLE_DRTIME = "DRTime";
     // Shops Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
@@ -29,6 +30,7 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String KEY_CATE = "category";
     private static final String KEY_COMPLETE = "completion";
     private static final String KEY_RECUR = "recurring";
+    private static final String KEY_DRTIME = "time";
 
 
     public DBHandler(Context context) {
@@ -41,7 +43,10 @@ public class DBHandler extends SQLiteOpenHelper{
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_DESC + " TEXT," + KEY_DATE + " TEXT," + KEY_TIME + " TEXT," + KEY_CATE + " TEXT," + KEY_COMPLETE + " TEXT,"
                 + KEY_RECUR + " TEXT" + ")";
+        String CREATE_DRTIME_TABLE = "CREATE TABLE" + TABLE_DRTIME + "("
+                + KEY_ID + "INTEGER PRIMARY KEY," + KEY_DRTIME + "TEXT)";
         db.execSQL(CREATE_TASK_TABLE);
+        db.execSQL(CREATE_DRTIME_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -66,6 +71,13 @@ public class DBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void addTime(String time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_DRTIME, time);
+        db.insert(TABLE_DRTIME,null,values);
+        db.close();
+    }
     public void deleteTask(int count) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE from TASKS WHERE ID == " + count);
@@ -80,6 +92,12 @@ public class DBHandler extends SQLiteOpenHelper{
                 + "', " + KEY_COMPLETE + " = '" + task.getCompletion() + "' ," + KEY_RECUR + " = '" + task.getRecurring()
                 +"' WHERE " + KEY_ID + " = " + task.getId());
         db.close();
+    }
+
+    public void updateTime(String time){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("UPDATE DRTime SET " + KEY_DRTIME + " = '" + time
+                    + "' WHERE " + KEY_ID + " = " + 0);
     }
     public List<Task> getAllTasks(){
         List<Task> taskList = new ArrayList<Task>();
@@ -98,6 +116,23 @@ public class DBHandler extends SQLiteOpenHelper{
         cur.close();
         db.close();
         return taskList;
+    }
+
+    public String getTableDrtime(){
+        String timeToSend = "";
+        String selectQuery = "SELECT * FROM " + TABLE_DRTIME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cur = db.rawQuery(selectQuery,null);
+
+        if(cur.moveToFirst()){
+            do{
+                timeToSend = cur.getString(1);
+            } while (cur.moveToNext());
+        }
+        cur.close();
+        db.close();
+
+        return timeToSend;
     }
 
     public int getTaskCount(){
