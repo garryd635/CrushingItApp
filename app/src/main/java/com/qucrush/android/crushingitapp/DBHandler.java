@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper{
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
     // Database Name
     private static final String DATABASE_NAME = "CrushDB";
     // Contacts table name
@@ -43,8 +43,9 @@ public class DBHandler extends SQLiteOpenHelper{
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_DESC + " TEXT," + KEY_DATE + " TEXT," + KEY_TIME + " TEXT," + KEY_CATE + " TEXT," + KEY_COMPLETE + " TEXT,"
                 + KEY_RECUR + " TEXT" + ")";
-        String CREATE_DRTIME_TABLE = "CREATE TABLE" + TABLE_DRTIME + "("
-                + KEY_ID + "INTEGER PRIMARY KEY," + KEY_DRTIME + "TEXT)";
+        String CREATE_DRTIME_TABLE = "CREATE TABLE " + TABLE_DRTIME + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DRTIME + " TEXT)";
+        System.out.println(CREATE_TASK_TABLE);
         db.execSQL(CREATE_TASK_TABLE);
         db.execSQL(CREATE_DRTIME_TABLE);
     }
@@ -52,6 +53,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DRTIME);
 // Creating tables again
         onCreate(db);
     }
@@ -97,8 +99,9 @@ public class DBHandler extends SQLiteOpenHelper{
     public void updateTime(String time){
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("UPDATE DRTime SET " + KEY_DRTIME + " = '" + time
-                    + "' WHERE " + KEY_ID + " = " + 0);
+                    + "' WHERE " + KEY_ID + " = " + 1);
     }
+
     public List<Task> getAllTasks(){
         List<Task> taskList = new ArrayList<Task>();
 
@@ -127,6 +130,7 @@ public class DBHandler extends SQLiteOpenHelper{
         if(cur.moveToFirst()){
             do{
                 timeToSend = cur.getString(1);
+                System.out.println("Time ID + " + cur.getInt(0));
             } while (cur.moveToNext());
         }
         cur.close();

@@ -26,6 +26,9 @@ public class SettingsFragment extends Fragment{
         myView = inflater.inflate(R.layout.settings, container, false);
         time = (TextView) myView.findViewById(R.id.textTimeDisplay);
         cm = (communicate) getActivity();
+        if(MainActivity.tm.retrieveTime() != null){
+            time.setText(MainActivity.tm.retrieveTime());
+        }
 
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,9 +43,11 @@ public class SettingsFragment extends Fragment{
                         if(hourOfDay < 13){
                             txt = hourOfDay + ":" + minute + " AM";
                             time.setText(txt);
+                            cm.storeTime(txt);
                         }else{
                             txt = (hourOfDay - 12) + ":" + minute + " PM";
                             time.setText(txt);
+                            cm.storeTime(txt);
                         }
                         cm.scheduleReport(hourOfDay,minute);
                         System.out.println(hourOfDay);

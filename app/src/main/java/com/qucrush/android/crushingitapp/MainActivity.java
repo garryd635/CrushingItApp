@@ -218,6 +218,15 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, "Feedback report Scheduled", Toast.LENGTH_LONG).show();
     }
 
+    public void storeTime(String time){
+        System.out.println("MainActivity stored time called. Results:" + tm.retrieveTime());
+        if(tm.retrieveTime() != null){
+            tm.updateTime(time);
+        }else{
+            tm.addTime(time);
+        }
+    }
+
     public static class AlarmReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent){
             Toast.makeText(context, "Alarm Triggered", Toast.LENGTH_LONG).show();

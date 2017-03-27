@@ -45,33 +45,36 @@ public class DailyReport extends Fragment{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         //Check through list of tasks for task due during current day
-        for(int i = 0; i < taskList.size(); i++){
-            Calendar toDate = Calendar.getInstance();
-            Calendar nowDate = Calendar.getInstance();
+        if (taskList != null){
+            for(int i = 0; i < taskList.size(); i++){
+                Calendar toDate = Calendar.getInstance();
+                Calendar nowDate = Calendar.getInstance();
 
-            try{
-                toDate.setTime(sdf.parse(taskList.get(i).getDate()));
-            }catch (ParseException e){
-                System.out.println("***ERROR***");
-            }
-
-
-            System.out.println("Now Date: " + nowDate.getTime().toString());
-
-            //toDate.set(convertedDate.getYear(), convertedDate.getMonth(),convertedDate.getDay());
-            System.out.println("To Date: " + toDate.getTime().toString());
-            if((toDate.get(Calendar.YEAR) == nowDate.get(Calendar.YEAR)) &&
-                    (toDate.get(Calendar.MONTH) == nowDate.get(Calendar.MONTH)) &&
-                    (toDate.get(Calendar.DAY_OF_MONTH) == nowDate.get(Calendar.DAY_OF_MONTH))){
-                System.out.println("Date is equal");
-                if(taskList.get(i).getCompletion().equals("yes")){
-                    cTaskList.add(taskList.get(i));
-                }else{
-                    uTaskList.add(taskList.get(i));
+                try{
+                    toDate.setTime(sdf.parse(taskList.get(i).getDate()));
+                }catch (ParseException e){
+                    System.out.println("***ERROR***");
                 }
-            }
 
+
+                System.out.println("Now Date: " + nowDate.getTime().toString());
+
+                //toDate.set(convertedDate.getYear(), convertedDate.getMonth(),convertedDate.getDay());
+                System.out.println("To Date: " + toDate.getTime().toString());
+                if((toDate.get(Calendar.YEAR) == nowDate.get(Calendar.YEAR)) &&
+                        (toDate.get(Calendar.MONTH) == nowDate.get(Calendar.MONTH)) &&
+                        (toDate.get(Calendar.DAY_OF_MONTH) == nowDate.get(Calendar.DAY_OF_MONTH))){
+                    System.out.println("Date is equal");
+                    if(taskList.get(i).getCompletion().equals("yes")){
+                        cTaskList.add(taskList.get(i));
+                    }else{
+                        uTaskList.add(taskList.get(i));
+                    }
+                }
+
+            }
         }
+
 
         cDataAdapter = new CompletionAdapter(getActivity(),
                 R.layout.daily_report, cTaskList);

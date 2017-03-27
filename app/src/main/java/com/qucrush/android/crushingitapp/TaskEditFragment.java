@@ -21,7 +21,10 @@ import android.widget.TimePicker;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Garry on 2/8/2017.
@@ -97,9 +100,23 @@ public class TaskEditFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
+                String timeTxt = timeH.getText().toString();
+                String[] splitTime = timeTxt.split("\\s+");
+                Calendar setCal = Calendar.getInstance();
+                //setCal.(Calendar.HOUR_OF_DAY, hour);
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                Date date = null;
+                try{
+                    date = sdf.parse(splitTime[0].toString());
+                }catch (ParseException e){
+
+                }
+                c.setTime(date);
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int min = c.get(Calendar.MINUTE);
+
                 TimePickerDialog timepicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String txt;
@@ -131,9 +148,18 @@ public class TaskEditFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
+                try{
+                    date = sdf.parse(dateD.getText().toString());
+                }catch (ParseException e){
+
+                }
+                calendar.setTime(date);
                 int yy = calendar.get(Calendar.YEAR);
                 int mm = calendar.get(Calendar.MONTH);
                 int dd = calendar.get(Calendar.DAY_OF_MONTH);
+
                 DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -179,6 +205,10 @@ public class TaskEditFragment extends Fragment{
             }
         });
         return myView;
+    }
+
+    public void checkDate(){
+
     }
 
     public void saveTask(){

@@ -12,5 +12,6 @@ public interface communicate {
     public void startDailyReport();
     public Task getTaskToEdit();
     public void scheduleReport(int hour, int min);
+    public void storeTime(String time);
 
 }

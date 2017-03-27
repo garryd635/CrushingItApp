@@ -72,6 +72,7 @@ public class TaskManager {
     }
 
     public String retrieveTime(){
+        System.out.println("***********" + MainActivity.db.getTableDrtime());
         if(MainActivity.db.getTableDrtime() != ""){
             reportTime = MainActivity.db.getTableDrtime();
         }
@@ -81,14 +82,17 @@ public class TaskManager {
     }
 
     public void addTime(String time){
+        System.out.println("CALLED addTime Results:" + MainActivity.db.getTableDrtime());
         if(MainActivity.db.getTableDrtime() == ""){
             MainActivity.db.addTime(time);
         }
     }
 
     public void updateTime(String time){
+        System.out.println("CALLED updateTime Results: updating " + time);
         MainActivity.db.updateTime(time);
     }
+
     public int getCount() {
         return counter;
     }
