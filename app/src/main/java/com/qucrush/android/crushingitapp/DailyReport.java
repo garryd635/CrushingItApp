@@ -27,8 +27,10 @@ public class DailyReport extends Fragment{
     List<Task> taskList = new ArrayList<Task>();
     List<Task> cTaskList = new ArrayList<Task>();
     List<Task> uTaskList = new ArrayList<Task>();
-    ListView completedList, uncompletedList;
-    CompletionAdapter cDataAdapter,uDataAdapter;
+    //ListView completedList, uncompletedList;
+    ListView feedbackList;
+    //CompletionAdapter cDataAdapter,uDataAdapter;
+    CompletionAdapter lDataAdapter;
     Button continueButton;
     communicate cm;
 
@@ -36,8 +38,9 @@ public class DailyReport extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.daily_report, container, false);
-        completedList = (ListView) myView.findViewById(R.id.viewComplete);
-        uncompletedList = (ListView) myView.findViewById(R.id.viewIncomplete);
+        //completedList = (ListView) myView.findViewById(R.id.viewComplete);
+        //uncompletedList = (ListView) myView.findViewById(R.id.viewIncomplete);
+        feedbackList = (ListView) myView.findViewById(R.id.viewTasks);
         continueButton = (Button) myView.findViewById(R.id.contButton);
         taskList = MainActivity.tm.retrieveTasks();
         cm = (communicate) getActivity();
@@ -65,24 +68,28 @@ public class DailyReport extends Fragment{
                         (toDate.get(Calendar.MONTH) == nowDate.get(Calendar.MONTH)) &&
                         (toDate.get(Calendar.DAY_OF_MONTH) == nowDate.get(Calendar.DAY_OF_MONTH))){
                     System.out.println("Date is equal");
-                    if(taskList.get(i).getCompletion().equals("yes")){
-                        cTaskList.add(taskList.get(i));
-                    }else{
-                        uTaskList.add(taskList.get(i));
-                    }
+                    //if(taskList.get(i).getCompletion().equals("yes")){
+                    //    cTaskList.add(taskList.get(i));
+                    //}else{
+                    //    uTaskList.add(taskList.get(i));
+                    //}
+                    cTaskList.add(taskList.get(i));
                 }
 
             }
         }
 
 
-        cDataAdapter = new CompletionAdapter(getActivity(),
+        //cDataAdapter = new CompletionAdapter(getActivity(),
+        //        R.layout.daily_report, cTaskList);
+        //uDataAdapter = new CompletionAdapter(getActivity(),
+        //        R.layout.daily_report, uTaskList);
+        lDataAdapter = new CompletionAdapter(getActivity(),
                 R.layout.daily_report, cTaskList);
-        uDataAdapter = new CompletionAdapter(getActivity(),
-                R.layout.daily_report, uTaskList);
 
-        completedList.setAdapter(cDataAdapter);
-        uncompletedList.setAdapter(uDataAdapter);
+        //completedList.setAdapter(cDataAdapter);
+        //uncompletedList.setAdapter(uDataAdapter);
+        feedbackList.setAdapter(lDataAdapter);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override

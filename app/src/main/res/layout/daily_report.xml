@@ -3,45 +3,27 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:weightSum="2" android:orientation="horizontal"
     android:background="@color/colorLightBlue">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-        <TextView
-            android:text="Completed Tasks"
-            android:textSize="20sp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
 
-        <TextView
-            android:text="Incomplete Tasks"
-            android:textSize="20sp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+    <TextView
+        android:text="Feedback Report"
+        android:textColor="@color/colorBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textFeedBackTitle"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginTop="30dp">
-        <ListView
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewComplete">
-        </ListView>
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:textColor="@color/colorBlack"
+        android:id="@+id/viewTasks">
+    </ListView>
 
-        <ListView
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewIncomplete">
-        </ListView>
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -49,25 +31,30 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:contentDescription="Badge Earned">
         </ImageView>
+
         <TextView
             android:textSize="18sp"
             android:text="Congragulations!\n You earned the badge:\n"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/textView2">
             </TextView>
     </LinearLayout>
 
     <Button
-        android:text="Continue"
+        android:text="Close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/colorBlue"
+        android:textColor="@color/colorBlack"
         android:id="@+id/contButton" />
 
 </RelativeLayout>
