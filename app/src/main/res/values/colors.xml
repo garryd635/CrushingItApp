@@ -7,4 +7,6 @@
     <color name="colorLighterBlue">#B4FEFF</color>
     <color name="colorBlue">#8CD0FF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorLightGreen">#98fb98</color>
+    <color name="colorLightRed">#FF6347</color>
 </resources>

@@ -206,10 +206,14 @@ public class MainActivity extends AppCompatActivity
         c.set(Calendar.MINUTE, min);
 
 
-        this.time = new GregorianCalendar().getTimeInMillis()+5*1000;
-        System.out.println(time);
-        Date d = new Date(time);
-        System.out.println(d);
+//        this.time = new GregorianCalendar().getTimeInMillis()+5*1000;
+//        System.out.println(time);
+//        Date d = new Date(time);
+//        System.out.println(d);
+        if(c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE,1);
+        }
+
         Intent intentAlarm = new Intent(this,AlarmReceiver.class);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 

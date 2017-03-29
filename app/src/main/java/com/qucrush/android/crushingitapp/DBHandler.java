@@ -15,13 +15,13 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper{
     // Database Version
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     // Database Name
     private static final String DATABASE_NAME = "CrushDB";
     // Contacts table name
     private static final String TABLE_TASKS = "Tasks";
     private static final String TABLE_DRTIME = "DRTime";
-    // Shops Table Columns names
+    // Task Column names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_DESC = "description";
@@ -30,6 +30,9 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String KEY_CATE = "category";
     private static final String KEY_COMPLETE = "completion";
     private static final String KEY_RECUR = "recurring";
+    private static final String KEY_COMPLETE_DATE = "completionDate";
+    private static final String KEY_DAYS_INCOMPLETE = "daysOfIncomplete";
+    //Report Time Column names
     private static final String KEY_DRTIME = "time";
 
 
@@ -42,10 +45,9 @@ public class DBHandler extends SQLiteOpenHelper{
         String CREATE_TASK_TABLE = "CREATE TABLE " + TABLE_TASKS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_DESC + " TEXT," + KEY_DATE + " TEXT," + KEY_TIME + " TEXT," + KEY_CATE + " TEXT," + KEY_COMPLETE + " TEXT,"
-                + KEY_RECUR + " TEXT" + ")";
+                + KEY_RECUR + " TEXT," + KEY_COMPLETE_DATE + " TEXT," + KEY_DAYS_INCOMPLETE + " TEXT" + ")";
         String CREATE_DRTIME_TABLE = "CREATE TABLE " + TABLE_DRTIME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DRTIME + " TEXT)";
-        System.out.println(CREATE_TASK_TABLE);
         db.execSQL(CREATE_TASK_TABLE);
         db.execSQL(CREATE_DRTIME_TABLE);
     }
@@ -68,6 +70,8 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(KEY_CATE, task.getCategory().toString());
         values.put(KEY_COMPLETE, task.getCompletion());
         values.put(KEY_RECUR, task.getRecurring());
+        values.put(KEY_COMPLETE_DATE, "none");
+        values.put(KEY_DAYS_INCOMPLETE, "0");
 
         db.insert(TABLE_TASKS,null,values);
         db.close();
@@ -93,6 +97,50 @@ public class DBHandler extends SQLiteOpenHelper{
                 "', " + KEY_TIME + " = '" + task.getTime() + "', " + KEY_CATE + " = '" + task.getCategory()
                 + "', " + KEY_COMPLETE + " = '" + task.getCompletion() + "' ," + KEY_RECUR + " = '" + task.getRecurring()
                 +"' WHERE " + KEY_ID + " = " + task.getId());
+        db.close();
+    }
+
+    public String getCompleteDateTask(int id){
+        String date = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery =("SELECT * FROM " + TABLE_TASKS + " WHERE " + KEY_ID + " = " + id);
+        Cursor cur = db.rawQuery(selectQuery,null);
+        if(cur.moveToFirst()){
+            do{
+                date = cur.getString(8);
+            } while (cur.moveToNext());
+        }
+        cur.close();
+        db.close();
+        return date;
+    }
+
+    public String getDaysIncomplete(int id){
+        String date = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery =("SELECT * FROM " + TABLE_TASKS + " WHERE " + KEY_ID + " = " + id);
+        Cursor cur = db.rawQuery(selectQuery,null);
+        if(cur.moveToFirst()){
+            do{
+                date = cur.getString(9);
+            } while (cur.moveToNext());
+        }
+        cur.close();
+        db.close();
+        return date;
+    }
+
+    public void updateCompleteDateTask(int id, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE TASKS SET " + KEY_COMPLETE_DATE + " = '" + date +
+                    "' WHERE " + KEY_ID + " = " + id);
+        db.close();
+    }
+
+    public void updateDaysIncomplete(int id, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE TASKS SET " + KEY_DAYS_INCOMPLETE + " = '" + date +
+                    "' WHERE " + KEY_ID + " = " + id);
         db.close();
     }
 

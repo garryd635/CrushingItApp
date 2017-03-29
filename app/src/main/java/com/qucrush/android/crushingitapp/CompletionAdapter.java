@@ -1,6 +1,8 @@
 package com.qucrush.android.crushingitapp;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +52,16 @@ public class CompletionAdapter extends ArrayAdapter<Task> {
         else {
             holder = (CompletionAdapter.ViewHolder) convertView.getTag();
         }
+
         Task task = taskList.get(position);
         holder.code.setText(task.getName());
+        holder.code.setTextColor(Color.BLACK);
+        if(task.getCompletion().equals("yes")){
+            convertView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorLightGreen));
+
+        }else{
+            convertView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorLightRed));
+        }
         //holder.name.setText(task.getName());
         //holder.name.setChecked(task.isSelected());
         //holder.name.setTag(task);

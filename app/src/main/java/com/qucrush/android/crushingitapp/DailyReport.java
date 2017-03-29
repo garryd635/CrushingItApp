@@ -68,15 +68,18 @@ public class DailyReport extends Fragment{
                         (toDate.get(Calendar.MONTH) == nowDate.get(Calendar.MONTH)) &&
                         (toDate.get(Calendar.DAY_OF_MONTH) == nowDate.get(Calendar.DAY_OF_MONTH))){
                     System.out.println("Date is equal");
-                    //if(taskList.get(i).getCompletion().equals("yes")){
-                    //    cTaskList.add(taskList.get(i));
-                    //}else{
-                    //    uTaskList.add(taskList.get(i));
-                    //}
-                    cTaskList.add(taskList.get(i));
+                    if(taskList.get(i).getCompletion().equals("yes")){
+                        cTaskList.add(taskList.get(i));
+                    }else{
+                        uTaskList.add(taskList.get(i));
+                    }
+
+                    //cTaskList.remove(cTaskList.size());
+
                 }
 
             }
+            cTaskList.addAll(uTaskList);
         }
 
 
@@ -94,7 +97,7 @@ public class DailyReport extends Fragment{
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.tm.deleteCompletedTask(cTaskList);
+                //MainActivity.tm.deleteCompletedTask(cTaskList);
                 cm.startTaskMenu();
             }
         });
