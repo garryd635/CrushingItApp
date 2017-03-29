@@ -4,24 +4,21 @@
     android:background="@color/colorLightBlue">
 
     <TextView
+        style="@style/largeText"
         android:text="Daily Feedback time:"
-        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textTime"
-        android:textSize="20sp"
         android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"/>
 
     <TextView
-        android:textColor="@color/colorBlack"
+        style="@style/largeText"
         android:text="12:00"
-
         android:background="@color/colorBlue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textTimeDisplay"
-        android:textSize="20sp"
         android:layout_alignBaseline="@+id/textTime"
         android:layout_alignBottom="@+id/textTime"
         android:layout_toRightOf="@id/textTime"
@@ -31,16 +28,16 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
+        style="@style/largeText"
         android:text="Select Home Screen Display on Startup:"
-        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textHomeSelect"
-        android:textSize="20sp"
         android:layout_marginTop="150dp"
         android:layout_alignParentTop="true"/>
 
     <RadioGroup
+        style="@style/smallText"
         android:id="@+id/radioHome"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -70,16 +67,16 @@
     </RadioGroup>
 
     <TextView
+        style="@style/largeText"
         android:text="Select Text Size:"
-        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textSize"
-        android:textSize="20sp"
         android:layout_marginTop="300dp"
         android:layout_alignParentTop="true"/>
 
     <Button
+        android:textSize="14dp"
         android:text="Small"
         android:layout_width="100dp"
         android:layout_height="50dp"
@@ -89,6 +86,7 @@
         android:layout_marginTop="350dp"/>
 
     <Button
+        android:textSize="17dp"
         android:text="Medium"
         android:layout_width="100dp"
         android:layout_height="50dp"
@@ -98,6 +96,7 @@
         android:layout_marginTop="350dp"/>
 
     <Button
+        android:textSize="20dp"
         android:text="Large"
         android:layout_width="100dp"
         android:layout_height="50dp"
