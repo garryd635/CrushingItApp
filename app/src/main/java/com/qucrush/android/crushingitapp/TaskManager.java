@@ -2,7 +2,11 @@ package com.qucrush.android.crushingitapp;
 
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.jar.Manifest;
 
@@ -103,6 +107,32 @@ public class TaskManager {
 
             }
         }
+    }//changeCard
+
+    /*
+    Check to see if task from report should be deleted or modified
+     */
+    public void managedCompletedTask(List<Task> completedList){
+        for(int i = 0; i < completedList.size(); i++){
+            if(completedList.get(i).getRecurring() == "none"){
+                MainActivity.db.deleteTask(completedList.get(i).getId());
+            }else{
+                Task updatedTask = completedList.get(i);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String[] splitDate = updatedTask.getDate().split("-");
+                String newDateString = splitDate[0] + "-" + (Integer.parseInt(splitDate[1])-1) + "-" + splitDate[2];
+                Date newDate = null;
+                try{
+                    newDate = sdf.parse(newDateString.toString());
+                }catch(ParseException e){
+                }
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(newDate);
+                if(completedList.get(i).getRecurring() == "Daily"){
+
+                }
+            }
+        }//for
     }
 
 }

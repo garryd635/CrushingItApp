@@ -41,16 +41,23 @@ public class SettingsFragment extends Fragment{
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String txt;
                         if(hourOfDay < 13){
-                            txt = hourOfDay + ":" + minute + " AM";
+                            if(minute < 10){
+                                txt = hourOfDay + ":0" + minute + " AM";
+                            }else {
+                                txt = hourOfDay + ":" + minute + " AM";
+                            }
                             time.setText(txt);
                             cm.storeTime(txt);
                         }else{
-                            txt = (hourOfDay - 12) + ":" + minute + " PM";
+                            if(minute < 10){
+                                txt = (hourOfDay - 12) + ":0" + minute + " PM";
+                            }else {
+                                txt = (hourOfDay - 12) + ":" + minute + " PM";
+                            }
                             time.setText(txt);
                             cm.storeTime(txt);
                         }
                         cm.scheduleReport(hourOfDay,minute);
-                        System.out.println(hourOfDay);
                     }
                 }, hour, min, false);
                 timepicker.show();

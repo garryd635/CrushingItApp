@@ -98,6 +98,7 @@ public class DailyReport extends Fragment{
             @Override
             public void onClick(View v) {
                 //MainActivity.tm.deleteCompletedTask(cTaskList);
+
                 cm.startTaskMenu();
             }
         });
