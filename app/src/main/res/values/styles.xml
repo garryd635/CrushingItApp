@@ -27,4 +27,27 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
+    <style name="smallBigText">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="largeBigText">
+        <item name="android:textSize">24dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="theme" parent="android:Theme">
+    </style>
+
+    <style name="theme.Small">
+        <item name="textSmall">@style/smallText</item>
+        <item name="textLarge">@style/LargeText</item>
+    </style>
+
+    <style name="theme.Large">
+        <item name="textSmall">@style/smallBigText</item>
+        <item name="textLarge">@style/largeBigText</item>
+    </style>
+
 </resources>

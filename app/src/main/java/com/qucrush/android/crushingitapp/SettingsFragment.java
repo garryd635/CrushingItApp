@@ -2,11 +2,13 @@ package com.qucrush.android.crushingitapp;
 
 import android.app.Fragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -17,14 +19,18 @@ import java.util.Calendar;
  */
 
 public class SettingsFragment extends Fragment{
+    public boolean smallSize = true;
     View myView;
     TextView time;
+    Button small, large;
     communicate cm;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.settings, container, false);
         time = (TextView) myView.findViewById(R.id.textTimeDisplay);
+        small = (Button) myView.findViewById(R.id.buttonSmall);
+        large = (Button) myView.findViewById(R.id.buttonLarge);
         cm = (communicate) getActivity();
         if(MainActivity.tm.retrieveTime() != null){
             time.setText(MainActivity.tm.retrieveTime());
@@ -63,6 +69,21 @@ public class SettingsFragment extends Fragment{
                 timepicker.show();
             }
         });
+
+        small.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                smallSize = true;
+                getActivity().setTheme(R.style.theme);
+            }
+        });
+
+        large.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                smallSize = false;
+            }
+        });
+
+        //http://stackoverflow.com/questions/3241729/android-dynamically-change-style-at-runtime
 
 
         return myView;
