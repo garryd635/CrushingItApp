@@ -73,13 +73,15 @@ public class SettingsFragment extends Fragment{
         small.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 smallSize = true;
-                getActivity().setTheme(R.style.theme);
+                getActivity().setTheme(R.style.Theme);
             }
         });
 
         large.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+
                 smallSize = false;
+                getActivity().setTheme(R.style.Theme);
             }
         });
 

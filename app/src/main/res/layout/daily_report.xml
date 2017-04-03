@@ -5,7 +5,7 @@
     android:background="@color/colorLightBlue">
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Feedback Report"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"/>
 
     <ListView
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="30dp"
@@ -35,7 +35,7 @@
         </ImageView>
 
         <TextView
-            style="@style/smallText"
+            style="?textBody"
             android:text="Congragulations!\n You earned the badge:\n"
             android:gravity="center"
             android:layout_width="0dp"
@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <Button
-        style="@style/smallText"
+        style="?textBody"
         android:text="Close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

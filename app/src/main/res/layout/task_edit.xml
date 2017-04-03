@@ -6,7 +6,7 @@
     android:fillViewport="true">
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Name:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Time:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Date:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Category:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
 
 
     <RadioGroup
-        style="@style/smallText"
+        style="?textBody"
         android:id="@+id/radioWorkLife"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 
     <TextView
         android:text="Recurrence:"
-        style="@style/largeText"
+        style="?textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textRecurrence"
@@ -96,7 +96,7 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Description:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
         android:layout_marginTop="26dp"/>
 
     <EditText
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:inputType="textMultiLine"
@@ -124,7 +124,7 @@
         android:layout_alignParentEnd="true" />
 
     <Spinner
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerEdit"
@@ -137,7 +137,7 @@
         android:layout_alignStart="@+id/inputHours" />
 
     <Button
-        style="@style/smallText"
+        style="?textBody"
         android:text="Confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
         android:layout_marginEnd="30dp"/>
 
     <Button
-        style="@style/smallText"
+        style="?textBody"
         android:text="Cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
         android:layout_marginStart="30dp"/>
 
     <EditText
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -175,7 +175,7 @@
         android:layout_alignStart="@+id/inputHours" />
 
     <TextView
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -188,7 +188,7 @@
         android:layout_alignStart="@+id/InputName"/>
 
     <Button
-        style="@style/smallText"
+        style="?textBody"
         android:text="Delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
         android:id="@+id/deleteTaskB" />
 
     <TextView
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

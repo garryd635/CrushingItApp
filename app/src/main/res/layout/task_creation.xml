@@ -5,7 +5,7 @@
     android:background="@color/colorLightBlue" android:fillViewport="true">
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Creation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Name:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Date:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Category:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
 
 
     <RadioGroup
-        style="@style/smallText"
+        style="?textBody"
         android:id="@+id/radioWorkLife"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,7 +67,7 @@
     </RadioGroup>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Recurrence:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Description:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
         android:layout_marginTop="26dp"/>
 
     <EditText
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:inputType="textMultiLine"
@@ -104,7 +104,7 @@
         android:layout_alignParentEnd="true" />
 
     <Spinner
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerCreate"
@@ -117,7 +117,7 @@
         android:layout_alignStart="@+id/inputHours" />
 
     <Button
-        style="@style/smallText"
+        style="?textBody"
         android:text="Add Task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
         android:layout_marginEnd="30dp"/>
 
     <EditText
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -145,7 +145,7 @@
         android:layout_alignStart="@+id/inputHours" />
 
     <TextView
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
@@ -159,7 +159,7 @@
         android:layout_alignStart="@+id/InputName" />
 
     <Button
-        style="@style/smallText"
+        style="?textBody"
         android:text="Cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
         android:layout_marginStart="30dp"/>
 
     <TextView
-        style="@style/largeText"
+        style="?textTitle"
         android:text="Task Time:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        style="@style/smallText"
+        style="?textBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
