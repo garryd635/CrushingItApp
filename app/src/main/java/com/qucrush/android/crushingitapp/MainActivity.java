@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
           setTheme(R.style.Theme_Small);
       }
     } catch (Exception e) {
-
+        System.out.println("IT BROOOOOOOOOOOOKE");
     }
 
 

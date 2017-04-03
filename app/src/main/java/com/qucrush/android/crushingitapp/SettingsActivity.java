@@ -1,13 +1,10 @@
 package com.qucrush.android.crushingitapp;
 
-import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -16,24 +13,23 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 /**
- * Created by Garry on 2/8/2017.
+ * Created by Tyler on 4/3/2017.
  */
 
-public class SettingsFragment extends Fragment{
+public class SettingsActivity  extends AppCompatActivity {
+
     public boolean smallSize = true;
     View myView;
     TextView time;
     Button small, large;
-    communicate cm;
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    Intent intent = SettingsActivity.this.getIntent();
 
-        myView = inflater.inflate(R.layout.settings, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.settings);
         time = (TextView) myView.findViewById(R.id.textTimeDisplay);
         small = (Button) myView.findViewById(R.id.buttonSmall);
         large = (Button) myView.findViewById(R.id.buttonLarge);
-        cm = (communicate) getActivity();
         if(MainActivity.tm.retrieveTime() != null){
             time.setText(MainActivity.tm.retrieveTime());
         }
@@ -44,7 +40,7 @@ public class SettingsFragment extends Fragment{
                 final Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int min = c.get(Calendar.MINUTE);
-                TimePickerDialog timepicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timepicker = new TimePickerDialog(SettingsActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String txt;
@@ -55,7 +51,8 @@ public class SettingsFragment extends Fragment{
                                 txt = hourOfDay + ":" + minute + " AM";
                             }
                             time.setText(txt);
-                            cm.storeTime(txt);
+                            //cm.storeTime(txt);
+                            intent.putExtra("Storing time", txt);
                         }else{
                             if(minute < 10){
                                 txt = (hourOfDay - 12) + ":0" + minute + " PM";
@@ -63,9 +60,11 @@ public class SettingsFragment extends Fragment{
                                 txt = (hourOfDay - 12) + ":" + minute + " PM";
                             }
                             time.setText(txt);
-                            cm.storeTime(txt);
+                            //cm.storeTime(txt);
+                            intent.putExtra("Storing time", txt);
                         }
-                        cm.scheduleReport(hourOfDay,minute);
+                        //cm.scheduleReport(hourOfDay,minute);
+                        intent.putExtra("Schedule", txt);
                     }
                 }, hour, min, false);
                 timepicker.show();
@@ -74,8 +73,8 @@ public class SettingsFragment extends Fragment{
 
         small.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Small Text Selected", Toast.LENGTH_SHORT).show();
-                Intent intent = getActivity().getIntent();
+                Toast.makeText(SettingsActivity.this, "Small Text Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = SettingsActivity.this.getIntent();
                 intent.putExtra( "Theme", "Small" );
                 MainActivity.db.close();
                 startActivity(intent);
@@ -84,8 +83,8 @@ public class SettingsFragment extends Fragment{
 
         large.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Large Text Selected", Toast.LENGTH_SHORT).show();
-                Intent intent = getActivity().getIntent();
+                Toast.makeText(SettingsActivity.this, "Large Text Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = SettingsActivity.this.getIntent();
                 intent.putExtra( "Theme", "Large" );
                 MainActivity.db.close();
                 startActivity(intent);
@@ -94,6 +93,6 @@ public class SettingsFragment extends Fragment{
 
         //http://stackoverflow.com/questions/3241729/android-dynamically-change-style-at-runtime
 
-        return myView;
+
     }
 }
