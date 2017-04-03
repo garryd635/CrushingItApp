@@ -38,6 +38,19 @@ public class MainActivity extends AppCompatActivity
     AlarmReceiver alarmReceiver = new AlarmReceiver();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+    try {
+      if ("Large".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
+          setTheme(R.style.Theme_Large);
+      } else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
+          setTheme(R.style.Theme_Small);
+      }
+    } catch (Exception e) {
+
+    }
+
+
+
         super.onCreate(savedInstanceState);
         db = new DBHandler(this);
         //tm = new TaskManager();

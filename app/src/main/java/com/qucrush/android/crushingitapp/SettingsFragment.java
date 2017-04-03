@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -27,6 +28,7 @@ public class SettingsFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         myView = inflater.inflate(R.layout.settings, container, false);
         time = (TextView) myView.findViewById(R.id.textTimeDisplay);
         small = (Button) myView.findViewById(R.id.buttonSmall);
@@ -72,16 +74,21 @@ public class SettingsFragment extends Fragment{
 
         small.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                smallSize = true;
-                getActivity().setTheme(R.style.Theme);
+                Toast.makeText(getActivity(), "Large Text Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = getActivity().getIntent();
+                intent.putExtra( "Theme", "Small" );
+                getActivity().finish();
+                startActivity(intent);
             }
         });
 
         large.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-
-                smallSize = false;
-                getActivity().setTheme(R.style.Theme);
+                Toast.makeText(getActivity(), "Large Text Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = getActivity().getIntent();
+                intent.putExtra( "Theme", "Large" );
+                getActivity().finish();
+                startActivity(intent);
             }
         });
 
