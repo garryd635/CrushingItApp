@@ -27,9 +27,9 @@ public class DailyFeedbackActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(DailyFeedbackActivity.this,MainActivity.class);
                         intent.putExtra("FrgToLoad", "dailyReport");
-                        startActivity(intent);
-                    }
-                });
+                startActivity(intent);
+    }
+});
         builder.setNegativeButton("View Later", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

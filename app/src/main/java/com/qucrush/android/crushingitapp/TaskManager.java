@@ -118,6 +118,7 @@ public class TaskManager {
                 MainActivity.db.deleteTask(completedList.get(i).getId());
             }else{
                 Task updatedTask = completedList.get(i);
+                int mm,dd,yy;
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String[] splitDate = updatedTask.getDate().split("-");
                 String newDateString = splitDate[0] + "-" + (Integer.parseInt(splitDate[1])-1) + "-" + splitDate[2];
@@ -129,8 +130,22 @@ public class TaskManager {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(newDate);
                 if(completedList.get(i).getRecurring() == "Daily"){
-
+                    cal.add(cal.DATE,1);
+                    mm = cal.get(Calendar.MONTH);
+                    dd = cal.get(Calendar.DAY_OF_MONTH);
+                    yy = cal.get(Calendar.YEAR);
+                    newDateString = yy + "-" + (mm + 1) + "-" + dd;
+                    updatedTask.setDate(newDateString);
+                }else{
+                    cal.add(cal.DATE,7);
+                    mm = cal.get(Calendar.MONTH);
+                    dd = cal.get(Calendar.DAY_OF_MONTH);
+                    yy = cal.get(Calendar.YEAR);
+                    newDateString = yy + "-" + (mm + 1) + "-" + dd;
+                    updatedTask.setDate(newDateString);
                 }
+                //Update Tasks HERE
+                MainActivity.db.updateTask(updatedTask);
             }
         }//for
     }

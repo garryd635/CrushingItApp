@@ -36,19 +36,23 @@ public class MainActivity extends AppCompatActivity
     private long time;
     private boolean reportReady = false;
     AlarmReceiver alarmReceiver = new AlarmReceiver();
+    String timeStored = null;
+    int[] schedule = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
     try {
-      if ("Large".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
+        if ("Large".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
           setTheme(R.style.Theme_Large);
-      } else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
-          setTheme(R.style.Theme_Small);
-      }
-    } catch (Exception e) {
-        System.out.println("IT BROOOOOOOOOOOOKE");
-    }
+        }   else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
+                setTheme(R.style.Theme_Small);
+        }
+        timeStored = getIntent().getStringExtra("Storing time");
+        schedule = getIntent().getIntArrayExtra("Schedule");
 
+    } catch (Exception e) {
+
+    }
 
 
         super.onCreate(savedInstanceState);
@@ -83,13 +87,21 @@ public class MainActivity extends AppCompatActivity
             System.out.println("Not yet");
         }
         System.out.println("IntendedFrag is :" + intentFragment );
-        if(intentFragment.equals("dailyReport")){
-            startDailyReport();
-        }
-        if(intentFragment.equals("taskMenu")){
-            startTaskMenu();
+        if(intentFragment != null){
+            if(intentFragment.equals("dailyReport")){
+                startDailyReport();
+            }
+            if(intentFragment.equals("taskMenu")){
+                startTaskMenu();
+            }
         }
 
+        if(timeStored != null){
+            storeTime(timeStored);
+        }
+        if(schedule != null){
+            scheduleReport(schedule[0],schedule[1]);
+        }
         try {
             reportReady = getIntent().getExtras().getBoolean("prepReport");
         }catch (NullPointerException e){
@@ -163,6 +175,8 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_frame
                             , new SettingsFragment())
                     .commit();
+//            Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+//            startActivity(intent);
             System.out.println("SETTINGS BUTTON PRESSED");
             return true;
         }

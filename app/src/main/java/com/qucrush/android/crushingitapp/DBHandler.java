@@ -21,6 +21,7 @@ public class DBHandler extends SQLiteOpenHelper{
     // Contacts table name
     private static final String TABLE_TASKS = "Tasks";
     private static final String TABLE_DRTIME = "DRTime";
+    private static final String TABLE_BADGES = "Badges";
     // Task Column names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
@@ -34,6 +35,10 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String KEY_DAYS_INCOMPLETE = "daysOfIncomplete";
     //Report Time Column names
     private static final String KEY_DRTIME = "time";
+    //Badges Column Names
+    private static final String KEY_IS_EARNED = "isEarned";
+    private static final String KEY_DATE_EARNED = "dateEarned";
+    private static final String KEY_IMG_SRC = "imgsrc";
 
 
     public DBHandler(Context context) {
@@ -48,14 +53,22 @@ public class DBHandler extends SQLiteOpenHelper{
                 + KEY_RECUR + " TEXT," + KEY_COMPLETE_DATE + " TEXT," + KEY_DAYS_INCOMPLETE + " TEXT" + ")";
         String CREATE_DRTIME_TABLE = "CREATE TABLE " + TABLE_DRTIME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DRTIME + " TEXT)";
+        String CREATE_BADGE_TABLE = "CREATE TABLE " + TABLE_BADGES + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+                + KEY_DESC + " TEXT," + KEY_IS_EARNED + " TEXT," + KEY_DATE_EARNED + " TEXT,"
+                + KEY_IMG_SRC + " TEXT)";
         db.execSQL(CREATE_TASK_TABLE);
         db.execSQL(CREATE_DRTIME_TABLE);
+        db.execSQL(CREATE_BADGE_TABLE);
+        addBadges(db);
+        db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_DRTIME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BADGES);
 // Creating tables again
         onCreate(db);
     }
@@ -84,6 +97,32 @@ public class DBHandler extends SQLiteOpenHelper{
         db.insert(TABLE_DRTIME,null,values);
         db.close();
     }
+
+    public void addBadges(SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME,"Sample Badge 1");
+        values.put(KEY_DESC, "A Sample Description for badge");
+        values.put(KEY_IS_EARNED, "no");
+        values.put(KEY_DATE_EARNED,"null");
+        values.put(KEY_IMG_SRC, "R.drawable.badge1");
+        db.insert(TABLE_BADGES,null,values);
+        values = new ContentValues();
+        values.put(KEY_NAME,"Sample Badge 2");
+        values.put(KEY_DESC, "A Sample Description for 2nd badge");
+        values.put(KEY_IS_EARNED, "no");
+        values.put(KEY_DATE_EARNED,"null");
+        values.put(KEY_IMG_SRC, "R.drawable.badge2");
+        db.insert(TABLE_BADGES,null,values);
+        values = new ContentValues();
+        values.put(KEY_NAME,"Sample Badge 3");
+        values.put(KEY_DESC, "A Sample Description for badge");
+        values.put(KEY_IS_EARNED, "no");
+        values.put(KEY_DATE_EARNED,"null");
+        values.put(KEY_IMG_SRC, "R.drawable.badge3");
+        db.insert(TABLE_BADGES,null,values);
+        db.close();
+    }
+
     public void deleteTask(int count) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE from TASKS WHERE ID == " + count);
