@@ -6,8 +6,10 @@ package com.qucrush.android.crushingitapp;
 
 public class Badge {
     private String name,desc,earnedDate,isEarned,imgsrc;
+    private int id;
 
-    public Badge(String name, String desc, String earnedDate, String isEarned, String imgsrc){
+    public Badge(int id, String name, String desc, String isEarned, String earnedDate, String imgsrc){
+        this.id = id;
         this.name = name;
         this.desc = desc;
         this.earnedDate = earnedDate;
@@ -29,6 +31,9 @@ public class Badge {
     }
     public String getImgsrc(){
         return imgsrc;
+    }
+    public int getID(){
+        return id;
     }
     public void setName(String name){
         this.name = name;
