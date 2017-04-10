@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,12 +29,15 @@ public class DailyReport extends Fragment{
     List<Task> taskList = new ArrayList<Task>();
     List<Task> cTaskList = new ArrayList<Task>();
     List<Task> uTaskList = new ArrayList<Task>();
-    //ListView completedList, uncompletedList;
+    List<Badge> badgeList = new ArrayList<Badge>();
+
     ListView feedbackList;
-    //CompletionAdapter cDataAdapter,uDataAdapter;
     CompletionAdapter lDataAdapter;
     Button continueButton;
     communicate cm;
+    ImageView badgeImg;
+    TextView rewardMessage;
+    private int count = 0;
 
     @Nullable
     @Override
@@ -43,6 +48,8 @@ public class DailyReport extends Fragment{
         //uncompletedList = (ListView) myView.findViewById(R.id.viewIncomplete);
         feedbackList = (ListView) myView.findViewById(R.id.viewTasks);
         continueButton = (Button) myView.findViewById(R.id.contButton);
+        badgeImg = (ImageView) myView.findViewById(R.id.badgeEarned);
+        rewardMessage = (TextView) myView.findViewById(R.id.badgeMessage);
         taskList = MainActivity.tm.retrieveTasks();
         cm = (communicate) getActivity();
 
@@ -79,6 +86,30 @@ public class DailyReport extends Fragment{
 
                 }
 
+            }
+            //Do Task completion check HERE
+            badgeList = MainActivity.bm.taskBadgeCheck(cTaskList.size());
+            if(badgeList.size() > 0){
+                rewardMessage.setText("Congratulations! You have earned " + badgeList.size() + " badges!");
+                int resource = getActivity().getResources().getIdentifier(badgeList.get(0).getImgsrc(),"drawable",
+                        getActivity().getPackageName());
+                badgeImg.setImageResource(resource);
+                badgeImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(badgeList.size() != 0){
+                            if(count < badgeList.size()){
+                                count++;
+
+                            }else{
+                                count = 0;
+                            }
+                            int resource = getActivity().getResources().getIdentifier(badgeList.get(count).getImgsrc(),"drawable",
+                                    getActivity().getPackageName());
+                            badgeImg.setImageResource(resource);
+                        }
+                    }
+                });
             }
             cTaskList.addAll(uTaskList);
         }

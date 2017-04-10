@@ -49,7 +49,8 @@ public class BadgeManager {
         badgeList = MainActivity.db.getBadgeList();
         results = new ArrayList<Badge>();
         int month,day,year;
-        if(completedTaskNum > 5 && badgeList.get(1).getIsEarned().equals("no")){
+        System.out.println("***BADGE NUM " + completedTaskNum);
+        if(completedTaskNum >= 2 && badgeList.get(2).getIsEarned().equals("no")){
             badgeList.get(1).setIsEarned("yes");
             Calendar c = Calendar.getInstance();
             month = c.get(Calendar.MONTH);

@@ -27,22 +27,22 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="350dp">
+
         <ImageView
+            android:id="@+id/badgeEarned"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:contentDescription="Badge Earned">
-        </ImageView>
+            android:contentDescription="Badge Earned"></ImageView>
 
         <TextView
+            android:id="@+id/badgeMessage"
             style="?textBody"
-            android:text="Congragulations!\n You earned the badge:\n"
-            android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/textView2">
-            </TextView>
+            android:gravity="center"
+            android:text="Congragulations!\n You earned the badge:\n"></TextView>
     </LinearLayout>
 
     <Button

@@ -126,7 +126,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public void updateBadge(Badge badge){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE BADGES set " + KEY_IS_EARNED + " = '" + badge.getIsEarned() +
-                "', " + KEY_DATE_EARNED + " = '" + badge.getEarnedDate() + "'  WHERE" + KEY_ID + " = " + badge.getID());
+                "', " + KEY_DATE_EARNED + " = '" + badge.getEarnedDate() + "'  WHERE " + KEY_ID + " = " + badge.getID());
     }
     public void deleteTask(int count) {
         SQLiteDatabase db = this.getWritableDatabase();

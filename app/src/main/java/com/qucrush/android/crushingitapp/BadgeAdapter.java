@@ -57,10 +57,8 @@ public class BadgeAdapter extends ArrayAdapter<Badge> {
         }
 
         Badge badge = badgeList.get(position);
-        System.out.println("*************" + badge.getImgsrc());
         int resource = context.getResources().getIdentifier(badge.getImgsrc(),"drawable",
                 context.getPackageName());
-        System.out.println(resource);
         holder.img.setImageResource(resource);
         if(badge.getIsEarned().equals("no")){
 
