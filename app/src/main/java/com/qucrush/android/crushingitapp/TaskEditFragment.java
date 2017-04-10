@@ -44,6 +44,7 @@ public class TaskEditFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().setTheme(R.style.Theme_Small);
         myView = inflater.inflate(R.layout.task_edit, container, false);
         cancel = (Button) myView.findViewById(R.id.cancelButton);
         update = (Button) myView.findViewById(R.id.confirmButton);

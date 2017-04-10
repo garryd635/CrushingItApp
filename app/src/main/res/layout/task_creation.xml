@@ -119,8 +119,8 @@
     <Button
         style="?textBody"
         android:text="Add Task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:id="@+id/addButton"
         android:background="@color/colorBlue"
         android:layout_alignParentRight="true"
@@ -161,8 +161,8 @@
     <Button
         style="?textBody"
         android:text="Cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
         android:id="@+id/cancelButton"
         android:background="@color/colorBlue"
         android:layout_alignParentBottom="true"

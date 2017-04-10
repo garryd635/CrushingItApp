@@ -57,7 +57,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
+        getActivity().setTheme(R.style.Theme_Small);
         myView = inflater.inflate(R.layout.task_menu, container, false);
         cm = (communicate) getActivity();
         taskList = MainActivity.tm.retrieveTasks();

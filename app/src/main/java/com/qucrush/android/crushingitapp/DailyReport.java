@@ -37,6 +37,7 @@ public class DailyReport extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().setTheme(R.style.Theme_Small);
         myView = inflater.inflate(R.layout.daily_report, container, false);
         //completedList = (ListView) myView.findViewById(R.id.viewComplete);
         //uncompletedList = (ListView) myView.findViewById(R.id.viewIncomplete);

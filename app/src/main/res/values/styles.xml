@@ -19,20 +19,20 @@
 
 
     <style name="small_title_text">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
     <style name="small_body_text">
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
     <style name="large_title_text">
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <style name="large_body_text">
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 

@@ -6,7 +6,7 @@
     <Button
         android:text="Add"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/addButton"
         android:background="@android:color/holo_green_light"
         android:layout_alignParentBottom="true"

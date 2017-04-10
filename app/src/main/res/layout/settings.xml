@@ -39,7 +39,7 @@
     <RadioGroup
         style="?textBody"
         android:id="@+id/radioHome"
-        android:layout_width="250dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="30dp"
@@ -66,42 +66,4 @@
             android:layout_marginLeft="20dp" />
     </RadioGroup>
 
-    <TextView
-        style="?textTitle"
-        android:text="Select Text Size:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textSize"
-        android:layout_marginTop="300dp"
-        android:layout_alignParentTop="true"/>
-
-    <Button
-        android:textSize="14dp"
-        android:text="Small"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:id="@+id/buttonSmall"
-        android:background="@color/colorBlue"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="350dp"/>
-
-    <Button
-        android:textSize="17dp"
-        android:text="Medium"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:id="@+id/buttonMedium"
-        android:background="@color/colorBlue"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="350dp"/>
-
-    <Button
-        android:textSize="20dp"
-        android:text="Large"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:id="@+id/buttonLarge"
-        android:background="@color/colorBlue"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="350dp"/>
 </RelativeLayout>
