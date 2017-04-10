@@ -25,6 +25,7 @@ public class CustomAdapter extends ArrayAdapter<Task>{
     public CustomAdapter(Context context, int textViewResourceId,
                          List<Task> taskList) {
         super(context, textViewResourceId, taskList);
+        this.context = context;
         this.taskList = new ArrayList<Task>();
         this.taskList = taskList;
         vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -86,7 +87,7 @@ public class CustomAdapter extends ArrayAdapter<Task>{
         if(task.getCompletion().equals("yes")){
             holder.name.setChecked(true);
         }
-
+        context.setTheme(R.style.Theme_Small);
         return convertView;
     }
 
