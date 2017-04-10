@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper{
     // Database Version
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 14;
     // Database Name
     private static final String DATABASE_NAME = "CrushDB";
     // Contacts table name
@@ -104,21 +104,21 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(KEY_DESC, "A Sample Description for badge");
         values.put(KEY_IS_EARNED, "no");
         values.put(KEY_DATE_EARNED,"null");
-        values.put(KEY_IMG_SRC, "R.drawable.badge1");
+        values.put(KEY_IMG_SRC, "badge1");
         db.insert(TABLE_BADGES,null,values);
         values = new ContentValues();
         values.put(KEY_NAME,"Sample Badge 2");
         values.put(KEY_DESC, "A Sample Description for 2nd badge");
         values.put(KEY_IS_EARNED, "no");
         values.put(KEY_DATE_EARNED,"null");
-        values.put(KEY_IMG_SRC, "R.drawable.badge2");
+        values.put(KEY_IMG_SRC, "badge2");
         db.insert(TABLE_BADGES,null,values);
         values = new ContentValues();
         values.put(KEY_NAME,"Sample Badge 3");
         values.put(KEY_DESC, "A Sample Description for badge");
         values.put(KEY_IS_EARNED, "no");
         values.put(KEY_DATE_EARNED,"null");
-        values.put(KEY_IMG_SRC, "R.drawable.badge3");
+        values.put(KEY_IMG_SRC, "badge3");
         db.insert(TABLE_BADGES,null,values);
         //db.close();
     }

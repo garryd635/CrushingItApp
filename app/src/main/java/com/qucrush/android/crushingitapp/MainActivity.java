@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
 
     public static DBHandler db;
     public static TaskManager tm = new TaskManager();
+    public static BadgeManager bm = new BadgeManager();
     private Task editTask;
     private long time;
     private boolean reportReady = false;
@@ -196,10 +197,10 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_frame
                             , new TaskFragment())
                     .commit();
-        } else if (id == R.id.nav_sample_menuy) {
+        } else if (id == R.id.nav_reward_menu) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame
-                            , new SampleFragment())
+                            , new RewardFragment())
                     .commit();
         } else if (id == R.id.nav_daily_report) {
             if(reportReady == false) {
@@ -214,10 +215,6 @@ public class MainActivity extends AppCompatActivity
                                 , new DailyReport())
                         .commit();
             }
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

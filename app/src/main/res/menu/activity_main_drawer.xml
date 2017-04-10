@@ -11,22 +11,10 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Feedback Report" />
         <item
-            android:id="@+id/nav_sample_menuy"
+            android:id="@+id/nav_reward_menu"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Sample" />
-    </group>
+            android:title="Reward Menu" />
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    </group>
 
 </menu>
