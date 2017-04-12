@@ -42,16 +42,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-    try {
-        if ("Large".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
-          setTheme(R.style.Theme_Large);
-        }   else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
-                setTheme(R.style.Theme_Small);
-        }
-        timeStored = getIntent().getStringExtra("Storing time");
-        schedule = getIntent().getIntArrayExtra("Schedule");
 
-    } catch (Exception e) {
+        try {
+            if ("Large".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
+              setTheme(R.style.Theme_Large);
+            }   else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
+                    setTheme(R.style.Theme_Small);
+            }
+            timeStored = getIntent().getStringExtra("Storing time");
+            schedule = getIntent().getIntArrayExtra("Schedule");
+
+        } catch (Exception e) {
 
     }
 
@@ -108,8 +109,16 @@ public class MainActivity extends AppCompatActivity
         }catch (NullPointerException e){
 
         }
-
+        //startHomePage();
     }
+
+
+    public void startHomePage(){
+        FragmentManager fm = getFragmentManager();
+        fm.beginTransaction().replace(R.id.content_frame,
+                new HomePageFragment()).commit();
+    }
+
 
     public void storeTask(){
         FragmentManager fm = getFragmentManager();

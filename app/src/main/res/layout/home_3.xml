@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorBlue"
-        android:id="@+id/prevButton">
+        android:id="@+id/prevButton3">
     </Button>
 
     <Button
@@ -38,6 +38,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:background="@color/colorBlue"
-        android:id="@+id/nextButton">
+        android:id="@+id/nextButton3">
     </Button>
 </RelativeLayout>
