@@ -1,18 +1,12 @@
 package com.qucrush.android.crushingitapp;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,8 +18,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,communicate {
@@ -109,14 +101,14 @@ public class MainActivity extends AppCompatActivity
         }catch (NullPointerException e){
 
         }
-        //startHomePage();
+        startHomePage();
     }
 
 
     public void startHomePage(){
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame,
-                new HomePageFragment()).commit();
+                new HomePageFragment1()).commit();
     }
 
 
