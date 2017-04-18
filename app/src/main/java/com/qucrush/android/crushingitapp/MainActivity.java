@@ -1,7 +1,8 @@
 package com.qucrush.android.crushingitapp;
 
 import android.app.AlarmManager;
-import android.app.FragmentManager;
+
+import android.support.v4.app.FragmentManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -94,26 +95,28 @@ public class MainActivity extends AppCompatActivity
             storeTime(timeStored);
         }
         if(schedule != null){
-            scheduleReport(schedule[0],schedule[1]);
+            scheduleReport(schedule[0],schedule[1],"settings");
         }
         try {
             reportReady = getIntent().getExtras().getBoolean("prepReport");
         }catch (NullPointerException e){
 
         }
-        startHomePage();
+        if(intentFragment == ""){
+            startHomePage();
+        }
     }
 
 
     public void startHomePage(){
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame,
-                new HomePageFragment1()).commit();
+                new ViewPagerFragment()).commit();
     }
 
 
     public void storeTask(){
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         //TaskFormTest frag = (TaskFormTest) fm.findFragmentById(R.id.);
         //frag.saveTask(tm);
         fm.beginTransaction().replace(R.id.content_frame,
@@ -121,25 +124,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void startCreationForm() {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskFormTest()).commit();
     }
 
     public void startDailyReport(){
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new DailyReport()).commit();
     }
     public void startTaskMenu(){
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskFragment()).commit();
     }
 
     public void startEditForm(Task task){
         editTask = task;
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskEditFragment()).commit();
     }
@@ -172,7 +175,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            FragmentManager fragmentManager = getFragmentManager();
+            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame
                             , new SettingsFragment())
@@ -190,7 +193,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         int id = item.getItemId();
 
         if (id == R.id.nav_task_menu) {
@@ -216,35 +219,47 @@ public class MainActivity extends AppCompatActivity
                                 , new DailyReport())
                         .commit();
             }
+        } else if (id == R.id.nav_home_menu){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame
+                            , new ViewPagerFragment())
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void scheduleReport(int hour, int min){
-        //this.time = time;
-        //long calc = (long) 1.0/60.0;
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(System.currentTimeMillis());
-        c.set(Calendar.HOUR_OF_DAY, hour);
-        c.set(Calendar.MINUTE, min);
+    public void scheduleReport(int hour, int min, String methodCalledLoc){
+        if(methodCalledLoc == "settings"){
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(System.currentTimeMillis());
+            c.set(Calendar.HOUR_OF_DAY, hour);
+            c.set(Calendar.MINUTE, min);
 
+            if(c.before(Calendar.getInstance())){
+                c.add(Calendar.DATE,1);
+            }
 
-//        this.time = new GregorianCalendar().getTimeInMillis()+5*1000;
-//        System.out.println(time);
-//        Date d = new Date(time);
-//        System.out.println(d);
-        if(c.before(Calendar.getInstance())){
+            Intent intentAlarm = new Intent(this,AlarmReceiver.class);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+            //set the alarm for particular time
+            alarmManager.set(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(), PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+            Toast.makeText(this, "Feedback report Scheduled", Toast.LENGTH_LONG).show();
+        }else{
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(System.currentTimeMillis());
+            c.set(Calendar.HOUR_OF_DAY, hour);
+            c.set(Calendar.MINUTE, min);
             c.add(Calendar.DATE,1);
+            Intent intentAlarm = new Intent(this,AlarmReceiver.class);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+            //set the alarm for particular time
+            alarmManager.set(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(), PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+            Toast.makeText(this, "Report Scheduled for next day", Toast.LENGTH_LONG).show();
         }
-
-        Intent intentAlarm = new Intent(this,AlarmReceiver.class);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        //set the alarm for particular time
-        alarmManager.set(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(), PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-        Toast.makeText(this, "Feedback report Scheduled", Toast.LENGTH_LONG).show();
     }
 
     public void storeTime(String time){

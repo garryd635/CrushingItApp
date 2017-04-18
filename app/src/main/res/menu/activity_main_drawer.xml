@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home_menu"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Homepage" />
+        <item
             android:id="@+id/nav_task_menu"
             android:icon="@drawable/ic_menu_camera"
             android:title="Task Menu" />

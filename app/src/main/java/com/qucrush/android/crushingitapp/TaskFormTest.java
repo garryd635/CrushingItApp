@@ -1,10 +1,11 @@
 package com.qucrush.android.crushingitapp;
 
 import android.app.DatePickerDialog;
-import android.app.Fragment;
+
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import java.util.Calendar;
  * Created by Garry on 2/8/2017.
  */
 
-public class TaskFormTest extends Fragment{
+public class TaskFormTest extends Fragment {
     View myView;
     TaskManager tmPointer;
     Button add,cancel;

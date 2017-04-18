@@ -1,7 +1,7 @@
 package com.qucrush.android.crushingitapp;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,7 +37,10 @@ public class DailyReport extends Fragment{
     communicate cm;
     ImageView badgeImg;
     TextView rewardMessage;
+    String timeString;
+    String[] timeSplited;
     private int count = 0;
+    int splitHour, splitMin;
 
     @Nullable
     @Override
@@ -51,7 +54,10 @@ public class DailyReport extends Fragment{
         badgeImg = (ImageView) myView.findViewById(R.id.badgeEarned);
         rewardMessage = (TextView) myView.findViewById(R.id.badgeMessage);
         taskList = MainActivity.tm.retrieveTasks();
+        timeString = MainActivity.db.getTableDrtime();
+        timeSplited = timeString.toString().split(" ");
         cm = (communicate) getActivity();
+
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -134,6 +140,13 @@ public class DailyReport extends Fragment{
                 cm.startTaskMenu();
             }
         });
+        String[] hourMinSplit = timeSplited[0].toString().split(":");
+        splitHour = Integer.parseInt(hourMinSplit[0].toString());
+        splitMin = Integer.parseInt(hourMinSplit[1].toString());
+        if(timeSplited[1] == "PM" ){
+            splitHour += 12;
+        }
+        cm.scheduleReport(splitHour,splitMin,"dailyReport");
         return myView;
     }
 }

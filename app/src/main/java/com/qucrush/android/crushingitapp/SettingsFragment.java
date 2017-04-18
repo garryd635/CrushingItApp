@@ -1,6 +1,6 @@
 package com.qucrush.android.crushingitapp;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,7 +63,7 @@ public class SettingsFragment extends Fragment{
                             time.setText(txt);
                             cm.storeTime(txt);
                         }
-                        cm.scheduleReport(hourOfDay,minute);
+                        cm.scheduleReport(hourOfDay,minute,"settings");
                     }
                 }, hour, min, false);
                 timepicker.show();
