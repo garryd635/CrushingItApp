@@ -27,21 +27,22 @@ public class TaskManager {
         counter = 0;
     }
 
-    public void createTask(String name, String desc, String date, String time, String category){
-        tempTask = new Task(0,name,desc,date,time,category,"no","no");
+    public void createTask(String name, String desc, String date, String time, String category,String recurr){
+        tempTask = new Task(0,name,desc,date,time,category,"no",recurr);
         MainActivity.db.addTask(tempTask);
         retrieveTasks();
     }
 
-    public void updateTask(String name, String desc, String date, String time, String category, int id){
-        tempTask = new Task(id,name,desc,date,time,category,"no","no");
+    public void updateTask(String name, String desc, String date, String time, String category, String complete, String recurr, int id){
+        tempTask = new Task(id,name,desc,date,time,category,complete,recurr);
         System.out.println("FROM TASKMANAGER:" + tempTask.getCompletion());
         MainActivity.db.updateTask(tempTask);
         retrieveTasks();
     }
 
-    public void updateTaskInAdapter(String name, String desc, String date, String time, String category,String complete, int id){
-        tempTask = new Task(id,name,desc,date,time,category,complete,"no");
+    public void updateTaskInAdapter(String name, String desc, String date, String time, String category,String complete,
+                                    String recurr, int id){
+        tempTask = new Task(id,name,desc,date,time,category,complete,recurr);
         System.out.println("FROM TASKMANAGER:" + tempTask.getCompletion());
         MainActivity.db.updateTask(tempTask);
         retrieveTasks();
@@ -51,15 +52,53 @@ public class TaskManager {
         MainActivity.db.deleteTask(count);
     }
 
-    public void deleteCompletedTask(List<Task> taskList){
+    public void updateCompletedTasks(List<Task> taskList){
         for(int i=0; i < taskList.size(); i++){
-            System.out.println(taskList.get(i).getRecurring());
-            if(taskList.get(i).getRecurring().equals("no")){
-                deleteTask(taskList.get(i).getId());
-            }
+            System.out.println("ERROR TEST " +taskList.get(i).getRecurring());
+            int month,day,year;
 
-        }
-    }
+            if(taskList.get(i).getCompletion().equals("yes")){
+                if(taskList.get(i).getRecurring().equals("None")){
+                    deleteTask(taskList.get(i).getId());
+                }
+            }//end completion if
+            if(taskList.get(i).getRecurring().equals("Daily")){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar taskDate = Calendar.getInstance();
+                try{
+                    taskDate.setTime(sdf.parse(taskList.get(i).getDate()));
+                }catch (ParseException e){
+                    System.out.println("***ERROR***");
+                }
+                taskDate.add(Calendar.DATE,1);
+                year = taskDate.get(Calendar.YEAR);
+                month = taskDate.get(Calendar.MONTH);
+                month += 1;
+                day = taskDate.get(Calendar.DAY_OF_MONTH);
+                taskList.get(i).setDate(year + "-" + month + "-" + day);
+                updateTaskInAdapter(taskList.get(i).getName(),taskList.get(i).getDesc(),taskList.get(i).getDate()
+                        , taskList.get(i).getTime(), taskList.get(i).getCategory(), "no",taskList.get(i).getRecurring(),taskList.get(i).getId());
+            }
+            if(taskList.get(i).getRecurring().equals("Weekly")){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar taskDate = Calendar.getInstance();
+                try{
+                    taskDate.setTime(sdf.parse(taskList.get(i).getDate()));
+                }catch (ParseException e){
+                    System.out.println("***ERROR***");
+                }
+                taskDate.add(Calendar.DATE,7);
+                year = taskDate.get(Calendar.YEAR);
+                month = taskDate.get(Calendar.MONTH);
+                month += 1;
+                day = taskDate.get(Calendar.DAY_OF_MONTH);
+                taskList.get(i).setDate(year + "-" + month + "-" + day);
+                updateTaskInAdapter(taskList.get(i).getName(),taskList.get(i).getDesc(),taskList.get(i).getDate()
+                        , taskList.get(i).getTime(), taskList.get(i).getCategory(), "no",taskList.get(i).getRecurring(),taskList.get(i).getId());
+            }
+        }//for-loop
+    }//updateCompletedTasks
+
     public List<Task> retrieveTasks(){
         //List<Task> taskList = new ArrayList<Task>();
         if(MainActivity.db.getTaskCount() != 0){

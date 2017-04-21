@@ -142,6 +142,6 @@ public class TaskFormTest extends Fragment {
         fullTime = timeH.getText().toString();
 
         MainActivity.tm.createTask(name.getText().toString(), desc.getText().toString(),fullDate,fullTime
-                ,cateBtn.getText().toString());
+                ,cateBtn.getText().toString(),recurOption.getSelectedItem().toString());
     }
 }

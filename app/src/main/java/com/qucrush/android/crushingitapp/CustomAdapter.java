@@ -62,13 +62,13 @@ public class CustomAdapter extends ArrayAdapter<Task>{
                     System.out.println(cb.isChecked());
                     if(cb.isChecked() == true){
                         MainActivity.tm.updateTaskInAdapter(taskList.get(position).getName(),taskList.get(position).getDesc(),taskList.get(position).getDate()
-                        , taskList.get(position).getTime(), taskList.get(position).getCategory(), "yes",taskList.get(position).getId());
+                        , taskList.get(position).getTime(), taskList.get(position).getCategory(), "yes",taskList.get(position).getRecurring(),taskList.get(position).getId());
                         taskList = MainActivity.tm.retrieveTasks();
                         System.out.println("New Task Update: " + taskList.get(position).getName() + " complete? " + taskList.get(position).getCompletion());
                     }
                     if(cb.isChecked() == false){
                         MainActivity.tm.updateTaskInAdapter(taskList.get(position).getName(),taskList.get(position).getDesc(),taskList.get(position).getDate()
-                                , taskList.get(position).getTime(), taskList.get(position).getCategory(), "no",taskList.get(position).getId());
+                                , taskList.get(position).getTime(), taskList.get(position).getCategory(), "no",taskList.get(position).getRecurring(),taskList.get(position).getId());
                         taskList = MainActivity.tm.retrieveTasks();
                         System.out.println("New Task Update: " + taskList.get(position).getName() + " complete? " + taskList.get(position).getCompletion());
                     }

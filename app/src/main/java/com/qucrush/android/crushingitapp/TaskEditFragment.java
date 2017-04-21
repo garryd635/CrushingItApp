@@ -177,6 +177,14 @@ public class TaskEditFragment extends Fragment{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         recurOption.setAdapter(adapter);
 
+        if(editTask.getRecurring().equals("None")){
+            recurOption.setSelection(0);
+        }else if(editTask.getRecurring().equals("Daily")){
+            recurOption.setSelection(1);
+        }else if(editTask.getRecurring().equals("Weekly")){
+            recurOption.setSelection(2);
+        }
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,20 +197,6 @@ public class TaskEditFragment extends Fragment{
                 System.out.println("Button pressed");
                 MainActivity.tm.deleteTask(editTask.getId());
                 cm.startTaskMenu();
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                builder.setCancelable(true);
-//                builder.setTitle("Delete Current Task");
-//                builder.setMessage("Do you wish to delete this task?");
-//                builder.setPositiveButton("Delete",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                MainActivity.tm.deleteTask(editTask.getId());
-//                                cm.startTaskMenu();
-//                                //updateTextView(0, taskList);
-//                            }
-//                        });
-//                builder.create().show();
             }
         });
         return myView;
@@ -232,6 +226,6 @@ public class TaskEditFragment extends Fragment{
         fullTime = timeH.getText().toString();
 
         MainActivity.tm.updateTask(name.getText().toString(), desc.getText().toString(),fullDate,fullTime
-                ,cateBtn.getText().toString(), editTask.getId());
+                ,cateBtn.getText().toString(),editTask.getCompletion(),recurOption.getSelectedItem().toString(), editTask.getId());
     }
 }

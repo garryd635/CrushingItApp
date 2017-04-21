@@ -120,26 +120,19 @@ public class DailyReport extends Fragment{
             cTaskList.addAll(uTaskList);
         }
 
-
-        //cDataAdapter = new CompletionAdapter(getActivity(),
-        //        R.layout.daily_report, cTaskList);
-        //uDataAdapter = new CompletionAdapter(getActivity(),
-        //        R.layout.daily_report, uTaskList);
         lDataAdapter = new CompletionAdapter(getActivity(),
                 R.layout.daily_report, cTaskList);
 
-        //completedList.setAdapter(cDataAdapter);
-        //uncompletedList.setAdapter(uDataAdapter);
         feedbackList.setAdapter(lDataAdapter);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //MainActivity.tm.deleteCompletedTask(cTaskList);
-
+                MainActivity.tm.updateCompletedTasks(cTaskList);
                 cm.startTaskMenu();
             }
         });
+
         String[] hourMinSplit = timeSplited[0].toString().split(":");
         splitHour = Integer.parseInt(hourMinSplit[0].toString());
         splitMin = Integer.parseInt(hourMinSplit[1].toString());
