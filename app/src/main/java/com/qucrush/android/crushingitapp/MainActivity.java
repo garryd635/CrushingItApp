@@ -224,6 +224,10 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_frame
                             , new ViewPagerFragment())
                     .commit();
+        } else if (id == R.id.nav_credit_menu){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_main
+                    , new CreditFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
