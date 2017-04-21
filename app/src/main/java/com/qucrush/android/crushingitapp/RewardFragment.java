@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -19,19 +20,26 @@ public class RewardFragment extends Fragment{
     View myView;
     private BadgeAdapter dataAdapter;
     private GridView gView;
-    private List<Badge> badgeList;
+    private List<Badge> badgeList,cBadgeList,uBadgeList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.reward_screen, container, false);
         gView = (GridView) myView.findViewById(R.id.badgeView);
         badgeList = new ArrayList<Badge>();
+        cBadgeList = new ArrayList<Badge>();
+        uBadgeList = new ArrayList<Badge>();
         badgeList = MainActivity.bm.getAllBadges();
 
         for(int i = 0; i < badgeList.size(); i++){
-            System.out.println(badgeList.get(i).getName());
+            if(badgeList.get(i).getIsEarned().equals("no")){
+                uBadgeList.add(badgeList.get(i));
+            }else{
+                cBadgeList.add(badgeList.get(i));
+            }
         }
-        dataAdapter = new BadgeAdapter(getActivity(),R.layout.reward_screen,badgeList);
+        cBadgeList.addAll(uBadgeList);
+        dataAdapter = new BadgeAdapter(getActivity(),R.layout.reward_screen,cBadgeList);
         gView.setAdapter(dataAdapter);
         return myView;
     }

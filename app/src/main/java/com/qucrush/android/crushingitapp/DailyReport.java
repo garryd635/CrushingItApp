@@ -39,7 +39,7 @@ public class DailyReport extends Fragment{
     TextView rewardMessage;
     String timeString;
     String[] timeSplited;
-    private int count = 0;
+    private int count = 1;
     int splitHour, splitMin;
 
     @Nullable
@@ -94,7 +94,7 @@ public class DailyReport extends Fragment{
 
             }
             //Do Task completion check HERE
-            badgeList = MainActivity.bm.taskBadgeCheck(cTaskList.size());
+            badgeList = MainActivity.bm.taskBadgeCheck(cTaskList.size(),cTaskList);
             if(badgeList.size() > 0){
                 rewardMessage.setText("Congratulations! You have earned " + badgeList.size() + " badges!");
                 int resource = getActivity().getResources().getIdentifier(badgeList.get(0).getImgsrc(),"drawable",
@@ -108,9 +108,9 @@ public class DailyReport extends Fragment{
                                 count++;
 
                             }else{
-                                count = 0;
+                                count = 1;
                             }
-                            int resource = getActivity().getResources().getIdentifier(badgeList.get(count).getImgsrc(),"drawable",
+                            int resource = getActivity().getResources().getIdentifier(badgeList.get(count-1).getImgsrc(),"drawable",
                                     getActivity().getPackageName());
                             badgeImg.setImageResource(resource);
                         }

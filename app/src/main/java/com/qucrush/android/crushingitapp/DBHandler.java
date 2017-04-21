@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper{
     // Database Version
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 16;
     // Database Name
     private static final String DATABASE_NAME = "CrushDB";
     // Contacts table name
@@ -100,7 +100,7 @@ public class DBHandler extends SQLiteOpenHelper{
 
     public void addBadges(SQLiteDatabase db){
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME,"Crusing It! 101");
+        values.put(KEY_NAME,"Crushing It! 101");
         values.put(KEY_DESC, "You've entered and completed your first daily task.  I think you are ready" +
                 " to take on managing your work and life tasks");
         values.put(KEY_IS_EARNED, "no");
@@ -108,7 +108,7 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(KEY_IMG_SRC, "badge1");
         db.insert(TABLE_BADGES,null,values);
         values = new ContentValues();
-        values.put(KEY_NAME,"Mnemonics 101");
+        values.put(KEY_NAME,"To Do List 101");
         values.put(KEY_DESC, "You've at least 5 tasks in one day!  How do we know? Well the daily report" +
                 " told us in advance!");
         values.put(KEY_IS_EARNED, "no");
@@ -116,9 +116,9 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(KEY_IMG_SRC, "badge2");
         db.insert(TABLE_BADGES,null,values);
         values = new ContentValues();
-        values.put(KEY_NAME,"Turned in on time");
-        values.put(KEY_DESC, "You managed to finish your recurring tasks on time and everyday!  " +
-                "Now that takes effort!");
+        values.put(KEY_NAME,"Employee by day, parent by night");
+        values.put(KEY_DESC, "You managed to complete a work and personal task in one day!" +
+                " You're living the double life well.");
         values.put(KEY_IS_EARNED, "no");
         values.put(KEY_DATE_EARNED,"null");
         values.put(KEY_IMG_SRC, "badge3");
