@@ -37,16 +37,13 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <!-- Base application theme is the default theme. -->
-    <style name="Theme" parent="android:Theme">
-    </style>
 
-    <style name="Theme.Small">
+    <style name="AppTheme.Small">
         <item name="textTitle">@style/small_title_text</item>
         <item name="textBody">@style/small_body_text</item>
     </style>
 
-    <style name="Theme.Large">
+    <style name="AppTheme.Large">
         <item name="textTitle">@style/large_title_text</item>
         <item name="textBody">@style/large_body_text</item>
     </style>

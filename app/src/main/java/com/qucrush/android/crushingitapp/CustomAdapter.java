@@ -87,7 +87,7 @@ public class CustomAdapter extends ArrayAdapter<Task>{
         if(task.getCompletion().equals("yes")){
             holder.name.setChecked(true);
         }
-        context.setTheme(R.style.Theme_Small);
+        context.setTheme(R.style.AppTheme_Small);
         return convertView;
     }
 

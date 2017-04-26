@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity
 
         try {
             if ("Large".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
-              setTheme(R.style.Theme_Large);
+              setTheme(R.style.AppTheme_Large);
             }   else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
-                    setTheme(R.style.Theme_Small);
+                    setTheme(R.style.AppTheme_Small);
             }
             timeStored = getIntent().getStringExtra("Storing time");
             schedule = getIntent().getIntArrayExtra("Schedule");

@@ -27,27 +27,6 @@ public class HomePageFragment2 extends Fragment{
 
         myView = inflater.inflate(R.layout.home_2, container, false);
 
-
-        next2 = (Button) myView.findViewById(R.id.nextButton2);
-        prev2 = (Button) myView.findViewById(R.id.prevButton2);
-
-
-
-        next2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //myView = inflater.inflate(R.layout.home_3, container, false);
-            }
-        });
-
-        prev2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //myView = inflater.inflate(R.layout.home_1, container, false);
-            }
-        });
-
-        //myView = inflater.inflate(R.layout.sample_layout, container, false);
         return myView;
     }
 

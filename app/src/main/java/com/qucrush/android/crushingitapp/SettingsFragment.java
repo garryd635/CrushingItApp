@@ -28,7 +28,7 @@ public class SettingsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        getActivity().setTheme(R.style.Theme_Small);
+        getActivity().setTheme(R.style.AppTheme_Small);
         myView = inflater.inflate(R.layout.settings, container, false);
         time = (TextView) myView.findViewById(R.id.textTimeDisplay);
         cm = (communicate) getActivity();

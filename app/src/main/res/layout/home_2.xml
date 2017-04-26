@@ -18,26 +18,8 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/textUpcoming"
         android:layout_marginBottom="60dp"
-        android:id="@+id/inCompleteList">
+        android:id="@+id/homeCompleteList">
     </ListView>
 
-    <Button
-        android:text="Prev"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorBlue"
-        android:id="@+id/prevButton2">
-    </Button>
 
-    <Button
-        android:text="Next"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorBlue"
-        android:id="@+id/nextButton2">
-    </Button>
 </RelativeLayout>

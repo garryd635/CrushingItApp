@@ -21,23 +21,4 @@
         android:id="@+id/inCompleteList">
     </ListView>
 
-    <Button
-        android:text="Prev"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorBlue"
-        android:id="@+id/prevButton3">
-    </Button>
-
-    <Button
-        android:text="Next"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorBlue"
-        android:id="@+id/nextButton3">
-    </Button>
 </RelativeLayout>
