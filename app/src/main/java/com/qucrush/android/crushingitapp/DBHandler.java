@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper{
     // Database Version
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 19;
     // Database Name
     private static final String DATABASE_NAME = "CrushDB";
     // Contacts table name

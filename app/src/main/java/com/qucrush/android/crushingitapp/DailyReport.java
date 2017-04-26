@@ -95,8 +95,15 @@ public class DailyReport extends Fragment{
             }
             //Do Task completion check HERE
             badgeList = MainActivity.bm.taskBadgeCheck(cTaskList.size(),cTaskList);
+            rewardMessage.setText("No Badges have been earned today.");
             if(badgeList.size() > 0){
-                rewardMessage.setText("Congratulations! You have earned " + badgeList.size() + " badges!");
+                if (badgeList.size() == 1) {
+                    rewardMessage.setText("Congratulations! You have earned 1 badge! \n" + badgeList.get(count-1).getName());
+                } else {
+                    rewardMessage.setText("Congratulations! You have earned " + badgeList.size() +
+                            " badges! \n" + badgeList.get(count-1).getName());
+                }
+
                 int resource = getActivity().getResources().getIdentifier(badgeList.get(0).getImgsrc(),"drawable",
                         getActivity().getPackageName());
                 badgeImg.setImageResource(resource);
@@ -110,6 +117,14 @@ public class DailyReport extends Fragment{
                             }else{
                                 count = 1;
                             }
+
+                            if (badgeList.size() == 1) {
+                                rewardMessage.setText("Congratulations! You have earned 1 badge! \n" + badgeList.get(count-1).getName());
+                            } else {
+                                rewardMessage.setText("Congratulations! You have earned " + badgeList.size() +
+                                        " badges! \n" + badgeList.get(count-1).getName());
+                            }
+
                             int resource = getActivity().getResources().getIdentifier(badgeList.get(count-1).getImgsrc(),"drawable",
                                     getActivity().getPackageName());
                             badgeImg.setImageResource(resource);
