@@ -148,6 +148,8 @@ public class DailyReport extends Fragment{
             }
         });
 
+        continueButton.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
         String[] hourMinSplit = timeSplited[0].toString().split(":");
         splitHour = Integer.parseInt(hourMinSplit[0].toString());
         splitMin = Integer.parseInt(hourMinSplit[1].toString());

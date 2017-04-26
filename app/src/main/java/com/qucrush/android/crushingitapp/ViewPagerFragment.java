@@ -10,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 /**
@@ -23,6 +25,7 @@ public class ViewPagerFragment extends Fragment{
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
     private Button next,prev;
+    private Animation button_shake;
 
     @Nullable
     @Override
@@ -31,6 +34,8 @@ public class ViewPagerFragment extends Fragment{
         mViewPager = (ViewPager) myView.findViewById(R.id.pager);
         next = (Button) myView.findViewById(R.id.nextButtonHome);
         prev = (Button) myView.findViewById(R.id.prevButtonHome);
+
+        button_shake = AnimationUtils.loadAnimation(getActivity(),R.anim.button_shrink);
 
         //Change pages forward when next button is pressed
         next.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +47,11 @@ public class ViewPagerFragment extends Fragment{
                     // Select previous page.
                     mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
                 }
+                next.startAnimation(button_shake);
             }
         });//next
+
+        next.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
         //Changes page backwards when buttons is pressed
         prev.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +63,11 @@ public class ViewPagerFragment extends Fragment{
                     // Select previous page.
                     mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
                 }
+                prev.startAnimation(button_shake);
             }
         });//prev
+
+        //prev.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
         mViewPager.setAdapter(new ScreenSliderPagerAdapter(getChildFragmentManager()));
         return myView;

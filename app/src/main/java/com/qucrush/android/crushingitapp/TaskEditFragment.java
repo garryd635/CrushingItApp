@@ -145,6 +145,8 @@ public class TaskEditFragment extends Fragment{
             }
         });
 
+        timeH.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
         dateD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +174,9 @@ public class TaskEditFragment extends Fragment{
                 datePicker.show();
             }
         });
+
+        dateD.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.recurr_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -192,6 +197,8 @@ public class TaskEditFragment extends Fragment{
             }
         });
 
+        cancel.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 System.out.println("Button pressed");
@@ -199,6 +206,8 @@ public class TaskEditFragment extends Fragment{
                 cm.startTaskMenu();
             }
         });
+
+        delete.playSoundEffect(android.view.SoundEffectConstants.CLICK);
         return myView;
     }
 

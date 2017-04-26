@@ -70,6 +70,8 @@ public class SettingsFragment extends Fragment{
             }
         });
 
+        time.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
         //http://stackoverflow.com/questions/3241729/android-dynamically-change-style-at-runtime
 
         return myView;

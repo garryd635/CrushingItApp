@@ -74,6 +74,9 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         textViewClickable = true;
 
         add.setOnClickListener(this);
+
+        add.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 if (taskList != null) {
@@ -103,6 +106,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        delete.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
         beforeDate.setOnClickListener(new View.OnClickListener() {
             @Override
