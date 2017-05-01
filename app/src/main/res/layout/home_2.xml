@@ -18,7 +18,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/textUpcoming"
         android:layout_marginBottom="60dp"
-        android:id="@+id/homeCompleteList">
+        android:id="@+id/homeUpcomingList">
     </ListView>
 
 

@@ -18,7 +18,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/textComplete"
         android:layout_marginBottom="60dp"
-        android:id="@+id/inCompleteList">
+        android:id="@+id/homeCompleteList">
     </ListView>
 
 </RelativeLayout>
