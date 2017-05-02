@@ -1,5 +1,6 @@
 package com.qucrush.android.crushingitapp;
 
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,7 +26,7 @@ public class ViewPagerFragment extends Fragment{
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
     private Button next,prev;
-    private Animation button_shake;
+    private Animation button_shrink;
 
     @Nullable
     @Override
@@ -35,19 +36,29 @@ public class ViewPagerFragment extends Fragment{
         next = (Button) myView.findViewById(R.id.nextButtonHome);
         prev = (Button) myView.findViewById(R.id.prevButtonHome);
 
-        button_shake = AnimationUtils.loadAnimation(getActivity(),R.anim.button_shrink);
+        button_shrink = AnimationUtils.loadAnimation(getActivity(),R.anim.button_shrink);
 
         //Change pages forward when next button is pressed
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mViewPager.getCurrentItem() == 2) {
-                    mViewPager.setCurrentItem(0);
-                } else {
-                    // Select previous page.
-                    mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
-                }
-                next.startAnimation(button_shake);
+                next.startAnimation(button_shrink);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after .2s = 200ms
+                        if (mViewPager.getCurrentItem() == 2) {
+                            mViewPager.setCurrentItem(0);
+                        } else {
+                            // Select previous page.
+                            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                        }
+                    }
+                }, 0);
+
+
             }
         });//next
 
@@ -57,17 +68,26 @@ public class ViewPagerFragment extends Fragment{
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mViewPager.getCurrentItem() == 0) {
-                    mViewPager.setCurrentItem(2);
-                } else {
-                    // Select previous page.
-                    mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
-                }
-                prev.startAnimation(button_shake);
+                prev.startAnimation(button_shrink);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after .2s = 200ms
+                        if (mViewPager.getCurrentItem() == 0) {
+                            mViewPager.setCurrentItem(2);
+                        } else {
+                            // Select previous page.
+                            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
+                        }
+                    }
+                }, 0);
+
             }
         });//prev
 
-        //prev.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+        prev.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
         mViewPager.setAdapter(new ScreenSliderPagerAdapter(getChildFragmentManager()));
         return myView;

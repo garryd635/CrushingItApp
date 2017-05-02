@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,6 +56,8 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     private int mMonth;
     private int mDay;
 
+    private Animation button_shrink;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,7 +78,11 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         lView = (ListView) myView.findViewById(R.id.listView);
         textViewClickable = true;
 
+        button_shrink = AnimationUtils.loadAnimation(getActivity(),R.anim.button_shrink);
+
+
         add.setOnClickListener(this);
+
 
         add.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
@@ -107,6 +116,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         });
 
         delete.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+        delete.startAnimation(button_shrink);
 
         beforeDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -280,7 +290,17 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onClick(View arg0){
-        cm.startCreationForm();
+        add.startAnimation(button_shrink);
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after .2s = 200ms
+                cm.startCreationForm();
+            }
+        }, 500);
     }
 
     public int getID(int count) {

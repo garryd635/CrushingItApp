@@ -1,6 +1,7 @@
 package com.qucrush.android.crushingitapp;
 
 import android.app.AlertDialog;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -31,6 +34,7 @@ public class DailyReport extends Fragment{
     List<Task> uTaskList = new ArrayList<Task>();
     List<Badge> badgeList = new ArrayList<Badge>();
 
+    private Animation button_shrink;
     ListView feedbackList;
     CompletionAdapter lDataAdapter;
     Button continueButton;
@@ -58,6 +62,7 @@ public class DailyReport extends Fragment{
         timeSplited = timeString.toString().split(" ");
         cm = (communicate) getActivity();
 
+        button_shrink = AnimationUtils.loadAnimation(getActivity(),R.anim.button_shrink);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -143,8 +148,18 @@ public class DailyReport extends Fragment{
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.tm.updateCompletedTasks(cTaskList);
-                cm.startTaskMenu();
+
+                continueButton.startAnimation(button_shrink);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after .2s = 200ms
+                        MainActivity.tm.updateCompletedTasks(cTaskList);
+                        cm.startTaskMenu();
+                    }
+                }, 500);
             }
         });
 

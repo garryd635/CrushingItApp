@@ -5,11 +5,14 @@ import android.app.DatePickerDialog;
 import android.support.v4.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -41,6 +44,7 @@ public class TaskEditFragment extends Fragment{
     String fullDate;
     String fullTime;
     Spinner recurOption;
+    Animation button_shrink;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class TaskEditFragment extends Fragment{
         String[] splitTime = editTask.getTime().split("\\s+");//Splits into full time and am/pm
         String[] splitNumTime = splitTime[0].split(":");//Splits the 00:00 time
 
+        button_shrink = AnimationUtils.loadAnimation(getActivity(),R.anim.button_shrink);
+
         name.setText(editTask.getName());
         desc.setText(editTask.getDesc());
         //dateM.setText(splitDate[1]);
@@ -91,8 +97,20 @@ public class TaskEditFragment extends Fragment{
 
         update.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                saveTask();
-                cm.startTaskMenu();
+
+                update.startAnimation(button_shrink);
+                update.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after .2s = 200ms
+                        saveTask();
+                        cm.startTaskMenu();
+                    }
+                }, 500);
+
             }
         });
 
@@ -100,6 +118,7 @@ public class TaskEditFragment extends Fragment{
         timeH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                timeH.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                 final Calendar c = Calendar.getInstance();
                 String timeTxt = timeH.getText().toString();
                 String[] splitTime = timeTxt.split("\\s+");
@@ -145,11 +164,10 @@ public class TaskEditFragment extends Fragment{
             }
         });
 
-        timeH.playSoundEffect(android.view.SoundEffectConstants.CLICK);
-
         dateD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dateD.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                 final Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = null;
@@ -175,8 +193,6 @@ public class TaskEditFragment extends Fragment{
             }
         });
 
-        dateD.playSoundEffect(android.view.SoundEffectConstants.CLICK);
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.recurr_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -193,21 +209,41 @@ public class TaskEditFragment extends Fragment{
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cm.startTaskMenu();
+                cancel.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                cancel.startAnimation(button_shrink);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after .2s = 200ms
+                        cm.startTaskMenu();
+                    }
+                }, 500);
+
             }
         });
-
-        cancel.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                System.out.println("Button pressed");
-                MainActivity.tm.deleteTask(editTask.getId());
-                cm.startTaskMenu();
+                delete.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                delete.startAnimation(button_shrink);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after .2s = 200ms
+                        System.out.println("Button pressed");
+                        MainActivity.tm.deleteTask(editTask.getId());
+                        cm.startTaskMenu();
+                    }
+                }, 500);
+
             }
         });
 
-        delete.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
         return myView;
     }
 
