@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Garry on 2/8/2017.
+ * Credit Fragment
+ *  Displays references for external resources
  */
 
 public class CreditFragment extends Fragment{

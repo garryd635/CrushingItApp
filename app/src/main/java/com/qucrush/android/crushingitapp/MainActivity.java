@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+/**
+ * Main Activity
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,communicate {
 
@@ -67,15 +70,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //depricated code involving intentFragment
+        //Check to see if the main activity was started with any intent instructions from
+        // the daily report activity
         String intentFragment = "";
-        //intentFragment = getIntent().getExtras().getString("FrgToLoad");
         try {
             intentFragment = getIntent().getExtras().getString("FrgToLoad");
         }catch (NullPointerException e){
             System.out.println("Not yet");
         }
-        System.out.println("IntendedFrag is :" + intentFragment );
+        //If there is an intent message, if the intent is a dailyReport, start daily report.
+        //  Otherwise, start the task menu
         if(intentFragment != null){
             if(intentFragment.equals("dailyReport")){
                 startDailyReport();
@@ -83,11 +87,13 @@ public class MainActivity extends AppCompatActivity
             if(intentFragment.equals("taskMenu")){
                 startTaskMenu();
             }
-        }
+        }//if
 
+        //If time stored isn't null store the time
         if(timeStored != null){
             storeTime(timeStored);
         }
+        //If schedule isn't null, schedule the report using the settings condition
         if(schedule != null){
             scheduleReport(schedule[0],schedule[1],"settings");
         }
@@ -235,6 +241,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }//onNavigationItemSelected
 
+    /**
+     * scheduleReport
+     *  Schedules the daily feedback report
+     * @param hour
+     * @param min
+     * @param methodCalledLoc If the param is settings, then schedule the report for the next day,
+     *                        otherwise, normally schedule the report
+     */
     public void scheduleReport(int hour, int min, String methodCalledLoc){
         if(methodCalledLoc == "settings"){
             Calendar c = Calendar.getInstance();
@@ -267,8 +281,11 @@ public class MainActivity extends AppCompatActivity
         }
     }//scheduleReport
 
+    /**
+     * Store the time to the database
+     * @param time
+     */
     public void storeTime(String time){
-        System.out.println("MainActivity stored time called. Results:" + tm.retrieveTime());
         if(tm.retrieveTime() != null){
             tm.updateTime(time);
         }else{
@@ -276,6 +293,9 @@ public class MainActivity extends AppCompatActivity
         }
     }//storeTime
 
+    /**
+     * Class to start the DailyFeedbackActivity when the alarm is triggered
+     */
     public static class AlarmReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent){
             Toast.makeText(context, "Alarm Triggered", Toast.LENGTH_LONG).show();

@@ -24,10 +24,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Garry on 2/8/2017.
+ * DailyReport
+ *  Displays the Daily Feedback Report
  */
 
 public class DailyReport extends Fragment{
+    //Instance Variables
     View myView;
     List<Task> taskList = new ArrayList<Task>();
     List<Task> cTaskList = new ArrayList<Task>();
@@ -51,8 +53,6 @@ public class DailyReport extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setTheme(R.style.AppTheme_Small);
         myView = inflater.inflate(R.layout.daily_report, container, false);
-        //completedList = (ListView) myView.findViewById(R.id.viewComplete);
-        //uncompletedList = (ListView) myView.findViewById(R.id.viewIncomplete);
         feedbackList = (ListView) myView.findViewById(R.id.viewTasks);
         continueButton = (Button) myView.findViewById(R.id.contButton);
         badgeImg = (ImageView) myView.findViewById(R.id.badgeEarned);
@@ -71,36 +71,31 @@ public class DailyReport extends Fragment{
             for(int i = 0; i < taskList.size(); i++){
                 Calendar toDate = Calendar.getInstance();
                 Calendar nowDate = Calendar.getInstance();
-
+                //set the time of the toDate to the due date stored in the task
                 try{
                     toDate.setTime(sdf.parse(taskList.get(i).getDate()));
                 }catch (ParseException e){
                     System.out.println("***ERROR***");
                 }
 
-
-                System.out.println("Now Date: " + nowDate.getTime().toString());
-
-                //toDate.set(convertedDate.getYear(), convertedDate.getMonth(),convertedDate.getDay());
-                System.out.println("To Date: " + toDate.getTime().toString());
+                //For all tasks that are due for the current day, if the task is completed store it in the
+                //  Completed task list.  Otherwise, store the task in the uncompleted task list
                 if((toDate.get(Calendar.YEAR) == nowDate.get(Calendar.YEAR)) &&
                         (toDate.get(Calendar.MONTH) == nowDate.get(Calendar.MONTH)) &&
                         (toDate.get(Calendar.DAY_OF_MONTH) == nowDate.get(Calendar.DAY_OF_MONTH))){
-                    System.out.println("Date is equal");
                     if(taskList.get(i).getCompletion().equals("yes")){
                         cTaskList.add(taskList.get(i));
                     }else{
                         uTaskList.add(taskList.get(i));
                     }
+                }//if
+            }//for
 
-                    //cTaskList.remove(cTaskList.size());
-
-                }
-
-            }
-            //Do Task completion check HERE
+            //Get a list of earned badges according to the Badge Manager
             badgeList = MainActivity.bm.taskBadgeCheck(cTaskList.size(),cTaskList);
+            //Set default reward message
             rewardMessage.setText("No Badges have been earned today.");
+            //If badges was earned, set the reward message according to the number of badges earned
             if(badgeList.size() > 0){
                 if (badgeList.size() == 1) {
                     rewardMessage.setText("Congratulations! You have earned 1 badge! \n" + badgeList.get(count-1).getName());
@@ -108,21 +103,20 @@ public class DailyReport extends Fragment{
                     rewardMessage.setText("Congratulations! You have earned " + badgeList.size() +
                             " badges! \n" + badgeList.get(count-1).getName());
                 }
-
+                //Retrieve the badge resource from the badge object
                 int resource = getActivity().getResources().getIdentifier(badgeList.get(0).getImgsrc(),"drawable",
                         getActivity().getPackageName());
                 badgeImg.setImageResource(resource);
+                //Set Listener to rotate badges earned when tapping on the badge
                 badgeImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(badgeList.size() != 0){
                             if(count < badgeList.size()){
                                 count++;
-
                             }else{
                                 count = 1;
                             }
-
                             if (badgeList.size() == 1) {
                                 rewardMessage.setText("Congratulations! You have earned 1 badge! \n" + badgeList.get(count-1).getName());
                             } else {
@@ -137,20 +131,20 @@ public class DailyReport extends Fragment{
                     }
                 });
             }
+            //Combine the completed and uncompleted task list together
             cTaskList.addAll(uTaskList);
         }
-
+        //Set the adapter with the combined task list and set adapter to the listview
         lDataAdapter = new CompletionAdapter(getActivity(),
                 R.layout.daily_report, cTaskList);
-
         feedbackList.setAdapter(lDataAdapter);
 
+        //When pressed, have the daily feedback start the task menu and update tasks
+        // according to their recurrance
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 continueButton.startAnimation(button_shrink);
-
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -162,9 +156,10 @@ public class DailyReport extends Fragment{
                 }, 500);
             }
         });
-
+        //play sound effect
         continueButton.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
+        //Schedule the next daily report
         String[] hourMinSplit = timeSplited[0].toString().split(":");
         splitHour = Integer.parseInt(hourMinSplit[0].toString());
         splitMin = Integer.parseInt(hourMinSplit[1].toString());
@@ -173,5 +168,5 @@ public class DailyReport extends Fragment{
         }
         cm.scheduleReport(splitHour,splitMin,"dailyReport");
         return myView;
-    }
-}
+    }//onCreateView()
+}//DailyReport

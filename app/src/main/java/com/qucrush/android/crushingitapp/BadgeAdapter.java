@@ -23,14 +23,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Garry on 3/2/2017.
+ * BadgeAdapter
+ *
+ * An adapter for the listview in RewardFragment to display
+ *  the badges and alertdialog for badge details
  */
 
 public class BadgeAdapter extends ArrayAdapter<Badge> {
+    //Instance Variables
     private List<Badge> badgeList;
     private Context context;
     private LayoutInflater vi;
 
+    /**
+     * Constructor
+     * @param context
+     * @param textViewResourceId
+     * @param badgeList
+     */
     public BadgeAdapter(Context context, int textViewResourceId,
                         List<Badge> badgeList) {
         super(context, textViewResourceId, badgeList);
@@ -38,13 +48,20 @@ public class BadgeAdapter extends ArrayAdapter<Badge> {
         this.badgeList = badgeList;
         this.context = context;
         vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
+
     private class ViewHolder {
         ImageView img;
-        //CheckBox name;
     }
 
+    /**
+     * Sets the individual listview row according to the badge_gridview_display layout
+     *
+     * @param position The specific position of the badge
+     * @param convertView
+     * @param parent
+     * @return
+     */
     public View getView(final int position, View convertView, ViewGroup parent){
         BadgeAdapter.ViewHolder holder = null;
         Log.v("ConvertView", String.valueOf(position));
@@ -66,6 +83,8 @@ public class BadgeAdapter extends ArrayAdapter<Badge> {
         final int resource = context.getResources().getIdentifier(badge.getImgsrc(),"drawable",
                 context.getPackageName());
         holder.img.setImageResource(resource);
+
+        //Set the badges to be gray and transparent when not earned
         if(badge.getIsEarned().equals("no")){
 
             ColorMatrix matrix = new ColorMatrix();
@@ -74,20 +93,24 @@ public class BadgeAdapter extends ArrayAdapter<Badge> {
             holder.img.setColorFilter(filter);
             holder.img.setImageAlpha(112);
         }
+        //Start dialog when a badge is pressed
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //DialogFragment dialog = new BadgeDialogFragment.newInstance();
                 startDialog(resource,badge.getName(),badge.getDesc());
             }
         });
-        //holder.name.setText(task.getName());
-        //holder.name.setChecked(task.isSelected());
-        //holder.name.setTag(task);
 
         return convertView;
-    }
+    }//getView
 
+    /**
+     * startDialog
+     *  Displays the badge's information such as earned date and description
+     * @param Res The resource number of the badge image
+     * @param name Name of the badge
+     * @param desc Description of the badge
+     */
     public void startDialog(int Res, String name, String desc){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
@@ -107,5 +130,5 @@ public class BadgeAdapter extends ArrayAdapter<Badge> {
             }
         });
         builder.create().show();
-    }
-}
+    }//startDialog
+}//BadgeAdapter

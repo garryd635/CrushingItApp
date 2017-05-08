@@ -40,9 +40,9 @@ public class TaskEditFragment extends Fragment{
     View myView;
     Button update,cancel,delete;
     communicate cm;
-    TextView name,desc,dateM,dateD,dateY,timeH,timeM,timeAMPM,category;
-    RadioGroup AMPMgrp, categrp;
-    RadioButton amPMBtn, cateBtn;
+    TextView name,desc,dateD,timeH;
+    RadioGroup categrp;
+    RadioButton cateBtn;
     Task editTask;
     String fullDate;
     String fullTime;
@@ -60,12 +60,8 @@ public class TaskEditFragment extends Fragment{
 
         name = (TextView) myView.findViewById(R.id.InputName);
         desc = (TextView) myView.findViewById(R.id.inputDesc);
-        //dateM = (TextView) myView.findViewById(R.id.inputMonth);
         dateD = (TextView) myView.findViewById(R.id.inputDay);
-        //dateY = (TextView) myView.findViewById(R.id.inputYear);
         timeH = (TextView) myView.findViewById(R.id.inputHours);
-        //timeM = (TextView) myView.findViewById(R.id.inputMins);
-        //AMPMgrp = (RadioGroup) myView.findViewById(R.id.radioAMPM);
         categrp = (RadioGroup) myView.findViewById(R.id.radioWorkLife);
 
         cm = (communicate) getActivity();
@@ -79,11 +75,8 @@ public class TaskEditFragment extends Fragment{
 
         name.setText(editTask.getName());
         desc.setText(editTask.getDesc());
-        //dateM.setText(splitDate[1]);
         dateD.setText(editTask.getDate());
-        //dateY.setText(splitDate[0]);
         timeH.setText(editTask.getTime());
-        //timeM.setText(splitNumTime[1]);
         if(splitTime[1] == "AM"){
            // AMPMgrp.check(R.id.radioButton);
         }
@@ -254,6 +247,9 @@ public class TaskEditFragment extends Fragment{
 
     }
 
+    /**
+     *Updates task
+     */
     public void saveTask(){
         name = (TextView) myView.findViewById(R.id.InputName);
         desc = (TextView) myView.findViewById(R.id.inputDesc);

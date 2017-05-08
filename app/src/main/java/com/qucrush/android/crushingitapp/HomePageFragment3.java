@@ -17,7 +17,8 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by Garry on 2/8/2017.
+ * HomePageFragment3
+ *  Contains the contents of home3.xml
  */
 
 public class HomePageFragment3 extends Fragment{

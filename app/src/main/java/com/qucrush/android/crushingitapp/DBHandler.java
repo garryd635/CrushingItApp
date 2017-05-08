@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Garry on 11/25/2016.
+ * DBHandler
+ *  Manages the database of the application
  */
 
 public class DBHandler extends SQLiteOpenHelper{
@@ -18,7 +19,7 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 23;
     // Database Name
     private static final String DATABASE_NAME = "CrushDB";
-    // Contacts table name
+    // Table Names
     private static final String TABLE_TASKS = "Tasks";
     private static final String TABLE_DRTIME = "DRTime";
     private static final String TABLE_BADGES = "Badges";
@@ -33,9 +34,9 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String KEY_RECUR = "recurring";
     private static final String KEY_COMPLETE_DATE = "completionDate";
     private static final String KEY_DAYS_INCOMPLETE = "daysOfIncomplete";
-    //Report Time Column names
+    //Report Time additional Column names
     private static final String KEY_DRTIME = "time";
-    //Badges Column Names
+    //Badges additional Column Names
     private static final String KEY_IS_EARNED = "isEarned";
     private static final String KEY_DATE_EARNED = "dateEarned";
     private static final String KEY_IMG_SRC = "imgsrc";
@@ -45,6 +46,10 @@ public class DBHandler extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * On database creation, create new tables for the tasks, Daily Feedback Report time, and Badges
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TASK_TABLE = "CREATE TABLE " + TABLE_TASKS + "("
@@ -61,18 +66,22 @@ public class DBHandler extends SQLiteOpenHelper{
         db.execSQL(CREATE_DRTIME_TABLE);
         db.execSQL(CREATE_BADGE_TABLE);
         this.addBadges(db);
-        //db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-// Drop older table if existed
+        // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_DRTIME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BADGES);
-// Creating tables again
+        // Creating tables again
         onCreate(db);
     }
 
+    /**
+     * addTask
+     *  Store task information to the database
+     * @param task task object to store information
+     */
     public void addTask(Task task){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -87,17 +96,25 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(KEY_DAYS_INCOMPLETE, "0");
 
         db.insert(TABLE_TASKS,null,values);
-        //db.close();
-    }
+    }//addTask()
 
+    /**
+     * addTime
+     *  Store the time for the daily feedback report
+     * @param time
+     */
     public void addTime(String time){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_DRTIME, time);
         db.insert(TABLE_DRTIME,null,values);
-        //db.close();
-    }
+    }//addTime()
 
+    /**
+     * addBadges
+     *  Manually store badge information to the database
+     * @param db
+     */
     public void addBadges(SQLiteDatabase db){
         ContentValues values = new ContentValues();
         values.put(KEY_NAME,"Crushing It! 101");
@@ -123,20 +140,34 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(KEY_DATE_EARNED,"null");
         values.put(KEY_IMG_SRC, "badge3");
         db.insert(TABLE_BADGES,null,values);
-        //db.close();
-    }
+    }//addBadges
 
+    /**
+     * updateBadge
+     *  Update the earn status and date for the specific badge
+     * @param badge
+     */
     public void updateBadge(Badge badge){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE BADGES set " + KEY_IS_EARNED + " = '" + badge.getIsEarned() +
                 "', " + KEY_DATE_EARNED + " = '" + badge.getEarnedDate() + "'  WHERE " + KEY_ID + " = " + badge.getID());
-    }
-    public void deleteTask(int count) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE from TASKS WHERE ID == " + count);
-        //db.close();
-    }
+    }//updateBadge
 
+    /**
+     * deleteTask
+     *  Delete a task based on Task's id
+     * @param id Task's id
+     */
+    public void deleteTask(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE from TASKS WHERE ID == " + id);
+    }//deleteTask
+
+    /**
+     * updateTask
+     *  Update task information in DB according to Task's id
+     * @param task
+     */
     public void updateTask(Task task){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE TASKS SET " + KEY_NAME + " = '" + task.getName() +
@@ -145,8 +176,13 @@ public class DBHandler extends SQLiteOpenHelper{
                 + "', " + KEY_COMPLETE + " = '" + task.getCompletion() + "' ," + KEY_RECUR + " = '" + task.getRecurring()
                 +"' WHERE " + KEY_ID + " = " + task.getId());
         //db.close();
-    }
+    }//updateTask
 
+    /**
+     * Get completed date from task according to id directly from DB
+     * @param id
+     * @return
+     */
     public String getCompleteDateTask(int id){
         String date = "";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -158,32 +194,46 @@ public class DBHandler extends SQLiteOpenHelper{
             } while (cur.moveToNext());
         }
         cur.close();
-        //db.close();
         return date;
-    }
+    }//getCompleteDateTask
 
+    /**
+     * Get the number of days the task was incompleted
+     * @param id
+     * @return
+     */
     public String getDaysIncomplete(int id){
-        String date = "";
+        String daysNum = "";
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery =("SELECT * FROM " + TABLE_TASKS + " WHERE " + KEY_ID + " = " + id);
         Cursor cur = db.rawQuery(selectQuery,null);
         if(cur.moveToFirst()){
             do{
-                date = cur.getString(9);
+                daysNum = cur.getString(9);
             } while (cur.moveToNext());
         }
         cur.close();
-        //db.close();
-        return date;
-    }
+        return daysNum;
+    }//getDaysIncomplete
 
+    /**
+     * updateCompleteDateTask
+     *  update task's complete date
+     * @param id
+     * @param date
+     */
     public void updateCompleteDateTask(int id, String date){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE TASKS SET " + KEY_COMPLETE_DATE + " = '" + date +
                     "' WHERE " + KEY_ID + " = " + id);
-        //db.close();
     }
 
+    /**
+     * updateDaysIncomplete
+     *  Update task's number of days a task has been incomplete
+     * @param id
+     * @param date
+     */
     public void updateDaysIncomplete(int id, String date){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE TASKS SET " + KEY_DAYS_INCOMPLETE + " = '" + date +
@@ -191,12 +241,23 @@ public class DBHandler extends SQLiteOpenHelper{
         //db.close();
     }
 
+    /**
+     * updateTime
+     *  Update the Daily Report Time
+     * @param time
+     */
     public void updateTime(String time){
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("UPDATE DRTime SET " + KEY_DRTIME + " = '" + time
                     + "' WHERE " + KEY_ID + " = " + 1);
-    }
+    }//updateTime
 
+    /**
+     * getAllTasks
+     *
+     *  Get all the tasks stored in the database
+     * @return
+     */
     public List<Task> getAllTasks(){
         List<Task> taskList = new ArrayList<Task>();
 
@@ -212,10 +273,14 @@ public class DBHandler extends SQLiteOpenHelper{
             } while (cur.moveToNext());
         }
         cur.close();
-        //db.close();
         return taskList;
     }
 
+    /**
+     * getBadgeList
+     *  Get all the badges stored in database
+     * @return
+     */
     public List<Badge> getBadgeList(){
         List<Badge> badgeLst = new ArrayList<Badge>();
         String selectQuery = "SELECT * FROM " + TABLE_BADGES;
@@ -232,6 +297,12 @@ public class DBHandler extends SQLiteOpenHelper{
         //db.close();
         return badgeLst;
     }
+
+    /**
+     * getTableDrtime
+     *  Get the time for the database
+     * @return
+     */
     public String getTableDrtime(){
         String timeToSend = "";
         String selectQuery = "SELECT * FROM " + TABLE_DRTIME;
@@ -245,21 +316,21 @@ public class DBHandler extends SQLiteOpenHelper{
             } while (cur.moveToNext());
         }
         cur.close();
-        //db.close();
-
         return timeToSend;
     }
 
+    /**
+     * Get the number of tasks stored in database
+     * @return
+     */
     public int getTaskCount(){
 
         String countQuery = "SELECT * FROM " + TABLE_TASKS;
-        //MainActivity.db.close();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cur = db.rawQuery(countQuery,null);
         int num = cur.getCount();
         cur.close();
-        //db.close();
         System.out.println(num);
         return num;
     }
-}
+}//DBHandler

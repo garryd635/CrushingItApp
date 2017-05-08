@@ -1,13 +1,24 @@
 package com.qucrush.android.crushingitapp;
 
 /**
- * Created by Garry on 3/31/2017.
+ * Badge
+ *  Defines the information for a badge object
  */
 
 public class Badge {
     private String name,desc,earnedDate,isEarned,imgsrc;
     private int id;
 
+    /**
+     * Constructor
+     *
+     * @param id Id of the badge assigned by the DB
+     * @param name Name of the badge
+     * @param desc Description of the badge
+     * @param isEarned The earned status of the badge
+     * @param earnedDate The date when the badge was earned
+     * @param imgsrc The source to retrieve the badge image from the project
+     */
     public Badge(int id, String name, String desc, String isEarned, String earnedDate, String imgsrc){
         this.id = id;
         this.name = name;
@@ -17,6 +28,7 @@ public class Badge {
         this.imgsrc = imgsrc;
     }
 
+    //Getters and Setters for each variable
     public String getName(){
         return name;
     }
@@ -49,6 +61,5 @@ public class Badge {
     }
     public void setImgsrc(String setImgsrc){
         this.imgsrc = imgsrc;
-
     }
-}
+}//Badge

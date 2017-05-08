@@ -5,24 +5,34 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by Garry on 4/8/2017.
+ * BadgeManager
+ *  Communicates with DB to add, modify, add, and distribute badges with the rest of the application
  */
 
 public class BadgeManager {
     private List<Badge> badgeList,completedList,incompletedList,results;
     private List<Task> completedTasks;
-    //private List<String> results;
 
-
+    /**
+     * Retrieves all badges for the BadgeManager
+     */
     public void retrieveDBBadges(){
         badgeList = MainActivity.db.getBadgeList();
     }//retrieveDBBadges()
 
+    /**
+     * Returns a list of badges from the DB
+     * @return badgeList
+     */
     public List<Badge> getAllBadges(){
         badgeList = MainActivity.db.getBadgeList();
         return badgeList;
-    }
+    }//getAllBadges()
 
+    /**
+     * Returns a list of completed Badges
+     * @return completedList
+     */
     public List<Badge> getCompletedBadges(){
         completedList = new ArrayList<Badge>();
         for(Badge badge: badgeList){
@@ -33,6 +43,10 @@ public class BadgeManager {
         return completedList;
     }//getCompletedBadges()
 
+    /**
+     * Returns a list of incompleted badges
+     * @return incompleteList
+     */
     public List<Badge> getInCompletedBadges(){
         incompletedList = new ArrayList<Badge>();
         for(Badge badge: badgeList){
@@ -41,7 +55,7 @@ public class BadgeManager {
             }
         }
         return incompletedList;
-    }
+    }//getIncompletedBadges
 
     /**
      * Check if user unlocked badge based on number of tasks completed
@@ -53,7 +67,6 @@ public class BadgeManager {
         int workCount = 0;
         int lifeCount = 0;
 
-        System.out.println("***BADGE NUM " + completedTaskNum);
         if(completedTaskNum >= 1 && badgeList.get(0).getIsEarned().equals("no")){
             results.add(updateBadgeChecked(badgeList.get(0)));
         }
@@ -73,9 +86,9 @@ public class BadgeManager {
                 results.add(updateBadgeChecked(badgeList.get(2)));
             }
         }
-
         return results;
-    }
+    }//taskBadgeCheck
+
     /*
     Used to update badge that was earned through daily feedback report
      */
@@ -90,5 +103,5 @@ public class BadgeManager {
         badge.setEarnedDate(month + "-" + day + "-" + year);
         MainActivity.db.updateBadge(badge);
         return badge;
-    }
-}
+    }//updateBadgeChecked
+}//BadgeManager()
