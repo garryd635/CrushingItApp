@@ -16,10 +16,13 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 /**
- * Created by Garry on 2/8/2017.
+ * SettingsFragment
+ *
+ * Contains contents for the settings page.
  */
 
 public class SettingsFragment extends Fragment{
+    //Instance Variables
     public boolean smallSize = true;
     View myView;
     TextView time;
@@ -36,6 +39,8 @@ public class SettingsFragment extends Fragment{
             time.setText(MainActivity.tm.retrieveTime());
         }
 
+        //button used to set the time for the daily report to show up
+        //if set to the current time, the report's notification will pop up within 5 seconds
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,10 +75,9 @@ public class SettingsFragment extends Fragment{
             }
         });
 
+        //sound effect
         time.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
-        //http://stackoverflow.com/questions/3241729/android-dynamically-change-style-at-runtime
-
         return myView;
-    }
-}
+    }//onCreateView
+}//SettingsFragment

@@ -23,6 +23,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,communicate {
 
+    //Instance Variables
     public static DBHandler db;
     public static TaskManager tm = new TaskManager();
     public static BadgeManager bm = new BadgeManager();
@@ -34,21 +35,19 @@ public class MainActivity extends AppCompatActivity
     int[] schedule = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
+        //set font size (depricated, as phone's integrated size is used instead
         try {
             if ("Large".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
               setTheme(R.style.AppTheme_Large);
-            }   else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
+            } else if ("Small".equalsIgnoreCase(getIntent().getStringExtra("Theme"))) {
                     setTheme(R.style.AppTheme_Small);
             }
             timeStored = getIntent().getStringExtra("Storing time");
             schedule = getIntent().getIntArrayExtra("Schedule");
 
         } catch (Exception e) {
-
-    }
-
+            e.printStackTrace();
+        }
 
         super.onCreate(savedInstanceState);
         db = new DBHandler(this);
@@ -57,23 +56,18 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
+        //drawer initialization
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        //navigationView initialization
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //depricated code involving intentFragment
         String intentFragment = "";
         //intentFragment = getIntent().getExtras().getString("FrgToLoad");
         try {
@@ -100,20 +94,19 @@ public class MainActivity extends AppCompatActivity
         try {
             reportReady = getIntent().getExtras().getBoolean("prepReport");
         }catch (NullPointerException e){
-
+            e.printStackTrace();
         }
         if(intentFragment == ""){
             startHomePage();
         }
-    }
+    }//onCreate
 
-
+    //initialize fragments for all active pages
     public void startHomePage(){
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame,
                 new ViewPagerFragment()).commit();
-    }
-
+    }//startHomePage
 
     public void storeTask(){
         FragmentManager fm = getSupportFragmentManager();
@@ -121,34 +114,39 @@ public class MainActivity extends AppCompatActivity
         //frag.saveTask(tm);
         fm.beginTransaction().replace(R.id.content_frame,
                 new TaskFragment()).commit();
-    }
+    }//storeTask
 
     public void startCreationForm() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskFormTest()).commit();
-    }
+    }//startCreationForm
 
     public void startDailyReport(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new DailyReport()).commit();
-    }
+    }//startDailyReport
+
     public void startTaskMenu(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskFragment()).commit();
-    }
+    }//startTaskMenu
 
     public void startEditForm(Task task){
         editTask = task;
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 new TaskEditFragment()).commit();
-    }
+    }//startEditForm
+
+
     public Task getTaskToEdit(){
         return editTask;
     }
+
+    //determines what happens when the back button is pressed
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -157,20 +155,21 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
+    }//onBackPressed
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
+    }//onCreateOptionsMenu
 
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -180,14 +179,12 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_frame
                             , new SettingsFragment())
                     .commit();
-//            Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
-//            startActivity(intent);
             System.out.println("SETTINGS BUTTON PRESSED");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }//onOptionsItemSelected
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -229,13 +226,15 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_main
                     , new CreditFragment())
                     //.commit()
+                    //removed commit as the page was giving errors too late into the cycle
             ;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+    }//onNavigationItemSelected
+
     public void scheduleReport(int hour, int min, String methodCalledLoc){
         if(methodCalledLoc == "settings"){
             Calendar c = Calendar.getInstance();
@@ -266,7 +265,7 @@ public class MainActivity extends AppCompatActivity
             alarmManager.set(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(), PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
             Toast.makeText(this, "Report Scheduled for next day", Toast.LENGTH_LONG).show();
         }
-    }
+    }//scheduleReport
 
     public void storeTime(String time){
         System.out.println("MainActivity stored time called. Results:" + tm.retrieveTime());
@@ -275,7 +274,7 @@ public class MainActivity extends AppCompatActivity
         }else{
             tm.addTime(time);
         }
-    }
+    }//storeTime
 
     public static class AlarmReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent){
@@ -283,6 +282,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent1 = new Intent(context,DailyFeedbackActivity.class);
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent1);
-        }
-    }
-}
+        }//onReceive
+    }//AlarmReceiver
+}//MainActivity

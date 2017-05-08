@@ -30,10 +30,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by Garry on 2/8/2017.
+ * TaskEditFragment
+ *
+ * Contains contents for the task editing screen.
  */
 
 public class TaskEditFragment extends Fragment{
+    //Instance Variables
     View myView;
     Button update,cancel,delete;
     communicate cm;
@@ -112,7 +115,7 @@ public class TaskEditFragment extends Fragment{
                 }, 500);
 
             }
-        });
+        });//update
 
 
         timeH.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +165,7 @@ public class TaskEditFragment extends Fragment{
                 }, hour, min, false);
                 timepicker.show();
             }
-        });
+        });//timeH
 
         dateD.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,20 +194,7 @@ public class TaskEditFragment extends Fragment{
                 }, yy, mm, dd);
                 datePicker.show();
             }
-        });
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.recurr_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        recurOption.setAdapter(adapter);
-
-        if(editTask.getRecurring().equals("None")){
-            recurOption.setSelection(0);
-        }else if(editTask.getRecurring().equals("Daily")){
-            recurOption.setSelection(1);
-        }else if(editTask.getRecurring().equals("Weekly")){
-            recurOption.setSelection(2);
-        }
+        });//dateD
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,7 +212,7 @@ public class TaskEditFragment extends Fragment{
                 }, 500);
 
             }
-        });
+        });//cancel
 
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -241,11 +231,24 @@ public class TaskEditFragment extends Fragment{
                 }, 500);
 
             }
-        });
+        });//delete
 
+        //determines recurrence
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.recurr_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        recurOption.setAdapter(adapter);
+
+        if(editTask.getRecurring().equals("None")){
+            recurOption.setSelection(0);
+        }else if(editTask.getRecurring().equals("Daily")){
+            recurOption.setSelection(1);
+        }else if(editTask.getRecurring().equals("Weekly")){
+            recurOption.setSelection(2);
+        }
 
         return myView;
-    }
+    }//onCreateView
 
     public void checkDate(){
 
@@ -272,5 +275,5 @@ public class TaskEditFragment extends Fragment{
 
         MainActivity.tm.updateTask(name.getText().toString(), desc.getText().toString(),fullDate,fullTime
                 ,cateBtn.getText().toString(),editTask.getCompletion(),recurOption.getSelectedItem().toString(), editTask.getId());
-    }
-}
+    }//saveTask
+}//TaskEditFragment

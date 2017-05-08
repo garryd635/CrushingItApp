@@ -20,6 +20,7 @@ import java.util.List;
  */
 
 public class HomeUpcomingTaskAdapter extends ArrayAdapter<Task> {
+    //Instance Variables
     private List<Task> taskList;
     private Context context;
     private LayoutInflater vi;
@@ -72,5 +73,5 @@ public class HomeUpcomingTaskAdapter extends ArrayAdapter<Task> {
         holder.date.setTextColor(Color.BLACK);
         holder.time.setTextColor(Color.BLACK);
         return convertView;
-    }
-}
+    }//getView
+}//HomeUpcomingTaskAdapter

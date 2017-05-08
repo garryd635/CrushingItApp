@@ -24,10 +24,13 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 /**
- * Created by Garry on 2/8/2017.
+ * TaskFormTest
+ *
+ * Contains contents for the task creation screen.
  */
 
 public class TaskFormTest extends Fragment {
+    //Instance Variables
     View myView;
     TaskManager tmPointer;
     Button add,cancel;
@@ -67,7 +70,7 @@ public class TaskFormTest extends Fragment {
                     }
                 }, 500);
             }
-        });
+        });//cancel
 
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -84,7 +87,7 @@ public class TaskFormTest extends Fragment {
                     }
                 }, 500);
             }
-        });
+        });//add
 
         dateD.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +106,8 @@ public class TaskFormTest extends Fragment {
                 }, yy, mm, dd);
                 datePicker.show();
             }
-        });
+        });//dateD
+
         timeH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,24 +140,25 @@ public class TaskFormTest extends Fragment {
                 }, hour, min, false);
                 timepicker.show();
             }
-        });
+        });//timeH
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.recurr_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+
+        // Apply the adapter to the spinner
         recurOption.setAdapter(adapter);
         return myView;
-    }
-
+    }//onCreateView
 
     public void saveTask(){
         name = (TextView) myView.findViewById(R.id.InputName);
         desc = (TextView) myView.findViewById(R.id.inputDesc);
 
         //timeM = (TextView) myView.findViewById(R.id.inputMins);
-
 
         //amPMGrp = (RadioGroup) myView.findViewById(R.id.radioAMPM);
         cateGrp = (RadioGroup) myView.findViewById(R.id.radioWorkLife);
@@ -169,5 +174,5 @@ public class TaskFormTest extends Fragment {
 
         MainActivity.tm.createTask(name.getText().toString(), desc.getText().toString(),fullDate,fullTime
                 ,cateBtn.getText().toString(),recurOption.getSelectedItem().toString());
-    }
-}
+    }//saveTask
+}//TaskFormTest

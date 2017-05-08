@@ -21,6 +21,7 @@ import java.util.List;
  */
 
 public class HomePageFragment3 extends Fragment{
+    //Instance variables
     View myView;
     LayoutInflater inflater;
     ViewGroup container;
@@ -36,6 +37,7 @@ public class HomePageFragment3 extends Fragment{
         completeLst = (ListView) myView.findViewById(R.id.homeCompleteList);
         complete = getTodayCompletedTasksList(MainActivity.tm.retrieveTasks());
 
+        //checks if there is at least one completed task
         if(complete != null){
             dataAdapter = new CompletionAdapter(getActivity(),
                     R.layout.home_3, complete);
@@ -71,5 +73,5 @@ public class HomePageFragment3 extends Fragment{
             }
         }
         return tempLst;
-    }//setTodayTaskList()
-}
+    }//getTodayTaskList()
+}//HomePageFragment3

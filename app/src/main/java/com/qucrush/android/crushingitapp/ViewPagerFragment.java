@@ -16,7 +16,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 /**
- * Created by Garry on 2/8/2017.
+ * ViewPagerFragment
+ *
+ * Contains contents for the management of the three home pages.
  */
 
 public class ViewPagerFragment extends Fragment{
@@ -42,23 +44,21 @@ public class ViewPagerFragment extends Fragment{
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                next.startAnimation(button_shrink);
+            next.startAnimation(button_shrink);
 
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after .2s = 200ms
-                        if (mViewPager.getCurrentItem() == 2) {
-                            mViewPager.setCurrentItem(0);
-                        } else {
-                            // Select previous page.
-                            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
-                        }
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after .2s = 200ms
+                    if (mViewPager.getCurrentItem() == 2) {
+                        mViewPager.setCurrentItem(0);
+                    } else {
+                        // Select next page.
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
                     }
-                }, 0);
-
-
+                }
+            }, 0);
             }
         });//next
 
@@ -68,22 +68,21 @@ public class ViewPagerFragment extends Fragment{
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prev.startAnimation(button_shrink);
+            prev.startAnimation(button_shrink);
 
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after .2s = 200ms
-                        if (mViewPager.getCurrentItem() == 0) {
-                            mViewPager.setCurrentItem(2);
-                        } else {
-                            // Select previous page.
-                            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
-                        }
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after .2s = 200ms
+                    if (mViewPager.getCurrentItem() == 0) {
+                        mViewPager.setCurrentItem(2);
+                    } else {
+                        // Select previous page.
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
                     }
-                }, 0);
-
+                }
+            }, 0);
             }
         });//prev
 
@@ -109,12 +108,12 @@ public class ViewPagerFragment extends Fragment{
             } else {
                 return new HomePageFragment3();
             }
-        }
+        }//getItem
 
         @Override
         public int getCount() {
             return NUM_PAGES;
         }
-    }
-}
+    }//ScreenSliderPagerAdapter
+}//ViewPagerFragment
 

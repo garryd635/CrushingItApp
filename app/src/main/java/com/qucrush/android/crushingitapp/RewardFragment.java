@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Garry on 2/8/2017.
+ * RewardFragment
+ *
+ * Contains contents for the reward screen.
  */
 
 public class RewardFragment extends Fragment{
+    //Instance Variables
     View myView;
     private BadgeAdapter dataAdapter;
     private GridView gView;
@@ -31,6 +34,7 @@ public class RewardFragment extends Fragment{
         uBadgeList = new ArrayList<Badge>();
         badgeList = MainActivity.bm.getAllBadges();
 
+        //checks if each badge is complete, and adds to a list of complete or incomplete badges
         for(int i = 0; i < badgeList.size(); i++){
             if(badgeList.get(i).getIsEarned().equals("no")){
                 uBadgeList.add(badgeList.get(i));
@@ -42,5 +46,5 @@ public class RewardFragment extends Fragment{
         dataAdapter = new BadgeAdapter(getActivity(),R.layout.reward_screen,cBadgeList);
         gView.setAdapter(dataAdapter);
         return myView;
-    }
-}
+    }//onCreateView
+}//RewardFragment

@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.jar.Manifest;
 
 /**
- * Created by Garry on 2/13/2017.
+ * TaskManager
+ *
+ * Contains contents for the management of tasks within the application.
  */
 
 public class TaskManager {
-
+    //Instance Variables
     private List<Task> taskList;
     private int counter;
     private TextView dateText,timeText, nameText, cateText;
@@ -25,20 +27,20 @@ public class TaskManager {
     public TaskManager(){
         taskList = new ArrayList<Task>();
         counter = 0;
-    }
+    }//TaskManager constructor
 
     public void createTask(String name, String desc, String date, String time, String category,String recurr){
         tempTask = new Task(0,name,desc,date,time,category,"no",recurr);
         MainActivity.db.addTask(tempTask);
         retrieveTasks();
-    }
+    }//onCreateTask
 
     public void updateTask(String name, String desc, String date, String time, String category, String complete, String recurr, int id){
         tempTask = new Task(id,name,desc,date,time,category,complete,recurr);
         System.out.println("FROM TASKMANAGER:" + tempTask.getCompletion());
         MainActivity.db.updateTask(tempTask);
         retrieveTasks();
-    }
+    }//updateTask
 
     public void updateTaskInAdapter(String name, String desc, String date, String time, String category,String complete,
                                     String recurr, int id){
@@ -46,11 +48,12 @@ public class TaskManager {
         System.out.println("FROM TASKMANAGER:" + tempTask.getCompletion());
         MainActivity.db.updateTask(tempTask);
         retrieveTasks();
-    }
+    }//updateTaskInAdapter
+
     public void deleteTask(int count){
         taskList = retrieveTasks();
         MainActivity.db.deleteTask(count);
-    }
+    }//deleteTask
 
     public void updateCompletedTasks(List<Task> taskList){
         for(int i=0; i < taskList.size(); i++){
@@ -96,7 +99,7 @@ public class TaskManager {
                 updateTaskInAdapter(taskList.get(i).getName(),taskList.get(i).getDesc(),taskList.get(i).getDate()
                         , taskList.get(i).getTime(), taskList.get(i).getCategory(), "no",taskList.get(i).getRecurring(),taskList.get(i).getId());
             }
-        }//for-loop
+        }
     }//updateCompletedTasks
 
     public List<Task> retrieveTasks(){
@@ -112,7 +115,7 @@ public class TaskManager {
             taskList = null;
         }
         return taskList;
-    }
+    }//retrieveTasks
 
     public String retrieveTime(){
         System.out.println("***********" + MainActivity.db.getTableDrtime());
@@ -122,19 +125,19 @@ public class TaskManager {
         else
             reportTime = null;
         return reportTime;
-    }
+    }//retrieveTime
 
     public void addTime(String time){
         System.out.println("CALLED addTime Results:" + MainActivity.db.getTableDrtime());
         if(MainActivity.db.getTableDrtime() == ""){
             MainActivity.db.addTime(time);
         }
-    }
+    }//addTime
 
     public void updateTime(String time){
         System.out.println("CALLED updateTime Results: updating " + time);
         MainActivity.db.updateTime(time);
-    }
+    }//updateTime
 
     public int getCount() {
         return counter;
@@ -165,6 +168,7 @@ public class TaskManager {
                 try{
                     newDate = sdf.parse(newDateString.toString());
                 }catch(ParseException e){
+                    e.printStackTrace();
                 }
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(newDate);
@@ -186,7 +190,6 @@ public class TaskManager {
                 //Update Tasks HERE
                 MainActivity.db.updateTask(updatedTask);
             }
-        }//for
-    }
-
-}
+        }
+    }//managedCompletedTask
+}//TaskManager

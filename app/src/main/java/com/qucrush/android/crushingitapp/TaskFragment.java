@@ -35,7 +35,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Garry on 2/8/2017.
+ * TaskFragment
+ *
+ * Contains contents for the task menu.
  */
 
 public class TaskFragment extends Fragment implements View.OnClickListener {
@@ -80,10 +82,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 
         button_shrink = AnimationUtils.loadAnimation(getActivity(),R.anim.button_shrink);
 
-
         add.setOnClickListener(this);
-
-
         add.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
         delete.setOnClickListener(new View.OnClickListener(){
@@ -113,7 +112,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 dialog.show();
                 }
             }
-        });
+        });//delete
 
         delete.playSoundEffect(android.view.SoundEffectConstants.CLICK);
         delete.startAnimation(button_shrink);
@@ -137,7 +136,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     datePicker.show();
                 }
             }
-        });
+        });//beforeDate
 
         afterDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,19 +157,18 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     datePicker.show();
                 }
             }
-        });
+        });//afterDate
+
         if(MainActivity.tm.retrieveTasks() != null){
             count = 0;
             taskList = MainActivity.tm.retrieveTasks();
         }
-
 
         dataAdapter = new CustomAdapter(getActivity(),
                 R.layout.task_menu, taskList);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.date_filter_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
 
         // Assign adapter to ListView
         if (taskList != null) {
@@ -185,7 +183,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 System.out.println(position);
                 cm.startEditForm(taskList.get(position));
             }
-        });
+        });//lView
 
         go.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +240,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     //Peform Date filter for Tasks with Toady's date HERE
                 }
             }
-        });
+        });//go
 
         filterOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -285,13 +283,12 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
             }
-        });
+        });//filterOptions
         return myView;
-    }
+    }//onCreateView
 
     public void onClick(View arg0){
         add.startAnimation(button_shrink);
-
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -301,7 +298,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 cm.startCreationForm();
             }
         }, 500);
-    }
+    }//onClick
 
     public int getID(int count) {
         return taskList.get(count).getId();
@@ -312,7 +309,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         mMonth = monthOfYear;
         mDay = dayOfMonth;
         updateTextview();
-    }
+    }//onDateSet
 
     public void updateTextview(){
         if(pickerStatus == "before"){
@@ -321,7 +318,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         if(pickerStatus == "after"){
             afterDate.setText(mMonth + "/" + mDay + "/" + mYear);
         }
-    }
+    }//updateTextView
 
     public void errorDialog(String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -336,7 +333,8 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     }
                 });
         builder.show();
-    }
+    }//errorDialog
+
     public void filterListView(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar currDate = Calendar.getInstance();
@@ -352,6 +350,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     System.out.println("FOUND ONE");
                 }
             }catch (ParseException e) {
+                e.printStackTrace();
             }
         }
         if(sortedTasks != null){
@@ -362,7 +361,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         }else{
             lView.setVisibility(View.GONE);
         }
-    }
+    }//filterListView
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -375,12 +374,12 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
+        }//onCreateDialog
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             ((DatePickerDialog.OnDateSetListener) getActivity()).onDateSet(view, year, month, day);
 
-        }
+        }//onDateSet
 
-    }
-}
+    }//DatePickerFragment
+}//taskFragment
