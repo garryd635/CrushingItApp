@@ -1,7 +1,7 @@
 package com.qucrush.android.crushingitapp;
 
 /**
- * Created by Garry on 2/14/2017.
+ * Interface for Fragments to communicate with the Main Activity
  */
 
 public interface communicate {
@@ -11,6 +11,6 @@ public interface communicate {
     public void startEditForm(Task task);
     public void startDailyReport();
     public Task getTaskToEdit();
-    public void scheduleReport();
-
+    public void scheduleReport(int hour, int min, String callLoc);
+    public void storeTime(String time);
 }

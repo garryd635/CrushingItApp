@@ -1,6 +1,13 @@
 package com.qucrush.android.crushingitapp;
 
+/**
+ * Task
+ *
+ * Contains contents for tasks, mainly variables and getters/setters.
+ */
+
 public class Task {
+    //Instance Variables
     private int id;
     private String name;
     private String desc;
@@ -19,8 +26,9 @@ public class Task {
         this.category = category;
         this.completion = completion;
         this.recurring = recurring;
-    }
+    }//Task constructor
 
+    //setters and getters for various variables
     public String getName(){
         return name;
     }
@@ -69,4 +77,4 @@ public class Task {
     public void setRecurring(String recurring){
         this.recurring = recurring;
     }
-}
+}//Task

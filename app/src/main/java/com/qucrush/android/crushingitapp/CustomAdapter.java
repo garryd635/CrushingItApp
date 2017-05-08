@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Tyler on 2/24/2017.
+ * CustomAdapter
+ * Adapter for the listview in the Task Menu
  */
 
 public class CustomAdapter extends ArrayAdapter<Task>{
@@ -25,17 +26,24 @@ public class CustomAdapter extends ArrayAdapter<Task>{
     public CustomAdapter(Context context, int textViewResourceId,
                          List<Task> taskList) {
         super(context, textViewResourceId, taskList);
+        this.context = context;
         this.taskList = new ArrayList<Task>();
         this.taskList = taskList;
         vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //this.taskList.addAll(taskList);
     }
 
     private class ViewHolder {
-        TextView code;
-        CheckBox name;
+        TextView code;//Name of Task
+        CheckBox name;//Checkbox for task
     }
 
+    /**
+     * Set individual task row baded on the task_display layout
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -43,8 +51,6 @@ public class CustomAdapter extends ArrayAdapter<Task>{
         Log.v("ConvertView", String.valueOf(position));
 
         if (convertView == null) {
-
-            //LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = vi.inflate(R.layout.task_display, null);
 
             holder = new ViewHolder();
@@ -57,19 +63,16 @@ public class CustomAdapter extends ArrayAdapter<Task>{
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v ;
                     Task task = (Task) cb.getTag();
-//                    task.setSelected(cb.isChecked());
-                    System.out.println(cb.isChecked());
+                    //Sets task completion to yes if checkbox is checked, and no when checkbox is unchecked
                     if(cb.isChecked() == true){
                         MainActivity.tm.updateTaskInAdapter(taskList.get(position).getName(),taskList.get(position).getDesc(),taskList.get(position).getDate()
-                        , taskList.get(position).getTime(), taskList.get(position).getCategory(), "yes",taskList.get(position).getId());
+                        , taskList.get(position).getTime(), taskList.get(position).getCategory(), "yes",taskList.get(position).getRecurring(),taskList.get(position).getId());
                         taskList = MainActivity.tm.retrieveTasks();
-                        System.out.println("New Task Update: " + taskList.get(position).getName() + " complete? " + taskList.get(position).getCompletion());
                     }
                     if(cb.isChecked() == false){
                         MainActivity.tm.updateTaskInAdapter(taskList.get(position).getName(),taskList.get(position).getDesc(),taskList.get(position).getDate()
-                                , taskList.get(position).getTime(), taskList.get(position).getCategory(), "no",taskList.get(position).getId());
+                                , taskList.get(position).getTime(), taskList.get(position).getCategory(), "no",taskList.get(position).getRecurring(),taskList.get(position).getId());
                         taskList = MainActivity.tm.retrieveTasks();
-                        System.out.println("New Task Update: " + taskList.get(position).getName() + " complete? " + taskList.get(position).getCompletion());
                     }
                 }
             });
@@ -81,34 +84,11 @@ public class CustomAdapter extends ArrayAdapter<Task>{
         Task task = taskList.get(position);
         holder.code.setText("      Due: " +  task.getDate());
         holder.name.setText(task.getName());
-        //holder.name.setChecked(task.isSelected());
         holder.name.setTag(task);
         if(task.getCompletion().equals("yes")){
             holder.name.setChecked(true);
         }
-
+        context.setTheme(R.style.AppTheme_Small);
         return convertView;
-    }
-
-//    private void checkButtonClick() {
-//
-//        Button myButton = (Button) findViewById(R.id.findSelected);
-//        myButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                StringBuffer responseText = new StringBuffer();
-//                responseText.append("The following were selected...\n");
-//
-//                ArrayList<Task> countryList = dataAdapter.countryList;
-//                for(int i=0;i<countryList.size();i++){
-//                    Task task = countryList.get(i);
-//                    if(task.isSelected()){
-//                        responseText.append("\n" + task.getName());
-//                    }
-//                }
-//            }
-//        });
-//    }
-}
+    }//getView()
+}//CustomAdapter

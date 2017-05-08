@@ -1,7 +1,7 @@
 package com.qucrush.android.crushingitapp;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -45,7 +45,7 @@ public class DailyFeedbackTest extends Fragment{
 //
 //                AlertDialog dialog = builder.create();
 //                dialog.show();
-                cm.scheduleReport();
+                //cm.scheduleReport();
             }
         });
         return myView;

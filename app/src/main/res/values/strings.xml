@@ -1,13 +1,19 @@
 <resources>
-    <string name="app_name">CrushingItApp</string>
+    <string name="app_name">Crushing It!</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_close">Close</string>
     <string-array name="recurr_array">
         <item>None</item>
         <item>Daily</item>
         <item>Weekly</item>
+    </string-array>
+    <string-array name="date_filter_options">
+        <item>None</item>
+        <item>Today</item>
+        <item>Between Dates</item>
     </string-array>
 </resources>
