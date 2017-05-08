@@ -227,7 +227,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_credit_menu){
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main
-                    , new CreditFragment());
+                    , new CreditFragment())
+                    //.commit()
+            ;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -60,10 +60,11 @@ public class HomePageFragment1 extends Fragment{
 
         if(completePer != 0){
             dayStatus.setProgress(((completePer*10/totalPer*10)));
-            percentText.setText((completePer*10/totalPer*10) + "%");
+            //percentText.setText((completePer*10/totalPer*10) + "%");
+            percentText.setText("Tasks: " + completePer + "/" + totalPer);
         }else if(todayTasks != null){
             dayStatus.setProgress(0);
-            percentText.setText("0 %");
+            percentText.setText("Tasks: 0/" + totalPer);
         }else{
             dayStatus.setProgress(0);
             percentText.setText("No Tasks Today");
